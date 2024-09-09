@@ -5,11 +5,13 @@
 <main class="p-4">
     <div class="container g-3 border " style="min-height: inherit">
         <div class="p-4 ">
-            <div class="col-2 border mb-2" style="max-height: 150px; overflow: hidden;">
-                <a href="{{ asset('assets/img/logo.jpg') }}">
+            <div class="col-2 border mb-2 text-center" style="max-height: 150px; overflow: hidden;">
+                <i class="fas fa-user p-2" style="font-size: 100px"></i>
+               <!-- <a href="{{ asset('assets/img/logo.jpg') }}">
                     <img style="max-height: inherit; max-width: 175px; object-fit: cover;"
                         src="{{ asset('assets/img/logo.jpg') }}" class="img-fluid" alt="Não encontrado">
                 </a>
+            -->
             </div>
 
             <div class="container col-12 border mb-2">
@@ -20,7 +22,7 @@
             </div>
 
             <div class="container col-12 border mb-2 pt-2">
-                <h4><i class="fas fa-bank pe-2"></i> <b>Saldo da conta: 1 000 000 00,kz</b></h4>
+                <h4><i class="fas fa-bank"></i> <b>Saldo da conta: 1 000 000 00,kz</b></h4>
             </div>
 
             <div>
