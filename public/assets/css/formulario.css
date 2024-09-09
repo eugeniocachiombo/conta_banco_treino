@@ -1,0 +1,21 @@
+
+
+label {
+    font-size: 20px;
+}
+
+input {
+    height: 30px;
+    color: rgb(24, 84, 214);
+    font-weight: bold;
+}
+
+button {
+    width: 260px;
+    height: 40px;
+    background: #222;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+}
