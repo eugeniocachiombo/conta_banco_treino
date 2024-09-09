@@ -4,6 +4,7 @@
 <div class="container formulario d-flex justify-content-center align-items-center text-light" style="min-height: inherit">
     <div class="row ">
         <div class="col-12 text-center text-md-start">
+            <i class="fas fa-user text-center" style="font-size: 100px"></i>
             <h1>Criar Conta</h1>
         </div>
 

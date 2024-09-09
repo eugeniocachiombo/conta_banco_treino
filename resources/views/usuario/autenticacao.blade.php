@@ -2,6 +2,7 @@
 <title>Autenticação</title>
 <div class="container formulario d-flex justify-content-center align-items-center text-light" style="min-height: inherit">
     <form class="row g-4 d-block justify-content-center" style="min-width: 50px" action="" method="get">
+        <i class="fas fa-bank text-center" style="font-size: 100px"></i>
         <h1>Autenticar-se</h1>
 
         <div class="col d-block justify-content-center">

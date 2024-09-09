@@ -1,7 +1,7 @@
 <header class="d-flex justify-content-center align-items-center">
     <div class="container border d-md-flex d-block justify-content-center align-items-center">
         <div class="col text-center text-md-start">
-            <b>Sistema Banco - Sistem Bank</b>
+            <b><i class="fas fa-bank"></i> Sistema Banco - Sistem Bank</b>
         </div>
 
         <div class="col">

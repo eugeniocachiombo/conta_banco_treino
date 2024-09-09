@@ -14,13 +14,13 @@
 
             <div class="container col-12 border mb-2">
                 <h1>Dados Pessoais</h1>
-                <p>Nome Completo: Eugénio</p>
+                <p>Nome Completo: Eugénio Cachiombo</p>
                 <p>Email: eugeniocachiombo@gmail.com</p>
                 <p>Telefone: 921 XXX XXX</p>
             </div>
 
             <div class="container col-12 border mb-2 pt-2">
-                <h4><i class="fas fa-cash pe-2"></i> <b>Saldo da conta: 1 000 000 00,kz</b></h4>
+                <h4><i class="fas fa-bank pe-2"></i> <b>Saldo da conta: 1 000 000 00,kz</b></h4>
             </div>
 
             <div>
