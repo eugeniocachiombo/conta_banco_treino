@@ -4,7 +4,7 @@
     <form action="/usuario/inicio" class="row g-4 d-block justify-content-center" style="min-width: 50px"
         method="get">
         <i class="fas fa-bank text-center" style="font-size: 100px"></i>
-        <h1>Autenticar-se</h1>
+        <h1 class="text-center">Autenticação</h1>
 
         <div class="col d-block justify-content-center">
             <label class="">Email ou Telefone:</label>
