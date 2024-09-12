@@ -11,9 +11,8 @@
     <link rel="stylesheet" href="{{ asset('assets/css/geral.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/formulario.css') }}">
     <script src="{{ asset('assets/bootstrap-5.0.2/js/bootstrap.js') }}" ></script>
-    <style>
-        
-    </style>
+    <script src="{{ asset('assets/jquery/jquery.js') }}" ></script>
+    <script src="{{ asset('assets/jquery/jMask.js') }}" ></script>
 </head>
 
 <body>
