@@ -1,7 +1,7 @@
 <footer class="d-flex justify-content-center align-items-center">
     <div class="container d-flex justify-content-center align-items-center">
         <div style="font-size: 20px" class="row d-flex justify-content-center align-items-center">
-            &copy Sistema de banco
+            &copy Sistema de banco - System Bank
         </div>
     </div>
 </footer>

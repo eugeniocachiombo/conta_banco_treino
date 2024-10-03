@@ -14,6 +14,7 @@ class DadosPessoais extends Model
         'sobrenome',
         'nascimento',
         'genero',
+        'nacionalidade',
         'id_usuario',
     ];
 }

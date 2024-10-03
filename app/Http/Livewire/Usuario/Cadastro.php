@@ -10,7 +10,7 @@ use Livewire\Component;
 class Cadastro extends Component
 {
     public $nome, $sobrenome, $email, $telefone, $senha;
-    public $nascimento, $genero;
+    public $nascimento, $genero, $nacionalidade;
     public $tlfExiste, $emailExist;
 
     protected $rules = [
@@ -64,6 +64,7 @@ class Cadastro extends Component
                 'sobrenome' => $this->sobrenome,
                 'nascimento' => $this->nascimento,
                 'genero' => $this->genero,
+                'nacionalidade' => $this->nacionalidade,
                 'id_usuario' => $usuario->id,
             ]);
             $this->emit('alerta', ['mensagem' => 'Conta criada com sucesso', 'icon' => 'success']);
@@ -93,7 +94,7 @@ class Cadastro extends Component
 
     public function limparCampos()
     {
-        $this->nascimento = $this->genero = $this->tlfExiste = $this->emailExist = null;
+        $this->nacionalidade = $this->nascimento = $this->genero = $this->tlfExiste = $this->emailExist = null;
         $this->nome = $this->sobrenome = $this->email = $this->telefone = $this->senha = null;
     }
 }

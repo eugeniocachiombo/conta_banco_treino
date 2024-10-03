@@ -92,6 +92,18 @@
                         <span class="error text-warning">{{ $message }}</span>
                     @enderror
                 </div>
+
+                <div class="col-8 col-md-6 ">
+                    <label for="">Nacionalidade:</label>
+                    <select class="form-select" wire:model="nacionalidade">
+                        <option class="d-none">Seleccione</option>
+                        <option value="angola" selected>Angolano</option>
+                        <option value="">Femenino</option>
+                    </select>
+                    @error('nacionalidade')
+                        <span class="error text-warning">{{ $message }}</span>
+                    @enderror
+                </div>
             </form>
         </div>
 
