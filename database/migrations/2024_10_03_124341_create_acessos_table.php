@@ -15,6 +15,9 @@ class CreateAcessosTable extends Migration
     {
         Schema::create('acessos', function (Blueprint $table) {
             $table->id();
+            $table->enum("tipo", ["admin", "gestor", "cliente"])->default("cliente");
+            $table->unsignedBigInteger("id_usuario");
+            $table->foreign("id_usuario")->references("id")->on("users")->onDelete("cascade");
             $table->timestamps();
         });
     }

@@ -15,10 +15,10 @@ class CreateContasTable extends Migration
     {
         Schema::create('contas', function (Blueprint $table) {
             $table->id();
-            $table->string("tipo")->nullable();
-            $table->enum("estado", ["bloqueado", "activo"])->default("activo");
+            $table->enum("tipo", ["corrente", "salario"])->default("corrente");
+            $table->enum("estado", ["activo", "inactivo", "bloqueado", "cancelada"])->default("activo");
             $table->integer("saldo")->nullable();
-            $table->integer("id_usuario")->nullable();
+            $table->unsignedBigInteger("id_usuario")->nullable();
             $table->foreign('id_usuario')->references("id")->on("users")->onDelete("cascade");
             $table->timestamps();
         });

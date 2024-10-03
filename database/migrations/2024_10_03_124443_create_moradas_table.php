@@ -15,6 +15,8 @@ class CreateMoradasTable extends Migration
     {
         Schema::create('moradas', function (Blueprint $table) {
             $table->id();
+            $table->string("provincia");
+            $table->string("endereco");
             $table->timestamps();
         });
     }

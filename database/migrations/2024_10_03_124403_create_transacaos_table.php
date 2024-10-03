@@ -15,6 +15,10 @@ class CreateTransacaosTable extends Migration
     {
         Schema::create('transacaos', function (Blueprint $table) {
             $table->id();
+            $table->string("tipo");
+            $table->text("descricao")->nullable();
+            $table->unsignedBigInteger("id_conta");
+            $table->foreign("id_conta")->references("id")->on("contas")->onDelete("cascade");
             $table->timestamps();
         });
     }

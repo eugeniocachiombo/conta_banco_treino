@@ -15,6 +15,10 @@ class CreateEmprestimosTable extends Migration
     {
         Schema::create('emprestimos', function (Blueprint $table) {
             $table->id();
+            $table->text("descricao");
+            $table->integer("quantia");
+            $table->unsignedBigInteger("id_usuario");
+            $table->foreign("id_usuario")->references("id")->on("users")->onDelete("cascade");
             $table->timestamps();
         });
     }

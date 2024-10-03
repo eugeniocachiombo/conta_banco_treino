@@ -15,6 +15,12 @@ class CreateDadosPessoaisTable extends Migration
     {
         Schema::create('dados_pessoais', function (Blueprint $table) {
             $table->id();
+            $table->string("nome");
+            $table->string("sobrenome");
+            $table->date("nascimento");
+            $table->enum("genero", ["M", "F"]);
+            $table->unsignedBigInteger("id_usuario");
+            $table->foreign("id_usuario")->references("id")->on("users")->onDelete("cascade");
             $table->timestamps();
         });
     }

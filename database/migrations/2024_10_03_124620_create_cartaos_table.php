@@ -15,6 +15,14 @@ class CreateCartaosTable extends Migration
     {
         Schema::create('cartaos', function (Blueprint $table) {
             $table->id();
+            $table->integer("numero");
+            $table->integer("codigo_seguranca");
+            $table->enum("tipo", ["credito", "pagamento"])->default("pagamento");
+            $table->date("validade");
+            $table->date("emissao");
+            $table->enum("estado", ["activo", "inactivo", "bloqueado", "cancelado", "expirado"])->default("activo");
+            $table->unsignedBigInteger("id_conta");
+            $table->foreign("id_conta")->references("id")->on("contas")->onDelete("cascade");
             $table->timestamps();
         });
     }

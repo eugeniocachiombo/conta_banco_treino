@@ -15,6 +15,9 @@ class CreateAgenciasTable extends Migration
     {
         Schema::create('agencias', function (Blueprint $table) {
             $table->id();
+            $table->string("num_indent");
+            $table->unsignedBigInteger("localizacao");
+            $table->foreign("localizacao")->references("id")->on("moradas")->onDelete("cascade");
             $table->timestamps();
         });
     }
