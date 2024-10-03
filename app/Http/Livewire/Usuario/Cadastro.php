@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Usuario;
 
 use App\Models\DadosPessoais;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 use Livewire\Component;
 
 class Cadastro extends Component
@@ -54,7 +55,7 @@ class Cadastro extends Component
                 'name' => strtolower($this->nome) . "_" . strtolower($this->sobrenome),
                 'email' => $this->email,
                 'telefone' => $this->telefone,
-                'password' => $this->senha,
+                'password' => Hash::make($this->senha),
             ]);
 
             DadosPessoais::create([
