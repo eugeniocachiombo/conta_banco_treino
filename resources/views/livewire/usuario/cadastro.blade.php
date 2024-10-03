@@ -9,22 +9,27 @@
             <form class="row g-3 d-flex justify-content-center" action="" method="get">
                 <div class="col-8 col-md-6 ">
                     <label for="">Nome:</label>
-                    <input class="form-control" type="nome" name="" id="" required wire:model="name">
+                    <input class="form-control" type="nome" name="" id="" required wire:model="nome">
                 </div>
 
                 <div class="col-8 col-md-6 ">
                     <label for="">Sobrenome:</label>
-                    <input class="form-control" type="sobrenome" name="" id="" required>
+                    <input class="form-control" type="sobrenome" name="" id="" required wire:model="sobrenome">
                 </div>
 
                 <div class="col-8 col-md-6 ">
-                    <label for="">Email ou Telefone:</label>
-                    <input class="form-control" type="email" name="" id="" required>
+                    <label for="">Email</label>
+                    <input class="form-control" type="email" name="" id="" required wire:model="email">
+                </div>
+
+                <div class="col-8 col-md-6 ">
+                    <label for="">Telefone</label>
+                    <input class="form-control" type="number" name="" id="" required wire:model="telefone">
                 </div>
 
                 <div class="col-8 col-md-6 ">
                     <label for="">Senha:</label>
-                    <input class="form-control" type="password" name="" id="" required>
+                    <input class="form-control" type="password" name="" id="" required wire:model="senha">
                 </div>
             </form>
         </div>

@@ -2,11 +2,12 @@
 
 namespace App\Http\Livewire\Usuario;
 
+use App\Models\User;
 use Livewire\Component;
 
 class Cadastro extends Component
 {
-    public $name, $email, $telefone, $password;
+    public $nome, $sobrenome, $email, $telefone, $senha;
 
     public function render()
     {
@@ -14,6 +15,12 @@ class Cadastro extends Component
     }
 
     public function cadastrar(){
-        dd($this->name);
+        $cadastro = User::create([
+            'name' => $this->nome . " " . $this->sobrenome,
+            'email' => $this->email,
+            'telefone' => $this->telefone,
+            'password' => $this->senha,
+        ]);
+        $this->emit('alerta', ['mensagem' => 'Estilo criado com sucesso', 'icon' => 'success']);
     }
 }
