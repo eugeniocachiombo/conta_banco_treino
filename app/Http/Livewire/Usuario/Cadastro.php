@@ -2,12 +2,14 @@
 
 namespace App\Http\Livewire\Usuario;
 
+use App\Models\DadosPessoais;
 use App\Models\User;
 use Livewire\Component;
 
 class Cadastro extends Component
 {
     public $nome, $sobrenome, $email, $telefone, $senha;
+    public $nascimento, $genero;
 
     public function render()
     {
@@ -17,11 +19,19 @@ class Cadastro extends Component
     public function cadastrar()
     {
         try {
-            User::create([
-                'name' => $this->nome . " " . $this->sobrenome,
+            $usuario = User::create([
+                'name' => strtolower($this->nome) . "_" . strtolower($this->sobrenome),
                 'email' => $this->email,
                 'telefone' => $this->telefone,
                 'password' => $this->senha,
+            ]);
+
+            DadosPessoais::create([
+                'nome' => $this->nome,
+                'sobrenome' => $this->sobrenome,
+                'nascimento' => $this->nascimento,
+                'genero' => $this->genero,
+                'id_usuario' => $usuario->id,
             ]);
             $this->emit('alerta', ['mensagem' => 'Conta criada com sucesso', 'icon' => 'success']);
             $this->limparCampos();
@@ -48,6 +58,7 @@ class Cadastro extends Component
 
     public function limparCampos()
     {
+        $this->nascimento = $this->genero = null;
         $this->nome = $this->sobrenome = $this->email = $this->telefone = $this->senha = null;
     }
 }

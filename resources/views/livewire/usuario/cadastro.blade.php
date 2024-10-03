@@ -31,6 +31,15 @@
                     <label for="">Senha:</label>
                     <input class="form-control" type="password" name="" id="" required wire:model="senha">
                 </div>
+
+                <div class="col-8 col-md-6 ">
+                    <label for="">Gênero:</label>
+                    <select class="form-select" wire:model="genero">
+                        <option class="d-none">Seleccione</option>
+                        <option value="M">Masculino</option>
+                        <option value="F">Femenino</option>
+                    </select>
+                </div>
             </form>
         </div>
 
