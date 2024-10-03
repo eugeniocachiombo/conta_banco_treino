@@ -10,6 +10,36 @@ class Cadastro extends Component
 {
     public $nome, $sobrenome, $email, $telefone, $senha;
     public $nascimento, $genero;
+    public $tlfExiste, $emailExist;
+
+    protected $rules = [
+        'nome' => 'required|min:3|regex:/^[A-Za-zÀ-ÿ\s]+$/',
+        'sobrenome' => 'required|min:3|regex:/^[A-Za-zÀ-ÿ\s]+$/',
+        'senha' => 'required|min:6',
+        'telefone' => 'required|digits:9',
+        'nascimento' => 'required|date|date_format:Y-m-d',
+        'genero' => 'required',
+        'email' => 'required|email',
+    ];
+
+    protected $messages = [
+        'nome.required' => 'Campo obrigatório',
+        'nome.min' => 'O nome de conter pelo menos 3 digitos',
+        'nome.regex' => 'O nome deve conter apenas letras e espaços',
+        'sobrenome.required' => 'Campo obrigatório',
+        'sobrenome.min' => 'O sobrenome de conter pelo menos 3 digitos',
+        'sobrenome.regex' => 'O sobrenome deve conter apenas letras e espaços',
+        'senha.required' => 'Campo obrigatório',
+        'senha.min' => 'A senha de conter pelo menos 6 digitos',
+        'telefone.required' => 'Campo obrigatório',
+        'telefone.digits' => 'O telefone deve ter exatamente 9 dígitos',
+        'nascimento.required' => 'Campo obrigatório',
+        'nascimento.date' => 'Data inválida',
+        'nascimento.date_format' => 'Formato de data inválido',
+        'genero.required' => 'Campo obrigatório',
+        'email.required' => 'Campo obrigatório',
+        'email.email' => 'Formato de email incorrecto',
+    ];
 
     public function render()
     {
@@ -18,6 +48,7 @@ class Cadastro extends Component
 
     public function cadastrar()
     {
+        $this->validate();
         try {
             $usuario = User::create([
                 'name' => strtolower($this->nome) . "_" . strtolower($this->sobrenome),
@@ -42,23 +73,25 @@ class Cadastro extends Component
 
     public function verificarEmail()
     {
+        $this->emailExist = null;
         $email = User::where("email", $this->email)->first();
         if (!empty($email)) {
-            $this->emit('alerta', ['mensagem' => 'Email já existe', 'icon' => 'warning', 'tempo' => 3000]);
+            $this->emailExist = 'O email já existe';
         }
     }
 
     public function verificarTelefone()
     {
+        $this->tlfExiste = null;
         $telefone = User::where("telefone", $this->telefone)->first();
         if (!empty($telefone)) {
-            $this->emit('alerta', ['mensagem' => 'Telefone já existe', 'icon' => 'warning', 'tempo' => 3000]);
+            $this->tlfExiste = 'O telefone já existe';
         }
     }
 
     public function limparCampos()
     {
-        $this->nascimento = $this->genero = null;
+        $this->nascimento = $this->genero = $this->tlfExiste = $this->emailExist = null;
         $this->nome = $this->sobrenome = $this->email = $this->telefone = $this->senha = null;
     }
 }
