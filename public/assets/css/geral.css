@@ -7,7 +7,7 @@
 header{
     background: linear-gradient(45deg, rgb(85, 113, 165), rgb(185, 6, 147));
     color: white;
-    min-height: 20dvh;
+    min-height: 20vh;
     animation: grade_header 15s ease infinite;
 }
 
@@ -19,7 +19,7 @@ main{
 footer{
     background: linear-gradient(45deg, blue, cyan);
     color: white;
-    min-height: 20dvh;
+    min-height: 20vh;
     animation: grade_footer 15s ease infinite;
 }
 
