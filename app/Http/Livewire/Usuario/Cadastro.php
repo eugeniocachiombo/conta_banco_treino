@@ -56,6 +56,7 @@ class Cadastro extends Component
                 'email' => $this->email,
                 'telefone' => $this->telefone,
                 'password' => Hash::make($this->senha),
+                'id_acesso' => 3,
             ]);
 
             DadosPessoais::create([
