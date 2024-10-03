@@ -3,6 +3,7 @@
 <title>Início</title>
 
 <main class="p-4">
+    
     <div class="container g-3 border " style="min-height: inherit">
         <div class="p-4 ">
             <div class="col-5 col-md-2 border mb-2 text-center" style="max-height: 150px; overflow: hidden;">
@@ -56,7 +57,7 @@
             </div>
         </div>
     </div>
-</main>
+</main> 
 
 <script src="{{ asset('assets/js/calculoBancario.js') }}"></script>
 

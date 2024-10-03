@@ -1,5 +1,6 @@
 @include('inclusao.head')
 <title>Autenticação</title>
+
 <div class="container formulario d-flex justify-content-center align-items-center text-light" style="min-height: inherit">
     <form action="/usuario/inicio" class="row g-4 d-block justify-content-center" style="min-width: 50px"
         method="get">
