@@ -32,7 +32,7 @@ class Cadastro extends Component
         'sobrenome.min' => 'O sobrenome de conter pelo menos 3 digitos',
         'sobrenome.regex' => 'O sobrenome deve conter apenas letras e espaços',
         'senha.required' => 'Campo obrigatório',
-        'senha.min' => 'A senha de conter pelo menos 6 digitos',
+        'senha.min' => 'A senha deve conter pelo menos 6 digitos',
         'telefone.required' => 'Campo obrigatório',
         'telefone.digits' => 'O telefone deve ter exatamente 9 dígitos',
         'nascimento.required' => 'Campo obrigatório',
