@@ -45,8 +45,9 @@
                                     role="button" aria-expanded="false">Contas</a>
                                 <ul class="dropdown-menu">
                                     <li><a class="dropdown-item" href="{{route('conta.listar.logado')}}">Minhas Contas</a></li>
-                                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                    <li><a class="dropdown-item" href="#">Adicionar Contas</a></li>
+                                    <li><a class="dropdown-item" href="#">Manutenção Contas</a></li>
+                                    <li><a class="dropdown-item" href="#">Eliminar Contas</a></li>
                                 </ul>
                             </li>
                             

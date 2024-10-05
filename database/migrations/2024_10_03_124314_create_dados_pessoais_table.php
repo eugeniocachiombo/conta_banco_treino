@@ -65,6 +65,13 @@ class CreateDadosPessoaisTable extends Migration
             'id_usuario' => $admin->id,
         ]);
 
+        Conta::create([
+            'saldo' => 1000000,
+            'tipo' => "salario",
+            'estado' => "inactivo",
+            'id_usuario' => $admin->id,
+        ]);
+
         $gestor = User::create([
             'name' => "conta_gestor",
             'email' => "contagestor@gmail.com",
