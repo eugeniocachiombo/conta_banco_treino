@@ -25,4 +25,8 @@ class UsuarioController extends Controller
         Auth::logout();
         return redirect()->route("usuario.autenticacao");
     }
+
+    public function alterarSenha(){
+        return view("usuario.alterar_senha");
+    }
 }

@@ -10,6 +10,7 @@ Route::prefix("/usuario")->name("usuario.")->group(function () {
     Route::get('/autenticacao', [UsuarioController::class, 'autenticar'])->name("autenticacao")->middleware("usuario.logado");
     Route::get('/inicio', [UsuarioController::class, 'iniciar'])->name("index")->middleware("usuario.terminado");
     Route::get('/sair', [UsuarioController::class, 'sair'])->name("sair")->middleware("usuario.terminado");
+    Route::get('/alterar/senha', [UsuarioController::class, 'alterarSenha'])->name("alterar.senha")->middleware("usuario.terminado");
 });
 
 Route::get("/migrate", function(){
