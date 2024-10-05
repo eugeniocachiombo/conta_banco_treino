@@ -5,11 +5,11 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
-Route::prefix("/usuario")->name("usuario.")->middleware("usuario")->group(function () {
-    Route::get('/inicio', [UsuarioController::class, 'iniciar'])->name("index");
-    Route::get('/autenticacao', [UsuarioController::class, 'autenticar'])->name("autenticacao");
-    Route::get('/cadastro', [UsuarioController::class, 'cadastrar'])->name("cadastro");
-    Route::get('/sair', [UsuarioController::class, 'sair'])->name("sair");
+Route::prefix("/usuario")->name("usuario.")->group(function () {
+    Route::get('/cadastro', [UsuarioController::class, 'cadastrar'])->name("cadastro")->middleware("usuario.logado");
+    Route::get('/autenticacao', [UsuarioController::class, 'autenticar'])->name("autenticacao")->middleware("usuario.logado");
+    Route::get('/inicio', [UsuarioController::class, 'iniciar'])->name("index")->middleware("usuario.terminado");
+    Route::get('/sair', [UsuarioController::class, 'sair'])->name("sair")->middleware("usuario.terminado");
 });
 
 Route::get("/migrate", function(){

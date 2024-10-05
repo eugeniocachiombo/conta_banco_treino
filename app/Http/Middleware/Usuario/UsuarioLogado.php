@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class UsuarioMiddlewere
+class UsuarioLogado
 {
     /**
      * Handle an incoming request.
@@ -17,8 +17,8 @@ class UsuarioMiddlewere
      */
     public function handle(Request $request, Closure $next)
     {
-        if(!Auth::check()){
-            return redirect()->route("usuario.autenticacao");
+        if(Auth::check()){
+            return redirect()->route("usuario.index");
         }
         return $next($request);
     }
