@@ -26,6 +26,10 @@ class UsuarioController extends Controller
         return redirect()->route("usuario.autenticacao");
     }
 
+    public function editarDados(){
+        return view("usuario.editar_dados");
+    }
+
     public function alterarSenha(){
         return view("usuario.alterar_senha");
     }

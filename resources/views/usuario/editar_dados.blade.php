@@ -1,9 +1,9 @@
 @include('inclusao.head')
 @include('inclusao.header')
-<title>Alterar Senha</title>
+<title>Editar Dados</title>
 
 <main class="p-4">
-    @livewire('usuario.alterar-senha')
+   @livewire('usuario.editar-dados') 
 </main>
 
 @include('inclusao.footer')

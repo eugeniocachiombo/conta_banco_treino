@@ -4,11 +4,13 @@ namespace App\Http\Livewire\Usuario;
 
 use App\Models\DadosPessoais;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Livewire\Component;
 
-class Cadastro extends Component
+class EditarDados extends Component
 {
+    public $usuarioLogado, $dadosPessoais;
     public $nome, $sobrenome, $email, $telefone, $senha;
     public $nascimento, $genero, $nacionalidade;
     public $tlfExiste, $emailExist;
@@ -16,7 +18,6 @@ class Cadastro extends Component
     protected $rules = [
         'nome' => 'required|min:3|regex:/^[A-Za-zÀ-ÿ\s]+$/',
         'sobrenome' => 'required|min:3|regex:/^[A-Za-zÀ-ÿ\s]+$/',
-        'senha' => 'required|min:6',
         'telefone' => 'required|digits:9',
         'nascimento' => 'required|date|date_format:Y-m-d',
         'genero' => 'required',
@@ -31,8 +32,6 @@ class Cadastro extends Component
         'sobrenome.required' => 'Campo obrigatório',
         'sobrenome.min' => 'O sobrenome de conter pelo menos 3 digitos',
         'sobrenome.regex' => 'O sobrenome deve conter apenas letras e espaços',
-        'senha.required' => 'Campo obrigatório',
-        'senha.min' => 'A senha deve conter pelo menos 6 digitos',
         'telefone.required' => 'Campo obrigatório',
         'telefone.digits' => 'O telefone deve ter exatamente 9 dígitos',
         'nascimento.required' => 'Campo obrigatório',
@@ -46,40 +45,54 @@ class Cadastro extends Component
 
     public function render()
     {
-        return view('livewire.usuario.cadastro');
+        return view('livewire.usuario.editar-dados');
     }
 
-    public function cadastrar()
+    public function mount(){
+        $this->usuarioLogado = Auth::user();
+        $this->email =  $this->usuarioLogado->email;
+        $this->telefone = $this->usuarioLogado->telefone;
+
+        $this->dadosPessoais = DadosPessoais::where('id_usuario', $this->usuarioLogado->id)->first();
+        $this->nome = $this->dadosPessoais->nome;
+        $this->sobrenome = $this->dadosPessoais->sobrenome;
+        $this->nascimento = $this->dadosPessoais->nascimento;
+        $this->genero = $this->dadosPessoais->genero;
+        $this->nacionalidade = $this->dadosPessoais->nacionalidade;
+    }
+
+    public function actualizar()
     {
         $this->validate();
         try {
-           $usuario = User::create([
+           User::where("id", $this->usuarioLogado->id)
+           ->update([
                 'name' => strtolower($this->nome) . "_" . strtolower($this->sobrenome),
                 'email' => $this->email,
-                'telefone' => $this->telefone,
-                'password' => Hash::make($this->senha),
-                'id_acesso' => 3,
+                'telefone' => $this->telefone
             ]);
 
-            DadosPessoais::create([
+            DadosPessoais::where("id_usuario", $this->usuarioLogado->id)
+            ->update([
                 'nome' => $this->nome,
                 'sobrenome' => $this->sobrenome,
                 'nascimento' => $this->nascimento,
                 'genero' => $this->genero,
                 'nacionalidade' => $this->nacionalidade,
-                'id_usuario' => $usuario->id,
             ]);
-            $this->emit('alerta', ['mensagem' => 'Conta criada com sucesso', 'icon' => 'success']);
+            $this->emit('alerta', ['mensagem' => 'Dados actualizados com sucesso', 'icon' => 'success']);
             $this->limparCampos();
         } catch (\Throwable $th) {
-            $this->emit('alerta', ['mensagem' => 'Ocorreu um erro no cadastro', 'icon' => 'error']);
+            $this->emit('alerta', ['mensagem' => 'Ocorreu um erro ao actualizar', 'icon' => 'error']);
         }
     }
 
     public function verificarEmail()
     {
         $this->emailExist = null;
-        $email = User::where("email", $this->email)->first();
+        $email = User::where("email", $this->email)
+        ->where("id", "!=", $this->usuarioLogado->id)
+        ->first();
         if (!empty($email)) {
             $this->emailExist = 'O email já existe';
         }
@@ -88,7 +101,9 @@ class Cadastro extends Component
     public function verificarTelefone()
     {
         $this->tlfExiste = null;
-        $telefone = User::where("telefone", $this->telefone)->first();
+        $telefone = User::where("telefone", $this->telefone)
+        ->where("id", "!=", $this->usuarioLogado->id)
+        ->first();
         if (!empty($telefone)) {
             $this->tlfExiste = 'O telefone já existe';
         }
@@ -96,6 +111,7 @@ class Cadastro extends Component
 
     public function limparCampos()
     {
+        $this->usuarioLogado = $this->dadosPessoais = null;
         $this->nacionalidade = $this->nascimento = $this->genero = $this->tlfExiste = $this->emailExist = null;
         $this->nome = $this->sobrenome = $this->email = $this->telefone = $this->senha = null;
     }
