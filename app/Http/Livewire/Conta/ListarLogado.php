@@ -13,7 +13,7 @@ class ListarLogado extends Component
 
     public function render()
     {
-        $this->listaGeral = Conta::where("id", Auth::user()->id)->get();
+        $this->listaGeral = Conta::where("id_usuario", Auth::user()->id)->get();
         return view('livewire.conta.listar-logado');
     }
 }
