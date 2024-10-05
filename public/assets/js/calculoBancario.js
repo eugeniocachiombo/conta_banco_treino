@@ -1,6 +1,12 @@
 let saldo = document.querySelector(".saldo");
-    let quantia = document.querySelector("#quantia");
-    regraSaldo();
+let saldoAtual = parseFloat(saldo.innerText.replace(/\./g, '').replace(',', '.'));
+saldo.innerHTML = parseFloat(saldoAtual).toLocaleString('pt-BR', {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+});
+window.alert(saldoAtual)
+/* regraSaldo();
+let quantia = document.querySelector("#quantia");
 
     function formatarValorNoCampo(valor) {
         $(document).ready(function() {
@@ -57,4 +63,4 @@ let saldo = document.querySelector(".saldo");
                 saldo.innerHTML = "0,00";
             }
         });
-    }
+    }*/

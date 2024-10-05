@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Usuario\UsuarioController;
+use App\Http\Controllers\Conta\ContaController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
@@ -12,6 +13,10 @@ Route::prefix("/usuario")->name("usuario.")->group(function () {
     Route::get('/sair', [UsuarioController::class, 'sair'])->name("sair")->middleware("usuario.terminado");
     Route::get('/editar/dados', [UsuarioController::class, 'editarDados'])->name("editar.dados")->middleware("usuario.terminado");
     Route::get('/alterar/senha', [UsuarioController::class, 'alterarSenha'])->name("alterar.senha")->middleware("usuario.terminado");
+});
+
+Route::prefix("/conta")->name("conta.")->group(function () {
+   Route::get('/listar/minhas/contas', [ContaController::class, 'listarLogado'])->name("listar.logado")->middleware("usuario.terminado");
 });
 
 Route::get("/migrate", function(){
