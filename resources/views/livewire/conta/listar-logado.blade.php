@@ -45,8 +45,8 @@
                                 <tr class="text-white">
                                     <td>{{ $item->id }}</td>
                                     <td>{{ $item->id_usuario }}</td>
-                                    <td>{{ $item->tipo }}</td>
-                                    <td>{{ $item->estado }}</td>
+                                    <td>{{ ucwords($item->tipo) }}</td>
+                                    <td>{{ ucwords($item->estado) }}</td>
                                     <td class="saldo">{{ number_format($item->saldo, 2, ',', '.') }} kz</td>
                                 </tr>
                             @empty

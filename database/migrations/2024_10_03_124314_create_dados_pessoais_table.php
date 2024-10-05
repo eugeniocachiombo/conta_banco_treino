@@ -75,7 +75,7 @@ class CreateDadosPessoaisTable extends Migration
 
         DadosPessoais::create([
             'nome' => "Conta",
-            'sobrenome' => "Admin",
+            'sobrenome' => "Gestor",
             'nascimento' => "1980-04-04",
             'nacionalidade' => 'angola',
             'id_usuario' => $gestor->id,
