@@ -20,6 +20,7 @@ class Cadastro extends Component
         'telefone' => 'required|digits:9',
         'nascimento' => 'required|date|date_format:Y-m-d',
         'genero' => 'required',
+        'nacionalidade' => 'required',
         'email' => 'required|email',
     ];
 
@@ -38,6 +39,7 @@ class Cadastro extends Component
         'nascimento.date' => 'Data inválida',
         'nascimento.date_format' => 'Formato de data inválido',
         'genero.required' => 'Campo obrigatório',
+        'nacionalidade.required' => 'Campo obrigatório',
         'email.required' => 'Campo obrigatório',
         'email.email' => 'Formato de email incorrecto',
     ];
@@ -51,7 +53,7 @@ class Cadastro extends Component
     {
         $this->validate();
         try {
-            $usuario = User::create([
+           $usuario = User::create([
                 'name' => strtolower($this->nome) . "_" . strtolower($this->sobrenome),
                 'email' => $this->email,
                 'telefone' => $this->telefone,
@@ -70,6 +72,7 @@ class Cadastro extends Component
             $this->emit('alerta', ['mensagem' => 'Conta criada com sucesso', 'icon' => 'success']);
             $this->limparCampos();
         } catch (\Throwable $th) {
+            dd($th);
             $this->emit('alerta', ['mensagem' => 'Ocorreu um erro no cadastro', 'icon' => 'error']);
         }
     }

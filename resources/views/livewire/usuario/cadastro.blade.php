@@ -95,10 +95,9 @@
 
                 <div class="col-8 col-md-6 ">
                     <label for="">Nacionalidade:</label>
-                    <select class="form-select" wire:model="nacionalidade">
+                    <select class="form-select" wire:model="nacionalidade" >
                         <option class="d-none">Seleccione</option>
-                        <option value="angola" selected>Angolano</option>
-                        <option value="">Femenino</option>
+                        <option value="angola" >Angolano</option>
                     </select>
                     @error('nacionalidade')
                         <span class="error text-warning">{{ $message }}</span>
@@ -109,7 +108,7 @@
 
         <div class="col-12 text-center text-md-start pt-4">
             <span>
-                <button type="submit" wire:click='cadastrar'>
+                <button type="submit" wire:click.prevent='cadastrar'>
                     Criar
                 </button> <br> <br>
 

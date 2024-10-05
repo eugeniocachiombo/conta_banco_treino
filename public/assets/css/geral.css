@@ -31,6 +31,11 @@ body {
     animation: grade 15s ease infinite;
 }
 
+.nav-item:hover{
+    background: rgb(185, 6, 147);
+    font-weight: bold;
+}
+
 @keyframes grade_header {
     0% {
         background-position-x: 0%;

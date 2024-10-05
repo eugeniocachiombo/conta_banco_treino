@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Usuario;
 
 use App\Models\User;
+use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Livewire\Component;
@@ -18,14 +19,18 @@ class Autenticacao extends Component
 
     public function logar()
     {
-        $usuario = User::where('email', $this->telEmail)
-            ->orWhere('telefone', $this->telEmail) 
-            ->first();
-        if ($usuario && Hash::check($this->senha, $usuario->password)) {
-            Auth::login($usuario);
-            return redirect()->route('usuario.index');
-        } else {
-            dd("Falha no login. Verifique suas credenciais.");
+        try {
+            $usuario = User::where('email', $this->telEmail)
+                ->orWhere('telefone', $this->telEmail)
+                ->first();
+            if ($usuario && Hash::check($this->senha, $usuario->password)) {
+                Auth::login($usuario);
+                return redirect()->route('usuario.index');
+            } else {
+                $this->emit('alerta', ['mensagem' => 'Falha no login. Verifique suas credenciais', 'icon' => 'error', 'tempo' => 3000]);
+            }
+        } catch (QueryException $th) {
+            $this->emit('alerta', ['mensagem' => 'Nenhuma conexão com a Base de dados', 'icon' => 'error', 'tempo' => 3000]);
         }
     }
 
