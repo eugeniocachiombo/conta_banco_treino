@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Conta;
 use App\Models\Conta;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
+use Whoops\Exception\Formatter;
 
 class ListarLogado extends Component
 {

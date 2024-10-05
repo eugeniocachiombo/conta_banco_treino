@@ -21,6 +21,10 @@
     </div>
 
     <div class="col-md-4 col-12 d-flex justify-content-center align-items-center border">
-        <h3 class="pt-2" style="height: inherit"> <span class="saldo ">0,00</span>kz</h3>
+        @php
+            use App\Models\Conta;
+            $conta = Conta::where("id", $usuario->id)->first();
+        @endphp
+        <h3 class="pt-2" style="height: inherit"> {{number_format($conta->saldo, 2,',', '.');}} kz</h3>
     </div>
 </div>
