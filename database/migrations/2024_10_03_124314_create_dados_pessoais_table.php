@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Conta;
 use App\Models\DadosPessoais;
 use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
@@ -59,6 +60,11 @@ class CreateDadosPessoaisTable extends Migration
             'id_usuario' => $admin->id,
         ]);
 
+        Conta::create([
+            'saldo' => 1000000,
+            'id_usuario' => $admin->id,
+        ]);
+
         $gestor = User::create([
             'name' => "conta_gestor",
             'email' => "contagestor@gmail.com",
@@ -72,6 +78,11 @@ class CreateDadosPessoaisTable extends Migration
             'sobrenome' => "Admin",
             'nascimento' => "1980-04-04",
             'nacionalidade' => 'angola',
+            'id_usuario' => $gestor->id,
+        ]);
+
+        Conta::create([
+            'saldo' => 200000,
             'id_usuario' => $gestor->id,
         ]);
     }

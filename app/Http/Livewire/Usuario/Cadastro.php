@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Usuario;
 
+use App\Models\Conta;
 use App\Models\DadosPessoais;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
@@ -69,6 +70,12 @@ class Cadastro extends Component
                 'nacionalidade' => $this->nacionalidade,
                 'id_usuario' => $usuario->id,
             ]);
+
+            Conta::create([
+                'saldo' => 1000000,
+                'id_usuario' => $usuario->id,
+            ]);
+
             $this->emit('alerta', ['mensagem' => 'Conta criada com sucesso', 'icon' => 'success']);
             $this->limparCampos();
         } catch (\Throwable $th) {
