@@ -14,7 +14,7 @@
             <h1 class="text-center text-md-start pt-3">Listagem de contas bancárias</h1>
 
             <div class="col-12 ">
-                <div>
+                <div class="table-responsive">
                     <table class="table datatablePT table-hover pt-3">
                         <thead class="">
                             <tr>

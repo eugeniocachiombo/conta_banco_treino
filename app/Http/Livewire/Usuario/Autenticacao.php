@@ -26,6 +26,7 @@ class Autenticacao extends Component
                 ->first();
             if ($usuario && Hash::check($this->senha, $usuario->password)) {
                 Auth::login($usuario);
+                cookie("sessao_iniciada", "sessao_iniciada", 60);
                 return redirect()->route('usuario.index');
             } else {
                 $this->emit('alerta', ['mensagem' => 'Falha no login. Verifique suas credenciais', 'icon' => 'error', 'tempo' => 3000]);

@@ -33,7 +33,9 @@
                         Saldo da conta:
                         @php
                         use App\Models\Conta;
-                        $conta = Conta::where("id", $usuario->id)->first();
+                        $conta = Conta::where("id_usuario", $usuario->id)
+                        ->where("tipo", "corrente")
+                        ->first();
                     @endphp
                         <div class="ps-md-2">{{number_format($conta->saldo, 2,',', '.');}} kz</div>
                     </b>

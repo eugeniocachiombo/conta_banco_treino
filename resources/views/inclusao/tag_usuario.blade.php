@@ -23,7 +23,9 @@
     <div class="col-md-4 col-12 d-flex justify-content-center align-items-center border">
         @php
             use App\Models\Conta;
-            $conta = Conta::where("id", $usuario->id)->first();
+            $conta = Conta::where("id_usuario", $usuario->id)
+            ->where("tipo", "corrente")
+            ->first();
         @endphp
         <h3 class="pt-2" style="height: inherit"> {{number_format($conta->saldo, 2,',', '.');}} kz</h3>
     </div>
