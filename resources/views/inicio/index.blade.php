@@ -11,7 +11,6 @@
 @endphp
 
 <main class="p-4">
-
     <div class="container g-3 border " style="min-height: inherit">
         <div class="p-4 ">
             @include('inclusao.tag_usuario')
@@ -32,7 +31,11 @@
                     <b class="d-table d-md-flex">
                         <i class="fas fa-bank pe-2"></i>
                         Saldo da conta:
-                        <div class="ps-md-2"> <span class="saldo pe-2">0,00</span>kz</div>
+                        @php
+                        use App\Models\Conta;
+                        $conta = Conta::where("id", $usuario->id)->first();
+                    @endphp
+                        <div class="ps-md-2">{{number_format($conta->saldo, 2,',', '.');}} kz</div>
                     </b>
                 </h4>
             </div>
