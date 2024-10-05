@@ -35,7 +35,7 @@
                                     role="button" aria-expanded="false">Perfil</a>
                                 <ul class="dropdown-menu">
                                     <li><a class="dropdown-item" href="#">Editar dados</a></li>
-                                    <li><a class="dropdown-item" href="#">Sair</a></li>
+                                    <li><a class="dropdown-item" href="{{route('usuario.sair')}}">Sair</a></li>
                                 </ul>
                             </li>
 

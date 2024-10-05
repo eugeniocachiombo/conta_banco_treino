@@ -9,6 +9,7 @@ Route::prefix("/usuario")->name("usuario.")->middleware("usuario")->group(functi
     Route::get('/inicio', [UsuarioController::class, 'iniciar'])->name("index");
     Route::get('/autenticacao', [UsuarioController::class, 'autenticar'])->name("autenticacao");
     Route::get('/cadastro', [UsuarioController::class, 'cadastrar'])->name("cadastro");
+    Route::get('/sair', [UsuarioController::class, 'sair'])->name("sair");
 });
 
 Route::get("/migrate", function(){
