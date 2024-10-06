@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Usuario;
 use App\Models\Conta;
 use App\Models\DadosPessoais;
 use App\Models\User;
+use Faker\Core\Number;
 use Illuminate\Support\Facades\Hash;
 use Livewire\Component;
 
@@ -72,7 +73,7 @@ class Cadastro extends Component
             ]);
 
             $ultimoRegistro = Conta::orderByDesc("id")->first();
-            $novoNumConta = $ultimoRegistro->id + $ultimoRegistro->num_conta;
+            $novoNumConta = intval($ultimoRegistro->id . rand(1000,9999) . rand(1100,9999));
             Conta::create([
                 'saldo' => 1000000,
                 'num_conta' => $novoNumConta,

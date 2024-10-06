@@ -23,7 +23,7 @@ class AdicionarContas extends Component
 
     public function adicionarConta($id_usuario){
         $ultimoRegistro = Conta::orderByDesc("id")->first();
-        $novoNumConta = $ultimoRegistro->id + $ultimoRegistro->num_conta;
+        $novoNumConta = intval($ultimoRegistro->id . rand(1000,9999) . rand(1100,9999));
         Conta::create([
             "tipo" => $this->tipoConta,
             'num_conta' => $novoNumConta,
