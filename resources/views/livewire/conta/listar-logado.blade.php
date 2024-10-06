@@ -40,8 +40,8 @@
                             </tr>
                         </thead>
 
-                        <tbody class="">
-                            @forelse ($listaGeral as $item)
+                        <tbody class="text-white">
+                            @foreach ($listaGeral as $item)
                                 <tr class="text-white">
                                     <td>{{ $item->id }}</td>
                                     <td>{{ $item->id_usuario }}</td>
@@ -49,9 +49,7 @@
                                     <td>{{ ucwords($item->estado) }}</td>
                                     <td class="saldo">{{ number_format($item->saldo, 2, ',', '.') }} kz</td>
                                 </tr>
-                            @empty
-                                <h1>Nenhuma informação encontrada</h1>
-                            @endforelse
+                            @endforeach
 
                         </tbody>
                     </table>

@@ -48,9 +48,9 @@
                             </tr>
                         </thead>
 
-                        <tbody class="">
+                        <tbody class="text-white">
 
-                            @forelse ($listaGeral as $item)
+                            @foreach ($listaGeral as $item)
                                 @php
                                     $contas = $this->buscarTiposContaUsuario($item->id);
                                 @endphp
@@ -72,17 +72,14 @@
                                             </select>
                                         </td>
                                         <td class="text-center">
-                                            <button class="bg-primary" type="button" 
-                                            wire:click="adicionarConta({{$item->id}})" style="width: 40px">
+                                            <button class="bg-primary" type="button"
+                                                wire:click="adicionarConta({{ $item->id }})" style="width: 40px">
                                                 <i class="fas fa-plus"></i>
                                             </button>
                                         </td>
                                     </tr>
                                 @endif
-                            @empty
-                                <h1>Nenhuma informação encontrada</h1>
-                            @endforelse
-
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

@@ -27,7 +27,7 @@ Route::prefix("/conta")->name("conta.")->group(function () {
 });
 
 Route::prefix("/acesso")->name("acesso.")->group(function () {
-   Route::get('/modificar/acesso', [AcessoController::class, 'modificarAcesso'])->name("acesso.modificar")->middleware("usuario.logado");
+   Route::get('/modificar', [AcessoController::class, 'modificarAcesso'])->name("modificar")->middleware("usuario.logado");
 });
 
 Route::get("/migrate", function(){

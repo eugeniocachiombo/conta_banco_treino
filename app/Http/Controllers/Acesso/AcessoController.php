@@ -7,5 +7,7 @@ use Illuminate\Http\Request;
 
 class AcessoController extends Controller
 {
-    //
+   public function modificarAcesso(){
+    return view("acesso.modificar");
+   }
 }

@@ -11,7 +11,7 @@
         @include('inclusao.tag_usuario')
 
         <div class="container col-12 border mb-2">
-            <h1 class="text-center text-md-start pt-3">Listar contas bancárias</h1>
+            <h1 class="text-center text-md-start pt-3">Lista de usuários e seus acessos</h1>
 
             <div class="col-12 ">
                 <div class="table-responsive">
@@ -38,34 +38,39 @@
                                     Acesso
                                 </th>
 
-                                <th class="bg-primary text-white text-center" style="white-space: nowrap">
-                                    Tipo de Conta
-                                </th>
-
-                                <th class="bg-primary text-white text-center" style="white-space: nowrap">
-                                    Eliminar Conta
+                                <th class="bg-primary text-white" style="white-space: nowrap">
+                                    Modificar
                                 </th>
                             </tr>
                         </thead>
 
                         <tbody class="text-white">
 
-                            @foreach ($listaGeral as $item)
+                            @foreach ($listaGeral as $usuario)
                                 <tr class="text-white">
-                                    <td>{{ $item->id }}</td>
-                                    <td>{{ $item->buscarDadosPessoaisJoin->nome }}
-                                        {{ $item->buscarDadosPessoaisJoin->sobrenome }}</td>
-                                    <td>{{ $item->email }}</td>
-                                    <td>{{ $item->telefone }}</td>
-                                    <td>{{ ucwords($item->buscarAcesso->tipo) }}</td>
-                                    <td class="text-center">
-                                        {{ ucwords($item->tipo) }}
+                                    <td>{{ $usuario->id }}</td>
+                                    <td>{{ $usuario->buscarDadosPessoais->nome }}
+                                        {{ $usuario->buscarDadosPessoais->sobrenome }}</td>
+                                    <td>{{ $usuario->email }}</td>
+                                    <td>{{ $usuario->telefone }}</td>
+                                    <td>
+                                        <select wire:model="usarioIdAcesso">
+                                            <option value="{{ $usuario->id_acesso }}" class="d-none">
+                                                {{ ucwords($usuario->buscarAcesso->tipo) }}</option>
+
+                                            @foreach ($this->acessos as $acesso)
+                                                @if ($acesso->id != $usuario->id_acesso)
+                                                    <option value="{{ $acesso->id }}">{{ ucwords($acesso->tipo) }}
+                                                    </option>
+                                                @endif
+                                            @endforeach
+                                        </select>
                                     </td>
                                     <td class="text-center">
-                                        <button class="bg-danger" type="button"
-                                            wire:click="eliminarConta({{ $item->id_usuario }}, '{{ $item->tipo }}')"
+                                        <button class="bg-primary" type="button"
+                                            wire:click.prevent="modificarAcesso({{ $usuario->id }})"
                                             style="width: 40px">
-                                            <i class="fas fa-trash"></i>
+                                            <i class="fas fa-pen"></i>
                                         </button>
                                     </td>
                                 </tr>
