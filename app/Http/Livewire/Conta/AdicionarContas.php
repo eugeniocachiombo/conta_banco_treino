@@ -22,8 +22,11 @@ class AdicionarContas extends Component
     }
 
     public function adicionarConta($id_usuario){
+        $ultimoRegistro = Conta::orderByDesc("id")->first();
+        $novoNumConta = $ultimoRegistro->id + $ultimoRegistro->num_conta;
         Conta::create([
             "tipo" => $this->tipoConta,
+            'num_conta' => $novoNumConta,
             "id_usuario" => $id_usuario
         ]);
         $this->emit('alerta', ['mensagem' => 'Conta adicionada com sucesso', 'icon' => 'success']);

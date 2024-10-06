@@ -39,6 +39,10 @@
                                 </th>
 
                                 <th class="bg-primary text-white text-center" style="white-space: nowrap">
+                                    Número da Conta
+                                </th>
+
+                                <th class="bg-primary text-white text-center" style="white-space: nowrap">
                                     Tipo de Conta
                                 </th>
 
@@ -53,11 +57,12 @@
                             @foreach ($listaGeral as $item)
                                 <tr class="text-white">
                                     <td>{{ $item->id }}</td>
-                                    <td>{{ $item->buscarDadosPessoaisJoin->nome }}
+                                    <td style="white-space: nowrap">{{ $item->buscarDadosPessoaisJoin->nome }}
                                         {{ $item->buscarDadosPessoaisJoin->sobrenome }}</td>
                                     <td>{{ $item->email }}</td>
                                     <td>{{ $item->telefone }}</td>
                                     <td>{{ ucwords($item->buscarAcesso->tipo) }}</td>
+                                    <td class="text-center"> {{ $item->num_conta }}</td>
                                     <td class="text-center">
                                         {{ ucwords($item->tipo) }}
                                     </td>

@@ -27,6 +27,10 @@
                                 </th>
 
                                 <th class="bg-primary text-white" style="white-space: nowrap">
+                                    Número da conta
+                                </th>
+
+                                <th class="bg-primary text-white" style="white-space: nowrap">
                                     Tipo de conta
                                 </th>
 
@@ -45,6 +49,7 @@
                                 <tr class="text-white">
                                     <td>{{ $item->id }}</td>
                                     <td>{{ $item->id_usuario }}</td>
+                                    <td>{{ $item->num_conta }}</td>
                                     <td>{{ ucwords($item->tipo) }}</td>
                                     <td>{{ ucwords($item->estado) }}</td>
                                     <td class="saldo">{{ number_format($item->saldo, 2, ',', '.') }} kz</td>
