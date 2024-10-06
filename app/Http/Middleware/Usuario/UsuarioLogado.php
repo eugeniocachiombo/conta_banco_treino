@@ -17,8 +17,8 @@ class UsuarioLogado
      */
     public function handle(Request $request, Closure $next)
     {
-        if(Auth::check()){
-            return redirect()->route("usuario.index");
+        if(!Auth::check()){
+            return redirect()->route("usuario.autenticacao");
         }
         return $next($request);
     }

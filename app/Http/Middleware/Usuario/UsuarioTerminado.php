@@ -17,8 +17,8 @@ class UsuarioTerminado
      */
     public function handle(Request $request, Closure $next)
     {
-        if(!Auth::check()){
-            return redirect()->route("usuario.autenticacao");
+        if(Auth::check()){
+            return redirect()->route("usuario.index");
         }
         return $next($request);
     }
