@@ -47,7 +47,6 @@
                                     <li><a class="dropdown-item" href="{{route('conta.listar.logado')}}">Minhas Contas</a></li>
                                     <li><a class="dropdown-item" href="{{route('conta.adicionar.contas')}}">Adicionar Contas</a></li>
                                     <li><a class="dropdown-item" href="{{route('conta.listar.contas')}}">Listar Contas</a></li>
-                                    <li><a class="dropdown-item" href="#">Eliminar Contas</a></li>
                                 </ul>
                             </li>
                             

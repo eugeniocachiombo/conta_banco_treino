@@ -15,7 +15,7 @@
 
             <div class="col-12 ">
                 <div class="table-responsive">
-                    <table class="table datatablePT table-hover pt-3">
+                    <table id="minhaTabela" class="table datatablePT table-hover pt-3">
                         <thead class="">
                             <tr>
                                 <th class="bg-primary text-white" style="white-space: nowrap">

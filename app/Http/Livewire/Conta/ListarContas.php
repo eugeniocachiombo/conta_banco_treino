@@ -12,12 +12,24 @@ class ListarContas extends Component
 
     public function render()
     {
-        $this->listaGeral = User::all();
+        $this->listaGeral = User::join('contas', 'users.id', '=', 'contas.id_usuario')
+            ->select('users.*', 'contas.*')
+            ->get();
         return view('livewire.conta.listar-contas');
     }
 
     public function buscarTiposContaUsuario($id_usuario)
     {
         return Conta::where('id_usuario', $id_usuario)->get();
+    }
+
+    public function eliminarConta($id_usuario, $tipo)
+    {
+        if (isset($id_usuario) && isset($tipo)) {
+            Conta::where('id_usuario', $id_usuario)
+                ->where('tipo', $tipo)
+                ->delete();
+            $this->emit('alerta', ['mensagem' => 'Eliminado com sucesso', 'icon' => 'success']);
+        }
     }
 }

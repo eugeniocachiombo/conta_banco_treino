@@ -11,11 +11,11 @@
         @include('inclusao.tag_usuario')
 
         <div class="container col-12 border mb-2">
-            <h1 class="text-center text-md-start pt-3">Listagem de contas bancárias</h1>
+            <h1 class="text-center text-md-start pt-3">Minhas contas bancárias</h1>
 
             <div class="col-12 ">
                 <div class="table-responsive">
-                    <table class="table datatablePT table-hover pt-3">
+                    <table id="minhaTabela" class="table datatablePT table-hover pt-3">
                         <thead class="">
                             <tr>
                                 <th class="bg-primary text-white" style="white-space: nowrap">

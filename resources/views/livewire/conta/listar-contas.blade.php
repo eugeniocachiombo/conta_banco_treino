@@ -41,27 +41,32 @@
                                 <th class="bg-primary text-white text-center" style="white-space: nowrap">
                                     Tipo de Conta
                                 </th>
+
+                                <th class="bg-primary text-white text-center" style="white-space: nowrap">
+                                    Eliminar Conta
+                                </th>
                             </tr>
                         </thead>
 
                         <tbody class="">
 
                             @forelse ($listaGeral as $item)
-                                @php
-                                    $contas = $this->buscarTiposContaUsuario($item->id);
-                                @endphp
-
                                 <tr class="text-white">
                                     <td>{{ $item->id }}</td>
-                                    <td>{{ $item->buscarDadosPessoais->nome }}
-                                        {{ $item->buscarDadosPessoais->sobrenome }}</td>
+                                    <td>{{ $item->buscarDadosPessoaisJoin->nome }}
+                                        {{ $item->buscarDadosPessoaisJoin->sobrenome }}</td>
                                     <td>{{ $item->email }}</td>
                                     <td>{{ $item->telefone }}</td>
                                     <td>{{ ucwords($item->buscarAcesso->tipo) }}</td>
                                     <td class="text-center">
-                                        @foreach ($contas as $conta)
-                                            {{ ucwords($conta->tipo) }}.
-                                        @endforeach
+                                        {{ ucwords($item->tipo) }}
+                                    </td>
+                                    <td class="text-center">
+                                        <button class="bg-danger" type="button" 
+                                        wire:click="eliminarConta({{ $item->id_usuario }}, '{{ $item->tipo }}')"
+                                         style="width: 40px">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
                                     </td>
                                 </tr>
                             @empty

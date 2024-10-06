@@ -34,6 +34,10 @@ class User extends Authenticatable
         return $this->BelongsTo(DadosPessoais::class, "id", "id_usuario");
     }
 
+    public function buscarDadosPessoaisJoin(){
+        return $this->BelongsTo(DadosPessoais::class, "id_usuario", "id_usuario");
+    }
+
     /**
      * The attributes that should be hidden for serialization.
      *
