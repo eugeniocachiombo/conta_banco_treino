@@ -41,6 +41,10 @@
                                 <th class="bg-primary text-white" style="white-space: nowrap">
                                     Tipo de Conta
                                 </th>
+
+                                <th class="bg-primary text-white" style="white-space: nowrap">
+                                    Adicionar
+                                </th>
                             </tr>
                         </thead>
 
@@ -59,12 +63,19 @@
                                         <td>{{ $item->email }}</td>
                                         <td>{{ $item->telefone }}</td>
                                         <td>{{ ucwords($item->buscarAcesso->tipo) }}</td>
-                                        <td>
-                                            <select wire:select="tipoConta">
+                                        <td class="text-center">
+                                            <select wire:model="tipoConta">
+                                                <option class="d-none">Selecione</option>
                                                 @foreach ($this->buscarContaEmFaltaUsuario($item->id) as $conta)
-                                                    <option value="">{{ $conta->tipo }}</option>
+                                                    <option value="{{ $conta->tipo }}">{{ $conta->tipo }}</option>
                                                 @endforeach
                                             </select>
+                                        </td>
+                                        <td class="text-center">
+                                            <button class="bg-primary" type="button" 
+                                            wire:click="adicionarConta({{$item->id}})" style="width: 40px">
+                                                <i class="fas fa-plus"></i>
+                                            </button>
                                         </td>
                                     </tr>
                                 @endif
