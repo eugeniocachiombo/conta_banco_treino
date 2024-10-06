@@ -15,6 +15,7 @@ class CreateContasTable extends Migration
     {
         Schema::create('contas', function (Blueprint $table) {
             $table->id();
+            $table->integer("num_conta")->unique();
             $table->enum("tipo", ["corrente", "salario"])->default("corrente");
             $table->enum("estado", ["activo", "inactivo", "bloqueado", "cancelado"])->default("activo");
             $table->integer("saldo")->nullable();

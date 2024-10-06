@@ -1,17 +1,11 @@
-@php
-    use App\Models\DadosPessoais;
-    use App\Models\Acesso;
-    $usuario = Auth::user();
-    $dados = DadosPessoais::where('id_usuario', $usuario->id)->first();
-    $acesso = Acesso::find($usuario->id_acesso);
-@endphp
-
 <div class="container g-3 border " style="min-height: inherit">
     <div class="p-4 ">
-        @include('inclusao.tag_usuario')
-
         <div class="container col-12 border mb-2">
-            <h1 class="text-center text-md-start pt-3">Modificar acesso de usuários</h1>
+            <h1 class="text-center text-md-start pt-3 pb-4">Depositar Dinheiro</h1>
+
+            @if ($this->usuarioSelecionado)
+                @include('transacao.form_deposito')
+            @endif
 
             <div class="col-12 ">
                 <div class="table-responsive">
@@ -39,7 +33,7 @@
                                 </th>
 
                                 <th class="bg-primary text-white" style="white-space: nowrap">
-                                    Modificar
+                                    Depositar
                                 </th>
                             </tr>
                         </thead>
@@ -54,23 +48,13 @@
                                     <td>{{ $usuario->email }}</td>
                                     <td>{{ $usuario->telefone }}</td>
                                     <td>
-                                        <select wire:model="usarioIdAcesso">
-                                            <option value="{{ $usuario->id_acesso }}" class="d-none">
-                                                {{ ucwords($usuario->buscarAcesso->tipo) }}</option>
-
-                                            @foreach ($this->acessos as $acesso)
-                                                @if ($acesso->id != $usuario->id_acesso)
-                                                    <option value="{{ $acesso->id }}">{{ ucwords($acesso->tipo) }}
-                                                    </option>
-                                                @endif
-                                            @endforeach
-                                        </select>
+                                          {{ ucwords($usuario->buscarAcesso->tipo) }}</option>
                                     </td>
                                     <td class="text-center">
                                         <button class="bg-primary" type="button"
-                                            wire:click.prevent="modificarAcesso({{ $usuario->id }})"
+                                            wire:click.prevent="selecionarUsuario({{ $usuario->id }})"
                                             style="width: 40px">
-                                            <i class="fas fa-pen"></i>
+                                            <i class="fas fa-plus-circle"></i>
                                         </button>
                                     </td>
                                 </tr>

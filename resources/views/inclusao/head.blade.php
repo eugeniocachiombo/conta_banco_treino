@@ -19,7 +19,7 @@
     <script src="{{ asset('assets/js/executar_alert.js') }}"></script>
 
     <link rel="stylesheet" href="{{ asset('assets/css/jquery.dataTables.min.css') }}">
-    <script src="{{ asset('assets/js/jquery-3.6.0.min.js') }}"></script>
+    {{--<script src="{{ asset('assets/js/jquery-3.6.0.min.js') }}"></script>--}}
     <script src="{{ asset('assets/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('assets/js/ellipsis.js') }}"></script>
     @livewireScripts

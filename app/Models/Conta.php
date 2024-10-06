@@ -10,6 +10,7 @@ class Conta extends Model
     use HasFactory;
 
     protected $fillable = [
+        'num_conta',
         'tipo',
         'estado',
         'saldo',

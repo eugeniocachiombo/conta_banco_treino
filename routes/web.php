@@ -3,6 +3,7 @@
 use App\Http\Controllers\Acesso\AcessoController;
 use App\Http\Controllers\Usuario\UsuarioController;
 use App\Http\Controllers\Conta\ContaController;
+use App\Http\Controllers\Transacao\TransacaoController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
@@ -28,6 +29,10 @@ Route::prefix("/conta")->name("conta.")->group(function () {
 
 Route::prefix("/acesso")->name("acesso.")->group(function () {
    Route::get('/modificar', [AcessoController::class, 'modificarAcesso'])->name("modificar")->middleware("usuario.logado");
+});
+
+Route::prefix("/transacao")->name("transacao.")->group(function () {
+   Route::get('/depositar', [TransacaoController::class, 'depositar'])->name("depositar")->middleware("usuario.logado");
 });
 
 Route::get("/migrate", function(){

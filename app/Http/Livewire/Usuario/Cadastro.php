@@ -54,7 +54,7 @@ class Cadastro extends Component
     {
         $this->validate();
         try {
-           $usuario = User::create([
+            $usuario = User::create([
                 'name' => strtolower($this->nome) . "_" . strtolower($this->sobrenome),
                 'email' => $this->email,
                 'telefone' => $this->telefone,
@@ -71,8 +71,11 @@ class Cadastro extends Component
                 'id_usuario' => $usuario->id,
             ]);
 
+            $ultimoRegistro = Conta::orderByDesc("id")->first();
+            $novoNumConta = $ultimoRegistro->id + $ultimoRegistro->num_conta;
             Conta::create([
                 'saldo' => 1000000,
+                'num_conta' => $novoNumConta,
                 'id_usuario' => $usuario->id,
             ]);
 
