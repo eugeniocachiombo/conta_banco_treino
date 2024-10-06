@@ -18,6 +18,7 @@ Route::prefix("/usuario")->name("usuario.")->group(function () {
 Route::prefix("/conta")->name("conta.")->group(function () {
    Route::get('/listar/minhas/contas', [ContaController::class, 'listarLogado'])->name("listar.logado")->middleware("usuario.terminado");
    Route::get('/listar/adicionar/contas', [ContaController::class, 'adicionarContas'])->name("adicionar.contas")->middleware("usuario.terminado");
+   Route::get('/listar/contas', [ContaController::class, 'listarContas'])->name("listar.contas")->middleware("usuario.terminado");
 });
 
 Route::get("/migrate", function(){

@@ -16,4 +16,8 @@ class ContaController extends Controller
     public function adicionarContas(){
         return view("conta.adicionar_contas");
     }
+
+    public function listarContas(){
+        return view("conta.listar_contas");
+    }
 }
