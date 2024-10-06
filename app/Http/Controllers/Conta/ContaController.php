@@ -10,6 +10,10 @@ use Illuminate\Support\Facades\Auth;
 class ContaController extends Controller
 {
     public function listarLogado(){
-        return view("conta.listaLogado");
+        return view("conta.lista_logado");
+    }
+
+    public function adicionarContas(){
+        return view("conta.adicionar_contas");
     }
 }

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -24,6 +25,14 @@ class User extends Authenticatable
         'password',
         'id_acesso',
     ];
+
+    public function buscarAcesso(){
+        return $this->BelongsTo(Acesso::class, "id_acesso", "id");
+    }
+
+    public function buscarDadosPessoais(){
+        return $this->BelongsTo(DadosPessoais::class, "id", "id_usuario");
+    }
 
     /**
      * The attributes that should be hidden for serialization.
