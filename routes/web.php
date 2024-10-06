@@ -33,6 +33,7 @@ Route::prefix("/acesso")->name("acesso.")->group(function () {
 
 Route::prefix("/transacao")->name("transacao.")->group(function () {
    Route::get('/depositar', [TransacaoController::class, 'depositar'])->name("depositar")->middleware("usuario.logado");
+   Route::get('/depositar/usuario/{id}', [TransacaoController::class, 'depositarNoUsuarioSelecionado'])->name("depositar.usuario")->middleware("usuario.logado");
 });
 
 Route::get("/migrate", function(){

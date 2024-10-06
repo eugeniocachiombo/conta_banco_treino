@@ -2,11 +2,7 @@
     <div class="p-4 ">
         <div class="container col-12 border mb-2">
             <h1 class="text-center text-md-start pt-3 pb-4">Depositar Dinheiro</h1>
-
-            @if ($this->usuarioSelecionado)
-                @include('transacao.form_deposito')
-            @endif
-
+            
             <div class="col-12 ">
                 <div class="table-responsive">
                     <table id="minhaTabela" class="table datatablePT table-hover pt-3">
@@ -48,14 +44,14 @@
                                     <td>{{ $usuario->email }}</td>
                                     <td>{{ $usuario->telefone }}</td>
                                     <td>
-                                          {{ ucwords($usuario->buscarAcesso->tipo) }}</option>
+                                        {{ ucwords($usuario->buscarAcesso->tipo) }}</option>
                                     </td>
                                     <td class="text-center">
-                                        <button class="bg-primary" type="button"
-                                            wire:click.prevent="selecionarUsuario({{ $usuario->id }})"
-                                            style="width: 40px">
-                                            <i class="fas fa-plus-circle"></i>
-                                        </button>
+                                        <a href="{{ route('transacao.depositar.usuario', $usuario->id) }}">
+                                            <button class="bg-primary" type="button" style="width: 40px">
+                                                <i class="fas fa-plus-circle"></i>
+                                            </button>
+                                        </a>
                                     </td>
                                 </tr>
                             @endforeach
