@@ -1,4 +1,3 @@
-
 <div class="d-table d-md-flex justify-content-between col-12 mb-2">
     <div class="col-md-4 col-12 d-flex justify-content-center align-items-center">
         <div class="col-md-12 col-6 border mb-2 text-center" style="max-height: 150px; overflow: hidden;">
@@ -16,17 +15,22 @@
             <h3>{{ $dados->nome }} {{ $dados->sobrenome }}</h3>
         </div>
         <div class="d-flex justify-content-start ">
-            {{ucwords($acesso->tipo)}}
+            {{ ucwords($acesso->tipo) }}
         </div>
     </div>
 
     <div class="col-md-4 col-12 d-flex justify-content-center align-items-center border">
         @php
             use App\Models\Conta;
-            $conta = Conta::where("id_usuario", $usuario->id)
-            ->where("tipo", "corrente")
-            ->first();
+            $conta = Conta::where('id_usuario', $usuario->id)
+                ->where('tipo', 'corrente')
+                ->first();
         @endphp
-        <h3 class="pt-2" style="height: inherit"> {{number_format($conta->saldo, 2,',', '.');}} kz</h3>
+
+        @if ($conta)
+            <h3 class="pt-2" style="height: inherit"> {{ number_format($conta->saldo, 2, ',', '.') }} kz</h3>
+        @else
+            <h3 class="pt-2" style="height: inherit"> 0,00 kz</h3>
+        @endif
     </div>
 </div>
