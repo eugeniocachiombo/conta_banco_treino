@@ -63,7 +63,7 @@
                                     role="button" aria-expanded="false">Transação</a>
                                 <ul class="dropdown-menu">
                                     <li><a class="dropdown-item" href="{{route('transacao.depositar')}}">Depositar</a></li>
-                                    <li><a class="dropdown-item" href="#">Retirar</a></li>
+                                    <li><a class="dropdown-item" href="{{route('transacao.retirar')}}">Retirar</a></li>
                                 </ul>
                             </li>
 
