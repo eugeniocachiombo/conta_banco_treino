@@ -27,6 +27,7 @@ class AdicionarContas extends Component
         Conta::create([
             "tipo" => $this->tipoConta,
             'num_conta' => $novoNumConta,
+            'saldo' => 0.00,
             "id_usuario" => $id_usuario
         ]);
         $this->emit('alerta', ['mensagem' => 'Conta adicionada com sucesso', 'icon' => 'success']);

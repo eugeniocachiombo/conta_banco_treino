@@ -18,7 +18,7 @@ class CreateContasTable extends Migration
             $table->integer("num_conta")->unique();
             $table->enum("tipo", ["corrente", "salario"])->default("corrente");
             $table->enum("estado", ["activo", "inactivo", "bloqueado", "cancelado"])->default("activo");
-            $table->integer("saldo")->nullable();
+            $table->decimal("saldo", 15, 2)->nullable();
             $table->unsignedBigInteger("id_usuario")->nullable();
             $table->foreign('id_usuario')->references("id")->on("users")->onDelete("cascade");
             $table->timestamps();

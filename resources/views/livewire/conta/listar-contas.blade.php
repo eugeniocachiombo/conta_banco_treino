@@ -27,10 +27,6 @@
                                 </th>
 
                                 <th class="bg-primary text-white" style="white-space: nowrap">
-                                    Email
-                                </th>
-
-                                <th class="bg-primary text-white" style="white-space: nowrap">
                                     Telefone
                                 </th>
 
@@ -40,6 +36,10 @@
 
                                 <th class="bg-primary text-white text-center" style="white-space: nowrap">
                                     Número da Conta
+                                </th>
+
+                                <th class="bg-primary text-white" style="white-space: nowrap">
+                                    Saldo da conta
                                 </th>
 
                                 <th class="bg-primary text-white text-center" style="white-space: nowrap">
@@ -59,10 +59,10 @@
                                     <td>{{ $item->id }}</td>
                                     <td style="white-space: nowrap">{{ $item->buscarDadosPessoaisJoin->nome }}
                                         {{ $item->buscarDadosPessoaisJoin->sobrenome }}</td>
-                                    <td>{{ $item->email }}</td>
                                     <td>{{ $item->telefone }}</td>
                                     <td>{{ ucwords($item->buscarAcesso->tipo) }}</td>
                                     <td class="text-center"> {{ $item->num_conta }}</td>
+                                    <td class="saldo">{{ number_format($item->saldo, 2, ',', '.') }} kz</td>
                                     <td class="text-center">
                                         {{ ucwords($item->tipo) }}
                                     </td>

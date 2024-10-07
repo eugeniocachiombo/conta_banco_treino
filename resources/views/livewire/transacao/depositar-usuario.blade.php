@@ -4,39 +4,34 @@
             <h1 class="text-center text-md-start pt-3 pb-4">Formulário de Depósito</h1>
             <div class="pb-5">
                 <div class="col-12 ">
-                    <form class="row g-3 d-table justify-content-center" action="" method="get">
+                    <form class="row d-flex justify-content-center" action="" method="get">
                         <div class="col-12 ">
                             <h1> <i class="fas fa-user"></i> {{ $this->dadosPessoais->nome }}
                                 {{ $this->dadosPessoais->sobrenome }}</h1>
                         </div>
 
-                        <div class="col-12 ">
-                            <label for="">Conta</label>
-                            <select wire:model="tipoConta">
+                        <div class="col-12 col-md-4">
+                            <label for="">Conta</label> <br>
+                            <select class="form-select" wire:model="tipoConta">
                                 <option class="d-none">Selecione</option>
                                 @foreach ($this->contasUsuario as $item)
-                                    <option value="{{$item->id}}">{{$item->tipo}}</option>
+                                    <option value="{{ $item->id }}">{{ $item->tipo }}</option>
                                 @endforeach
-                            </select>
+                            </select> <br>
 
-                            @error('quantia')
+                            @error('tipoConta')
                                 <span class="error text-warning">{{ $message }}</span>
                             @enderror
                         </div>
 
-                        <div class="col-12 ">
+                        <div class="col-12 col-md-8 mb-3">
                             <label for="">Quantia do depósito</label>
-                            <input class="form-control" onkeydown="formatarCampoDinheiro(this.value)" type="text"
-                                id="quantia" required wire:model="quantia">
+                            <input style="min-height: 38px" class="form-control" onkeydown="formatarCampoDinheiro(this.value)" type="text"
+                                id="quantia" required wire:model="quantia" placeholder="Digite a quantia do deposito">
 
-                            {{--
-                            @if ($tlfExiste != null)
-                                <span class="error text-warning">{{ $tlfExiste }}</span>
-                            @else 
-                                @error('quantia')
-                                    <span class="error text-warning">{{ $message }}</span>
-                                @enderror
-                            @endif --}}
+                            @error('quantia')
+                                <span class="error text-warning">{{ $message }}</span>
+                            @enderror
 
                             <script>
                                 function formatarCampoDinheiro(valor) {
@@ -51,7 +46,7 @@
                     </form>
                 </div>
 
-                <div class="col-12 text-center text-md-start pt-4">
+                <div class="col-12 text-center text-md-start">
                     <span>
                         <button type="submit" wire:click.prevent='depositar'>
                             Depositar

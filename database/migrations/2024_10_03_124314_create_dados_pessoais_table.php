@@ -62,13 +62,13 @@ class CreateDadosPessoaisTable extends Migration
 
         Conta::create([
             'num_conta' => 123412341,
-            'saldo' => 1000000,
+            'saldo' => 1000000.68,
             'id_usuario' => $admin->id,
         ]);
 
         Conta::create([
             'num_conta' => 123412342,
-            'saldo' => 500000,
+            'saldo' => 500000.70,
             'tipo' => "salario",
             'estado' => "inactivo",
             'id_usuario' => $admin->id,
@@ -92,7 +92,7 @@ class CreateDadosPessoaisTable extends Migration
 
         Conta::create([
             'num_conta' => 123412343,
-            'saldo' => 200000,
+            'saldo' => 200000.33,
             'id_usuario' => $gestor->id,
         ]);
     }

@@ -75,7 +75,7 @@ class Cadastro extends Component
             $ultimoRegistro = Conta::orderByDesc("id")->first();
             $novoNumConta = intval($ultimoRegistro->id . rand(1000,9999) . rand(1100,9999));
             Conta::create([
-                'saldo' => 1000000,
+                'saldo' => 0.00,
                 'num_conta' => $novoNumConta,
                 'id_usuario' => $usuario->id,
             ]);
