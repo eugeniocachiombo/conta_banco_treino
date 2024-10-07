@@ -17,7 +17,7 @@
                                 @foreach ($this->contasUsuario as $item)
                                     <option value="{{ $item->id }}">{{ $item->tipo }}</option>
                                 @endforeach
-                            </select> <br>
+                            </select>
 
                             @error('tipoConta')
                                 <span class="error text-warning">{{ $message }}</span>

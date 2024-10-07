@@ -12,26 +12,38 @@
 
                         <div class="col-12 col-md-4">
                             <label for="">Conta</label> <br>
-                            <select class="form-select" wire:model="tipoConta">
+                            <select class="form-select" 
+                            wire:change='escolherTipoConta'
+                            wire:model="tipoConta">
                                 <option class="d-none">Selecione</option>
                                 @foreach ($this->contasUsuario as $item)
                                     <option value="{{ $item->id }}">{{ $item->tipo }}</option>
                                 @endforeach
-                            </select> <br>
+                            </select>
 
-                            @error('tipoConta')
-                                <span class="error text-warning">{{ $message }}</span>
-                            @enderror
+                            @if ($this->msgErroTipoConta != null)
+                                <span class="error text-warning">{{ $this->msgErroTipoConta }}</span>
+                            @else
+                                @error('tipoConta')
+                                    <span class="error text-warning">{{ $message }}</span>
+                                @enderror
+                            @endif
                         </div>
 
                         <div class="col-12 col-md-8 mb-3">
                             <label for="">Quantia do retíro</label>
-                            <input style="min-height: 38px" class="form-control" onkeydown="formatarCampoDinheiro(this.value)" type="text"
-                                id="quantia" required wire:model="quantia" placeholder="Digite a quantia do retíro">
+                            <input style="min-height: 38px" class="form-control"
+                                onkeydown="formatarCampoDinheiro(this.value)" type="text"
+                                wire:keyup='verificarExcessoQuantia' id="quantia" required wire:model="quantia"
+                                placeholder="Digite a quantia do retíro">
 
-                            @error('quantia')
-                                <span class="error text-warning">{{ $message }}</span>
-                            @enderror
+                            @if ($this->msgErroQuantia != null)
+                                <span class="error text-warning">{{ $this->msgErroQuantia }}</span>
+                            @else
+                                @error('quantia')
+                                    <span class="error text-warning">{{ $message }}</span>
+                                @enderror
+                            @endif
 
                             <script>
                                 function formatarCampoDinheiro(valor) {
