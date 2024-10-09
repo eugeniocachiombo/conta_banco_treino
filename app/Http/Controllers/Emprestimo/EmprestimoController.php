@@ -16,6 +16,6 @@ class EmprestimoController extends Controller
     }
 
     public function listarMeusEmprestimos($id){
-        return view("emprestimo.lista-meus-emprestimos", ["id"=>$id]);
+        return view("emprestimo.lista_meus_emprestimos", ["id"=>$id]);
     }
 }
