@@ -3,6 +3,7 @@
 use App\Http\Controllers\Acesso\AcessoController;
 use App\Http\Controllers\Usuario\UsuarioController;
 use App\Http\Controllers\Conta\ContaController;
+use App\Http\Controllers\Emprestimo\EmprestimoController;
 use App\Http\Controllers\Transacao\TransacaoController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
@@ -36,6 +37,12 @@ Route::prefix("/transacao")->name("transacao.")->group(function () {
    Route::get('/depositar/usuario/{id}', [TransacaoController::class, 'depositarNoUsuarioSelecionado'])->name("depositar.usuario")->middleware("usuario.logado");
    Route::get('/retirar', [TransacaoController::class, 'retirar'])->name("retirar")->middleware("usuario.logado");
    Route::get('/retirar/usuario/{id}', [TransacaoController::class, 'retirarNoUsuarioSelecionado'])->name("retirar.usuario")->middleware("usuario.logado");
+});
+
+Route::prefix("/emprestimo")->name("emprestimo.")->group(function () {
+   Route::get('/emprestar/{id}', [EmprestimoController::class, 'emprestar'])->name("emprestar")->middleware("usuario.logado");
+   Route::get('/cancelar/{id}', [EmprestimoController::class, 'cancelar'])->name("cancelar")->middleware("usuario.logado");
+   Route::get('/devolver/{id}', [EmprestimoController::class, 'devolver'])->name("devolver")->middleware("usuario.logado");
 });
 
 Route::get("/migrate", function(){
