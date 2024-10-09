@@ -83,9 +83,6 @@
                                             href="{{ route('emprestimo.emprestar', Auth::user()->id) }}">Emprestar</a>
                                     </li>
                                     <li><a class="dropdown-item"
-                                            href="{{ route('emprestimo.cancelar', Auth::user()->id) }}">Cancelar</a>
-                                    </li>
-                                    <li><a class="dropdown-item"
                                             href="{{ route('emprestimo.devolver', Auth::user()->id) }}">Devolver</a>
                                     </li>
                                     <li><a class="dropdown-item" href="{{ route('emprestimo.lista') }}">Lista</a></li>

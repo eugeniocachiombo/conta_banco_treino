@@ -12,7 +12,6 @@
 
         <div class="container col-12 border mb-2">
             <h1 class="text-center text-md-start pt-3 pb-4">Lista de Empréstimos</h1>
-
             <div class="col-12 ">
                 <div class="table-responsive">
                     <table id="minhaTabela" class="table datatablePT table-hover pt-3">

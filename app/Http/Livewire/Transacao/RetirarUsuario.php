@@ -76,7 +76,7 @@ class RetirarUsuario extends Component
             $formatarQuantia1 = str_replace(".", "", $this->quantia);
             $formatarQuantia2 = str_replace(",", ".", $formatarQuantia1);
 
-            if ($formatarQuantia2 >= $saldoConta) {
+            if ($formatarQuantia2 > $saldoConta) {
                 $this->msgErroQuantia = "A quantia deve ser menor ou igual ao valor da conta";
             }
         }
