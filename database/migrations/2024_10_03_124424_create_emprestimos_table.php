@@ -18,7 +18,9 @@ class CreateEmprestimosTable extends Migration
             $table->text("descricao");
             $table->decimal("quantia", 15, 2);
             $table->unsignedBigInteger("id_usuario");
+            $table->unsignedBigInteger("id_conta");
             $table->foreign("id_usuario")->references("id")->on("users")->onDelete("cascade");
+            $table->foreign("id_conta")->references("id")->on("contas")->onDelete("cascade");
             $table->timestamps();
         });
     }

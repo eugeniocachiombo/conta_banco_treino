@@ -10,4 +10,12 @@ class EmprestimoController extends Controller
     public function emprestar($id){
         return view("emprestimo.emprestar", ["id"=>$id]);
     }
+
+    public function listar(){
+        return view("emprestimo.lista");
+    }
+
+    public function listarMeusEmprestimos($id){
+        return view("emprestimo.lista-meus-emprestimos", ["id"=>$id]);
+    }
 }

@@ -55,6 +55,7 @@ class Emprestar extends Component
                 'descricao' => $this->descricao,
                 'quantia' => $formatarQuantia2,
                 'id_usuario' => $this->id_usuario,
+                'id_conta' => $this->tipoConta,
             ]);
             $conta->update(["saldo" => $novoSaldo]);
             $this->emit('alerta', ['mensagem' => 'Dinheiro emprestado com sucesso', 'icon' => 'success', 'tempo' => 3000]);

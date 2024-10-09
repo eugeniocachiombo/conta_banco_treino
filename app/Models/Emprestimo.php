@@ -13,5 +13,6 @@ class Emprestimo extends Model
         'descricao',
         'quantia',
         'id_usuario',
+        'id_conta',
     ];
 }

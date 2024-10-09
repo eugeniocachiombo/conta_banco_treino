@@ -30,6 +30,14 @@ class User extends Authenticatable
         return $this->BelongsTo(Acesso::class, "id_acesso", "id");
     }
 
+    public function buscarConta(){
+        return $this->BelongsTo(Conta::class, "id", "id_usuario");
+    }
+
+    public function buscarEmprestimo($id){
+        return Emprestimo::where("id_usuario", $id)->first();
+    }
+
     public function buscarDadosPessoais(){
         return $this->BelongsTo(DadosPessoais::class, "id", "id_usuario");
     }
