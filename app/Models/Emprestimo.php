@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class Emprestimo extends Model
 {
     use HasFactory;
+    
+    protected $fillable = [
+        'descricao',
+        'quantia',
+        'id_usuario',
+    ];
 }
