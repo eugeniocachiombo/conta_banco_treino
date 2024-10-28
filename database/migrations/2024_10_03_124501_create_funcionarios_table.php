@@ -18,11 +18,9 @@ class CreateFuncionariosTable extends Migration
             $table->enum("tipo", ["admin", "gestor"])->default("gestor");
             $table->integer("salario");
             $table->string("NIF");
-            $table->unsignedBigInteger("id_dados_pessoais");
             $table->unsignedBigInteger("id_agencia");
             $table->unsignedBigInteger("id_usuario");
             $table->unsignedBigInteger("id_morada");            
-            $table->foreign("id_dados_pessoais")->references("id")->on("dados_pessoais")->onDelete("cascade");
             $table->foreign("id_agencia")->references("id")->on("agencias")->onDelete("cascade");
             $table->foreign("id_usuario")->references("id")->on("users")->onDelete("cascade");
             $table->foreign("id_morada")->references("id")->on("moradas")->onDelete("cascade");

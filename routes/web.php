@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Acesso\AcessoController;
+use App\Http\Controllers\Cliente\ClienteController;
 use App\Http\Controllers\Usuario\UsuarioController;
 use App\Http\Controllers\Conta\ContaController;
 use App\Http\Controllers\Emprestimo\EmprestimoController;
@@ -45,6 +46,10 @@ Route::prefix("/emprestimo")->name("emprestimo.")->group(function () {
    Route::get('/devolver/{id}', [EmprestimoController::class, 'devolver'])->name("devolver")->middleware("usuario.logado");
    Route::get('/lista/todos', [EmprestimoController::class, 'listar'])->name("lista")->middleware("usuario.logado");
    Route::get('/lista/meus/emprestimos/{id}', [EmprestimoController::class, 'listarMeusEmprestimos'])->name("lista.meus.emprestimos")->middleware("usuario.logado");
+});
+
+Route::prefix("/cliente")->name("cliente.")->group(function () {
+  Route::get('/lista/todos', [ClienteController::class, 'listar'])->name("lista")->middleware("usuario.logado");
 });
 
 Route::get("/migrate", function(){
