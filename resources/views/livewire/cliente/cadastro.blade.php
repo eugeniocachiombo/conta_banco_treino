@@ -11,7 +11,7 @@
         @include('inclusao.tag_usuario')
 
         @if ($verForm)
-        <hr>
+            <hr>
             <div class="container">
                 <div class="row ">
                     <div class="col-12 text-center text-md-start">
@@ -21,17 +21,17 @@
                     <div class="col-12 text-center text-md-start mb-5">
                         <i class="fas fa-user text-center" style="font-size: 100px"></i>
                         <div class="col-8 col-md-6 mt-2">
-                                <select disabled class="form-select" id="" required wire:model="id_usuario">
-                                    <option class="d-none">Selecione</option>
-                                    @foreach ($usuarios as $usuario)
-                                        <option value="{{ $usuario->id }}">{{ $usuario->name }}</option>
-                                    @endforeach
-                                </select>
+                            <select disabled class="form-select" id="" required wire:model="id_usuario">
+                                <option class="d-none">Selecione</option>
+                                @foreach ($usuarios as $usuario)
+                                    <option value="{{ $usuario->id }}">{{ $usuario->name }}</option>
+                                @endforeach
+                            </select>
 
-                                @error('id_usuario')
-                                    <span class="error text-warning">{{ $message }}</span>
-                                @enderror
-                            </div>
+                            @error('id_usuario')
+                                <span class="error text-warning">{{ $message }}</span>
+                            @enderror
+                        </div>
                     </div>
 
                     <div class="col-12 ">
@@ -50,13 +50,14 @@
 
                             <div class="col-12 col-md-6">
                                 <label for="">Salário</label>
-                                <input style="min-height: 38px" class="form-control" onkeydown="formatarCampoDinheiro(this.value)" type="text"
-                                    id="salario" required wire:model="salario" placeholder="Exemplo: 12356,32">
-    
+                                <input style="min-height: 38px" class="form-control"
+                                    onkeydown="formatarCampoDinheiro(this.value)" type="text" id="salario" required
+                                    wire:model="salario" placeholder="Exemplo: 12356,32">
+
                                 @error('salario')
                                     <span class="error text-warning">{{ $message }}</span>
                                 @enderror
-    
+
                                 <script>
                                     function formatarCampoDinheiro(valor) {
                                         $(document).ready(function() {
@@ -71,10 +72,15 @@
                             <div class="col-8 col-md-6 ">
                                 <label for="">NIF:</label>
                                 <input class="form-control" type="nif" name="" id="" required
-                                    wire:model="nif">
-                                @error('nif')
-                                    <span class="error text-warning">{{ $message }}</span>
-                                @enderror
+                                    wire:model="nif" wire:keyup='verificarNif'>
+
+                                @if ($nifExist != null)
+                                    <span class="error text-warning">{{ $nifExist }}</span>
+                                @else
+                                    @error('nif')
+                                        <span class="error text-warning">{{ $message }}</span>
+                                    @enderror
+                                @endif
                             </div>
 
                             <div class="col-8 col-md-6 ">
@@ -107,7 +113,7 @@
         @endif
 
         <div class="container col-12 border mb-2">
-            <h1 class="text-center text-md-start pt-3">Lista de contas clientes</h1>
+            <h1 class="text-center text-md-start pt-3">Lista de Clientes Independentes</h1>
             <div class="col-12 ">
                 <div class="table-responsive">
                     <table id="minhaTabela" class="table datatablePT table-hover pt-3">

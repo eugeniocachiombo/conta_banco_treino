@@ -10,7 +10,7 @@ use Livewire\Component;
 class Cadastro extends Component
 {
     public $listaGeral, $tipo, $salario, $nif, $morada, $id_usuario;
-    public $verForm = false, $usuarios, $moradas;
+    public $verForm = false, $nifExist = false, $usuarios, $moradas;
 
     protected $rules = [
         'tipo' => 'required',
@@ -43,16 +43,17 @@ class Cadastro extends Component
     {
         $this->validate();
         $salario = str_replace(",", ".", $this->salario);
-
-        Cliente::create([
-            "tipo" => $this->tipo,
-            "salario" => $salario,
-            "NIF" => $this->nif,
-            "id_usuario" => $this->id_usuario,
-            "id_morada" => $this->morada,
-        ]);
-
-        $this->emit('alerta', ['mensagem' => 'Cliente associado com sucesso', 'icon' => 'success', 'tempo' => 3000]);
+        if (empty($this->nifExist)) {
+            Cliente::create([
+                "tipo" => $this->tipo,
+                "salario" => $salario,
+                "NIF" => $this->nif,
+                "id_usuario" => $this->id_usuario,
+                "id_morada" => $this->morada,
+            ]);
+            $this->emit('alerta', ['mensagem' => 'Cliente associado com sucesso', 'icon' => 'success', 'tempo' => 3000]);
+            $this->limparCampos();
+        }
     }
 
     public function tornarCliente($id)
@@ -61,10 +62,19 @@ class Cadastro extends Component
         $this->id_usuario = $id;
     }
 
+    public function verificarNif()
+    {
+        $this->nifExist = null;
+        $nif = Cliente::where("nif", $this->nif)->first();
+        if (!empty($nif)) {
+            $this->nifExist = 'O NIF já existe';
+        }
+    }
+
     public function limparCampos()
     {
         $this->listaGeral = $this->tipo = $this->salario = $this->nif = $this->morada = $this->id_usuario = null;
-        $this->verForm = false;
+        $this->verForm = $this->nifExist = false;
         $this->usuarios = $this->moradas = null;
     }
 }
