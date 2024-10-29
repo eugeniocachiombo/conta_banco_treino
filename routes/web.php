@@ -5,6 +5,7 @@ use App\Http\Controllers\Cliente\ClienteController;
 use App\Http\Controllers\Usuario\UsuarioController;
 use App\Http\Controllers\Conta\ContaController;
 use App\Http\Controllers\Emprestimo\EmprestimoController;
+use App\Http\Controllers\Funcionario\FuncionarioController;
 use App\Http\Controllers\Transacao\TransacaoController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
@@ -51,6 +52,11 @@ Route::prefix("/emprestimo")->name("emprestimo.")->group(function () {
 Route::prefix("/cliente")->name("cliente.")->group(function () {
   Route::get('/cadastro', [ClienteController::class, 'cadastrar'])->name("cadastro")->middleware("usuario.logado");
   Route::get('/lista/todos', [ClienteController::class, 'listar'])->name("lista")->middleware("usuario.logado");
+});
+
+Route::prefix("/funcionario")->name("funcionario.")->group(function () {
+  Route::get('/cadastro', [FuncionarioController::class, 'cadastrar'])->name("cadastro")->middleware("usuario.logado");
+  Route::get('/lista/todos', [FuncionarioController::class, 'listar'])->name("lista")->middleware("usuario.logado");
 });
 
 Route::get("/migrate", function(){

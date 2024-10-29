@@ -96,12 +96,10 @@
                                 <a class="nav-link dropdown-toggle text-light" data-bs-toggle="dropdown" href="#"
                                     role="button" aria-expanded="false">Cliente</a>
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item"
-                                        href="{{ route('cliente.cadastro') }}">Cadastrar</a>
-                                </li>
-                                <li><a class="dropdown-item"
-                                        href="{{ route('cliente.lista')}}">Listar</a>
-                                </li>
+                                    <li><a class="dropdown-item" href="{{ route('cliente.cadastro') }}">Cadastrar</a>
+                                    </li>
+                                    <li><a class="dropdown-item" href="{{ route('cliente.lista') }}">Listar</a>
+                                    </li>
                                 </ul>
                             </li>
 
@@ -109,9 +107,10 @@
                                 <a class="nav-link dropdown-toggle text-light" data-bs-toggle="dropdown"
                                     href="#" role="button" aria-expanded="false">Funcionário</a>
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="#">Action</a></li>
-                                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('funcionario.cadastro') }}">Cadastrar</a>
+                                    </li>
+                                    <li><a class="dropdown-item" href="{{ route('funcionario.lista') }}">Listar</a>
+                                    </li>
                                 </ul>
                             </li>
 
