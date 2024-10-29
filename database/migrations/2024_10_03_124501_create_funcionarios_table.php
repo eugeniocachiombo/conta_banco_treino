@@ -16,7 +16,7 @@ class CreateFuncionariosTable extends Migration
         Schema::create('funcionarios', function (Blueprint $table) {
             $table->id();
             $table->enum("tipo", ["admin", "gestor"])->default("gestor");
-            $table->integer("salario");
+            $table->decimal("salario", 15, 2);
             $table->string("NIF");
             $table->unsignedBigInteger("id_agencia");
             $table->unsignedBigInteger("id_usuario");

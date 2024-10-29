@@ -23,6 +23,10 @@
                                 </th>
 
                                 <th class="bg-primary text-white" style="white-space: nowrap">
+                                    id_usuario
+                                </th>
+
+                                <th class="bg-primary text-white" style="white-space: nowrap">
                                     Tipo
                                 </th>
 
@@ -35,28 +39,34 @@
                                 </th>
 
                                 <th class="bg-primary text-white" style="white-space: nowrap">
-                                    id_dados_pessoais
+                                    Morada
                                 </th>
 
                                 <th class="bg-primary text-white" style="white-space: nowrap">
-                                    id_usuario
-                                </th>
-
-                                <th class="bg-primary text-white" style="white-space: nowrap">
-                                    id_morada
+                                    Eliminar
                                 </th>
                             </tr>
                         </thead>
 
                         <tbody class="text-white">
                             @foreach ($clientes as $cliente)
+                                @php
+                                    $morada = $this->buscarMorada($cliente->id_morada);
+                                    $dadosPessoais = DadosPessoais::where('id_usuario', $cliente->id_usuario)->first();
+                                @endphp
                                 <tr class="text-white">
-                                    <td>{{ $cliente->tipo }}</td>
-                                    <td>{{ $cliente->salario }}</td>
+                                    <td>{{ $cliente->id }}</td>
+                                    <td>{{ $dadosPessoais->nome }} {{ $dadosPessoais->sobrenome }}</td>
+                                    <td>{{ ucwords($cliente->tipo) }}</td>
+                                    <td>{{ number_format($cliente->salario, 2, ",", ".") }}</td>
                                     <td>{{ $cliente->NIF }}</td>
-                                    <td>{{ $cliente->id_dados_pessoais }}</td>
-                                    <td>{{ $cliente->id_usuario }}</td>
-                                    <td>{{ $cliente->id_morada }}</td>
+                                    <td>{{ $morada->provincia }} : {{ $morada->endereco }} </td>
+                                    <td class="text-center">
+                                        <button class="bg-danger" type="button"
+                                            wire:click="eliminarCliente({{ $cliente->id }})" style="width: 40px">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>

@@ -16,7 +16,7 @@ class CreateClientesTable extends Migration
         Schema::create('clientes', function (Blueprint $table) {
             $table->id();
             $table->enum("tipo", ["fisico", "juridico"])->default("fisico");
-            $table->integer("salario");
+            $table->decimal("salario", 15, 2);
             $table->string("NIF");
             $table->unsignedBigInteger("id_usuario");
             $table->unsignedBigInteger("id_morada");            
