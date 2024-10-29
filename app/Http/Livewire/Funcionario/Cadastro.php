@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Funcionario;
 
 use App\Models\Agencia;
+use App\Models\Cliente;
 use App\Models\Funcionario;
 use App\Models\Morada;
 use App\Models\User;
@@ -52,7 +53,7 @@ class Cadastro extends Component
                 "tipo" => $this->tipo,
                 "salario" => $salario,
                 "id_agencia" => $this->agencia,
-                "NIF" => $this->nif,
+                "nif" => $this->nif,
                 "id_usuario" => $this->id_usuario,
                 "id_morada" => $this->morada,
             ]);
@@ -70,15 +71,10 @@ class Cadastro extends Component
     public function verificarNif()
     {
         $this->nifExist = null;
-        $nif = Funcionario::leftjoin("users", "users.id", "=", "funcionarios.id_usuario")
-            ->leftjoin("clientes", "clientes.id_usuario", "=", "users.id")
-            ->where(function ($query) {
-                $query->where("funcionarios.nif", $this->nif)
-                    ->orWhere("clientes.nif", $this->nif);
-            })
-            ->first();
+        $nifFuncVericado = Funcionario::where("nif", $this->nif)->first();
+        $nifClienteVericado = Cliente::where("nif", $this->nif)->first();
 
-        if (!empty($nif)) {
+        if (!empty($nifFuncVericado) || !empty($nifClienteVericado)) {
             $this->nifExist = 'O NIF já existe';
         }
     }

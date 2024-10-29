@@ -59,7 +59,7 @@
                                     <td>{{ $dadosPessoais->nome }} {{ $dadosPessoais->sobrenome }}</td>
                                     <td>{{ ucwords($cliente->tipo) }}</td>
                                     <td>{{ number_format($cliente->salario, 2, ",", ".") }}</td>
-                                    <td>{{ $cliente->NIF }}</td>
+                                    <td>{{ $cliente->nif }}</td>
                                     <td>{{ $morada->provincia }} : {{ $morada->endereco }} </td>
                                     <td class="text-center">
                                         <button class="bg-danger" type="button"

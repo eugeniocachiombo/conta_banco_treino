@@ -66,7 +66,7 @@
                                     <td>{{ $agencia->num_indent }}</td>
                                     <td>{{ ucwords($funcionario->tipo) }}</td>
                                     <td>{{ number_format($funcionario->salario, 2, ",", ".") }}</td>
-                                    <td>{{ $funcionario->NIF }}</td>
+                                    <td>{{ $funcionario->nif }}</td>
                                     <td>{{ $morada->provincia }} : {{ $morada->endereco }} </td>
                                     <td class="text-center">
                                         <button class="bg-danger" type="button"

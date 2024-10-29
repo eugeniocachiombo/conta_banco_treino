@@ -12,7 +12,7 @@ class Funcionario extends Model
     protected $fillable = [
         "tipo",
         "salario",
-        "NIF",
+        "nif",
         "id_agencia",
         "id_usuario",
         "id_morada",

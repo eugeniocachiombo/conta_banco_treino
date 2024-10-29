@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Cliente;
 
 use App\Models\Cliente;
+use App\Models\Funcionario;
 use App\Models\Morada;
 use App\Models\User;
 use Livewire\Component;
@@ -47,7 +48,7 @@ class Cadastro extends Component
             Cliente::create([
                 "tipo" => $this->tipo,
                 "salario" => $salario,
-                "NIF" => $this->nif,
+                "nif" => $this->nif,
                 "id_usuario" => $this->id_usuario,
                 "id_morada" => $this->morada,
             ]);
@@ -65,8 +66,10 @@ class Cadastro extends Component
     public function verificarNif()
     {
         $this->nifExist = null;
-        $nif = Cliente::where("nif", $this->nif)->first();
-        if (!empty($nif)) {
+        $nifFuncVericado = Funcionario::where("nif", $this->nif)->first();
+        $nifClienteVericado = Cliente::where("nif", $this->nif)->first();
+
+        if (!empty($nifFuncVericado) || !empty($nifClienteVericado)) {
             $this->nifExist = 'O NIF já existe';
         }
     }

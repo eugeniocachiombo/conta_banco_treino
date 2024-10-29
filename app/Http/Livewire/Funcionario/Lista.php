@@ -25,7 +25,7 @@ class Lista extends Component
         return Agencia::find($id);
     }
 
-    public function eliminarfuncionario($id){
+    public function eliminarFuncionario($id){
         $funcionario = Funcionario::find($id);
         $funcionario->delete();
         $this->emit('alerta', ['mensagem' => 'Funcionário eliminado com sucesso', 'icon' => 'success', 'tempo' => 3000]);
