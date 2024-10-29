@@ -17,7 +17,7 @@ class CreateFuncionariosTable extends Migration
             $table->id();
             $table->enum("tipo", ["gestor", "sub-gestor"])->default("gestor");
             $table->decimal("salario", 15, 2);
-            $table->string("NIF");
+            $table->string("nif");
             $table->unsignedBigInteger("id_agencia");
             $table->unsignedBigInteger("id_usuario");
             $table->unsignedBigInteger("id_morada");            

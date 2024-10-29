@@ -11,7 +11,7 @@ use Livewire\Component;
 class Cadastro extends Component
 {
     public $listaGeral, $tipo, $salario, $agencia, $nif, $morada, $id_usuario;
-    public $verForm = false, $nifExist = false, $usuarios, $moradas, $agencias;
+    public $verForm = false, $nifExist, $usuarios, $moradas, $agencias;
 
     protected $rules = [
         'tipo' => 'required',
@@ -70,7 +70,14 @@ class Cadastro extends Component
     public function verificarNif()
     {
         $this->nifExist = null;
-        $nif = Funcionario::where("nif", $this->nif)->first();
+        $nif = Funcionario::leftjoin("users", "users.id", "=", "funcionarios.id_usuario")
+            ->leftjoin("clientes", "clientes.id_usuario", "=", "users.id")
+            ->where(function ($query) {
+                $query->where("funcionarios.nif", $this->nif)
+                    ->orWhere("clientes.nif", $this->nif);
+            })
+            ->first();
+
         if (!empty($nif)) {
             $this->nifExist = 'O NIF já existe';
         }

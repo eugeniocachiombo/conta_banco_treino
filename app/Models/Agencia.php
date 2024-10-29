@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Agencia extends Model
 {
     use HasFactory;
+
+    protected $fillable = ["num_indent","localizacao"];
 }

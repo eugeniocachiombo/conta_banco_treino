@@ -17,7 +17,7 @@ class CreateClientesTable extends Migration
             $table->id();
             $table->enum("tipo", ["fisico", "juridico"])->default("fisico");
             $table->decimal("salario", 15, 2);
-            $table->string("NIF");
+            $table->string("nif");
             $table->unsignedBigInteger("id_usuario");
             $table->unsignedBigInteger("id_morada");            
             $table->foreign("id_usuario")->references("id")->on("users")->onDelete("cascade");
