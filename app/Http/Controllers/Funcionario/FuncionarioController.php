@@ -14,4 +14,8 @@ class FuncionarioController extends Controller
     public function listar(){
         return view("funcionario.lista");
     }
+
+    public function actualizar($id){
+        return view("funcionario.actualizar", ["id"=>$id]);
+    }
 }

@@ -13,4 +13,8 @@ class ClienteController extends Controller
     public function listar(){
         return view("cliente.lista");
     }
+
+    public function actualizar($id){
+        return view("cliente.actualizar", ["id"=>$id]);
+    }
 }

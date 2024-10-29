@@ -47,7 +47,7 @@
                                 </th>
 
                                 <th class="bg-primary text-white" style="white-space: nowrap">
-                                    Eliminar
+                                    Acção
                                 </th>
                             </tr>
                         </thead>
@@ -69,6 +69,12 @@
                                     <td>{{ $funcionario->nif }}</td>
                                     <td>{{ $morada->provincia }} : {{ $morada->endereco }} </td>
                                     <td class="text-center">
+                                        <a href="{{route("funcionario.actualizar", $funcionario->id_usuario)}}">
+                                            <button class="bg-info" type="button" style="width: 40px">
+                                                <i class="fas fa-pen"></i>
+                                            </button>
+                                        </a>
+
                                         <button class="bg-danger" type="button"
                                             wire:click="eliminarFuncionario({{ $funcionario->id }})" style="width: 40px">
                                             <i class="fas fa-trash"></i>

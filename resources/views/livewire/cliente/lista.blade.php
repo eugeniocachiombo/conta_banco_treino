@@ -43,7 +43,7 @@
                                 </th>
 
                                 <th class="bg-primary text-white" style="white-space: nowrap">
-                                    Eliminar
+                                    Acção
                                 </th>
                             </tr>
                         </thead>
@@ -58,10 +58,16 @@
                                     <td>{{ $cliente->id }}</td>
                                     <td>{{ $dadosPessoais->nome }} {{ $dadosPessoais->sobrenome }}</td>
                                     <td>{{ ucwords($cliente->tipo) }}</td>
-                                    <td>{{ number_format($cliente->salario, 2, ",", ".") }}</td>
+                                    <td>{{ number_format($cliente->salario, 2, ',', '.') }}</td>
                                     <td>{{ $cliente->nif }}</td>
                                     <td>{{ $morada->provincia }} : {{ $morada->endereco }} </td>
                                     <td class="text-center">
+                                        <a href="{{route("cliente.actualizar", $cliente->id_usuario)}}">
+                                            <button class="bg-info" type="button" style="width: 40px">
+                                                <i class="fas fa-pen"></i>
+                                            </button>
+                                        </a>
+
                                         <button class="bg-danger" type="button"
                                             wire:click="eliminarCliente({{ $cliente->id }})" style="width: 40px">
                                             <i class="fas fa-trash"></i>

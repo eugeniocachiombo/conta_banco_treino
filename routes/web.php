@@ -52,11 +52,13 @@ Route::prefix("/emprestimo")->name("emprestimo.")->group(function () {
 Route::prefix("/cliente")->name("cliente.")->group(function () {
   Route::get('/cadastro', [ClienteController::class, 'cadastrar'])->name("cadastro")->middleware("usuario.logado");
   Route::get('/lista/todos', [ClienteController::class, 'listar'])->name("lista")->middleware("usuario.logado");
+  Route::get('/actualizar/cliente/{id}', [ClienteController::class, 'actualizar'])->name("actualizar")->middleware("usuario.logado");
 });
 
 Route::prefix("/funcionario")->name("funcionario.")->group(function () {
   Route::get('/cadastro', [FuncionarioController::class, 'cadastrar'])->name("cadastro")->middleware("usuario.logado");
   Route::get('/lista/todos', [FuncionarioController::class, 'listar'])->name("lista")->middleware("usuario.logado");
+  Route::get('/actualizar/funcionario/{id}', [FuncionarioController::class, 'actualizar'])->name("actualizar")->middleware("usuario.logado");
 });
 
 Route::get("/migrate", function(){
