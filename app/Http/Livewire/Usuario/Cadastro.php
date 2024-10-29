@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Usuario;
 
+use App\Models\Cliente;
 use App\Models\Conta;
 use App\Models\DadosPessoais;
 use App\Models\User;
@@ -43,7 +44,7 @@ class Cadastro extends Component
         'genero.required' => 'Campo obrigatório',
         'nacionalidade.required' => 'Campo obrigatório',
         'email.required' => 'Campo obrigatório',
-        'email.email' => 'Formato de email incorrecto',
+        'email.email' => 'Formato de email incorrecto'
     ];
 
     public function render()

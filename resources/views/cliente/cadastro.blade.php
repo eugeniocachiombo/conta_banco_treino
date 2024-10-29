@@ -1,9 +1,9 @@
 @include('inclusao.head')
 @include('inclusao.header')
-<title>Lista de Clientes</title>
+<title>Cadastro de Clientes</title>
 
 <main class="p-4">
-   @livewire('cliente.lista')
+   @livewire('cliente.cadastro')
 </main>
 
 @include('inclusao.footer')

@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Morada extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'provincia',
+        'endereco',
+    ];
 }

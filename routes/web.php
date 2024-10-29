@@ -49,6 +49,7 @@ Route::prefix("/emprestimo")->name("emprestimo.")->group(function () {
 });
 
 Route::prefix("/cliente")->name("cliente.")->group(function () {
+  Route::get('/cadastro', [ClienteController::class, 'cadastrar'])->name("cadastro")->middleware("usuario.logado");
   Route::get('/lista/todos', [ClienteController::class, 'listar'])->name("lista")->middleware("usuario.logado");
 });
 

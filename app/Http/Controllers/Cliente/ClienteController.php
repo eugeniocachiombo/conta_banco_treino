@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 
 class ClienteController extends Controller
 {
+    public function cadastrar(){
+        return view("cliente.cadastro");
+    }
     public function listar(){
         return view("cliente.lista");
     }
