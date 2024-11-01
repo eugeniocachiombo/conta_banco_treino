@@ -1,4 +1,4 @@
-<div class="cartao">
+<div class="d-flex">
     <style>
         .cartao {
             width: 400px;
@@ -80,14 +80,38 @@
         }
     </style>
 
-    <div class="chip"></div>
-    <div class="banco">
-        <h2>System Bank</h2>
-    </div>
-    <div class="numero-cartao mb-4">
-        <h3>**** **** **** ****</h3>
-    </div>
-    <div class="validade mt-5">
-        <span>Validade: **/**</span>
-    </div>
+    @php
+        use App\Models\DadosPessoais;
+        use App\Models\Acesso;
+        use App\Models\Conta;
+        use App\Models\Cartao;
+        $usuario = Auth::user();
+        $dados = DadosPessoais::where('id_usuario', $usuario->id)->first();
+        $acesso = Acesso::find($usuario->id_acesso);
+        $contas = Conta::where('id_usuario', $usuario->id)->get();
+    @endphp
+
+    @foreach ($contas as $conta)
+        @php
+            $cartao = Cartao::where('id_conta', $conta->id)->get();
+        @endphp
+
+        <div class="container d-flex" >
+            @if ($cartao)
+                <div class="cartao ">
+                    <div class="chip"></div>
+                    <div class="banco">
+                        <h2>System Bank</h2>
+                    </div>
+                    <div class="numero-cartao mb-4">
+                        <h3>**** **** **** ****</h3>
+                    </div>
+                    <div class="validade mt-5">
+                        <span>Validade: **/**</span>
+                    </div>
+                </div>
+            @endif
+        </div>
+    @endforeach
+
 </div>
