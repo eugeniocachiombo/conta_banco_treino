@@ -22,8 +22,8 @@
                 <p>Telefone: {{ $usuario->telefone }}</p>
             </div>
 
-            <div class="mb-2">
-                @include('cartao.cartao')
+            <div class="mb-2 d-flex justify-content-start">
+               @include('cartao.cartao') 
             </div>
 
             <div class="container col-12 border mb-2 pt-2">
