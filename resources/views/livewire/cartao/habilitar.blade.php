@@ -76,7 +76,7 @@
             <h1>Formulário de Habilitação</h1>
         </div>
 
-        @if ($this->codSecreto)
+        @if ($this->codSecreto && session("sucesso"))
             <di class="alert alert-info fw-bold mt-4 mb-5" style="font-size: 30px">O código secreto é {{$this->codSecreto}}</di>
         @endif
 

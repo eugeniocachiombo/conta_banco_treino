@@ -16,7 +16,7 @@ class CreateCartaosTable extends Migration
         Schema::create('cartaos', function (Blueprint $table) {
             $table->id();
             $table->integer("numero");
-            $table->integer("codigo_seguranca");
+            $table->string("codigo_seguranca");
             $table->enum("tipo", ["credito", "pagamento"])->default("pagamento");
             $table->date("validade");
             $table->date("emissao");

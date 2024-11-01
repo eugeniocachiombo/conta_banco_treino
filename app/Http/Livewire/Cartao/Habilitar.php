@@ -39,19 +39,35 @@ class Habilitar extends Component
         $this->validate();
         $numero = rand(10102020, 98989898) + $this->id_usuario;
         $this->codSecreto = rand(1111, 9999);
+        $cartaoHabilitado = $this->verificarCartaoHabitilado($this->id_conta, $this->id_usuario);
 
-        Cartao::create([
-            "numero" => $numero,
-            "codigo_seguranca" => Hash::make($this->codSecreto),
-            "tipo" => $this->tipo,
-            "emissao" => Carbon::now(),
-            "validade" => Carbon::now()->addYears(4),
-            "estado" => $this->estado,
-            "id_conta" => $this->id_conta,
-        ]);
+        if ($cartaoHabilitado) {
+            $this->emit('alerta', ['mensagem' => 'Já existe cartão com este usuário e a conta habilitado', 'icon' => 'warning', 'tempo' => 3000]);
+        } else {
+            Cartao::create([
+                "numero" => $numero,
+                "codigo_seguranca" => Hash::make($this->codSecreto),
+                "tipo" => $this->tipo,
+                "emissao" => Carbon::now(),
+                "validade" => Carbon::now()->addYears(4),
+                "estado" => $this->estado,
+                "id_conta" => $this->id_conta,
+            ]);
 
-        $this->emit('alerta', ['mensagem' => 'Cartão habilitado com sucesso', 'icon' => 'success', 'tempo' => 3000]);
-        $this->limparCampos();
+            session()->flash("sucesso", "sucesso");
+            $this->emit('alerta', ['mensagem' => 'Cartão habilitado com sucesso', 'icon' => 'success', 'tempo' => 3000]);
+            $this->limparCampos();
+        }
+
+    }
+
+    public function verificarCartaoHabitilado($id_conta, $id_usuario)
+    {
+        $conta = Conta::where("id", $id_conta)
+            ->where("id_usuario", $id_usuario)
+            ->first();
+        $cartao = Cartao::where("id_conta", $conta->id)->first();
+        return $cartao;
     }
 
     public function buscarUsuario($id_usuario)
