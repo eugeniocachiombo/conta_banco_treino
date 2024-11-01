@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Acesso\AcessoController;
+use App\Http\Controllers\Agencia\AgenciaController;
 use App\Http\Controllers\Cliente\ClienteController;
 use App\Http\Controllers\Usuario\UsuarioController;
 use App\Http\Controllers\Conta\ContaController;
@@ -52,13 +53,19 @@ Route::prefix("/emprestimo")->name("emprestimo.")->group(function () {
 Route::prefix("/cliente")->name("cliente.")->group(function () {
   Route::get('/cadastro', [ClienteController::class, 'cadastrar'])->name("cadastro")->middleware("usuario.logado");
   Route::get('/lista/todos', [ClienteController::class, 'listar'])->name("lista")->middleware("usuario.logado");
-  Route::get('/actualizar/cliente/{id}', [ClienteController::class, 'actualizar'])->name("actualizar")->middleware("usuario.logado");
+  Route::get('/actualizar/{id}', [ClienteController::class, 'actualizar'])->name("actualizar")->middleware("usuario.logado");
 });
 
 Route::prefix("/funcionario")->name("funcionario.")->group(function () {
   Route::get('/cadastro', [FuncionarioController::class, 'cadastrar'])->name("cadastro")->middleware("usuario.logado");
   Route::get('/lista/todos', [FuncionarioController::class, 'listar'])->name("lista")->middleware("usuario.logado");
-  Route::get('/actualizar/funcionario/{id}', [FuncionarioController::class, 'actualizar'])->name("actualizar")->middleware("usuario.logado");
+  Route::get('/actualizar/{id}', [FuncionarioController::class, 'actualizar'])->name("actualizar")->middleware("usuario.logado");
+});
+
+Route::prefix("/agencia")->name("agencia.")->group(function () {
+  Route::get('/cadastro', [AgenciaController::class, 'cadastrar'])->name("cadastro")->middleware("usuario.logado");
+  Route::get('/lista', [AgenciaController::class, 'listar'])->name("lista")->middleware("usuario.logado");
+  Route::get('/actualizar/{id}', [AgenciaController::class, 'actualizar'])->name("actualizar")->middleware("usuario.logado");
 });
 
 Route::get("/migrate", function(){
