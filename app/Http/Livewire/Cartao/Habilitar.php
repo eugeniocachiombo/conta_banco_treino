@@ -13,7 +13,7 @@ class Habilitar extends Component
 {
     public $tipo, $estado, $id_conta, $id_usuario;
     public $contas, $usuarios;
-    public $codSecreto;
+    public $codSecreto, $formHabilitado = false;
 
     protected $rules = [
         'estado' => 'required',
@@ -80,10 +80,12 @@ class Habilitar extends Component
         $conta = Conta::find($id_conta);
         $this->id_conta = $conta->id;
         $this->id_usuario = $conta->id_usuario;
+        $this->formHabilitado = true;
     }
 
     public function limparCampos()
     {
         $this->tipo = $this->estado = $this->id_conta = $this->id_usuario = null;
+        $this->formHabilitado = false;
     }
 }
