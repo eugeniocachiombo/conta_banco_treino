@@ -1,7 +1,7 @@
-<div class="d-flex">
+<div class="d-md-flex d-table text-start">
     <style>
         .cartao {
-            width: 400px;
+            min-width: inherit;
             height: 200px;
             background: linear-gradient(135deg, #0f2b47, #165ca1);
             color: white;
@@ -12,9 +12,9 @@
             flex-direction: column;
             justify-content: space-between;
             align-items: center;
-            margin: auto;
             font-family: 'Arial', sans-serif;
             position: relative;
+            margin-left: 300px;
         }
 
         .banco {
@@ -40,7 +40,7 @@
             position: absolute;
             bottom: 20px;
             right: 20px;
-            background: rgba(255, 255, 255, 0.1);
+           /* background: rgba(255, 255, 255, 0.1);*/
             padding: 5px 10px;
             border-radius: 5px;
         }
@@ -93,21 +93,34 @@
 
     @foreach ($contas as $conta)
         @php
-            $cartao = Cartao::where('id_conta', $conta->id)->get();
+            $cartao = Cartao::where('id_conta', $conta->id)->first();
         @endphp
 
-        <div class="container d-flex" >
+        <div class="container d-flex justify-content-center">
             @if ($cartao)
-                <div class="cartao ">
+                @php
+                    $numero = $cartao->numero;
+                    $numeroFormatado = substr($numero, 0, 3) . ' ' . substr($numero, 3, 3) . ' ' . substr($numero, 6);
+                    $data = $cartao->validade; 
+                    list($ano, $mes) = explode('-', $data);
+                @endphp
+
+                <div class="cartao m-2">
                     <div class="chip"></div>
-                    <div class="banco">
+                    <div class="banco ms-3">
                         <h2>System Bank</h2>
                     </div>
+
                     <div class="numero-cartao mb-4">
-                        <h3>**** **** **** ****</h3>
+                        <h3>Ref {{ $numeroFormatado }}</h3>
                     </div>
-                    <div class="validade mt-5">
-                        <span>Validade: **/**</span>
+
+                    <div class="validade mt-5 pb-2">
+                        <span>Validade: {{$mes}}/{{$ano}}</span>
+                    </div>
+
+                    <div class="mt-4" style="font-size: 10px">
+                        {{ $usuario->buscarDadosPessoais->nome }} {{ $usuario->buscarDadosPessoais->sobrenome }}
                     </div>
                 </div>
             @endif

@@ -72,7 +72,7 @@
                                     <button class="bg-danger" type="button"
                                         wire:click="eliminarCartao({{ $cartao->id }})"
                                         style="width: 40px">
-                                        <i class="fas fa-check"></i>
+                                        <i class="fas fa-trash"></i>
                                     </button>
                                 </td>
                             </tr>
