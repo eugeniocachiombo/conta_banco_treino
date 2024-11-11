@@ -61,7 +61,7 @@ class CartaoController extends Controller
 
     public function pagar($idConta, $quantia){
         $conta = Conta::find($idConta);
-        Conta::where("id", $idConta)->update([
+        Conta::where("id", $conta->id)->update([
            "saldo" => $conta->saldo - $quantia
         ]);
         return true;
