@@ -3,7 +3,9 @@
 namespace App\Http\Livewire\Cartao;
 
 use App\Models\Cartao;
+use App\Models\Cliente;
 use App\Models\Conta;
+use App\Models\Funcionario;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
@@ -81,6 +83,16 @@ class Habilitar extends Component
         $this->id_conta = $conta->id;
         $this->id_usuario = $conta->id_usuario;
         $this->formHabilitado = true;
+    }
+
+    public function verificarSeClienteOuFuncionario($id_usuario)
+    {
+        if (Cliente::where("id_usuario", $id_usuario)->first() || Funcionario::where("id_usuario", $id_usuario)->first()) {
+           return true;
+        }
+        else{
+            return false;
+        }
     }
 
     public function limparCampos()

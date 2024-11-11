@@ -134,25 +134,28 @@
                         @foreach ($contas as $conta)
                             @php
                                 $usuario = $this->buscarUsuario($conta->id_usuario);
+                                $clienteOuFuncionario = $this->verificarSeClienteOuFuncionario($conta->id_usuario);
                             @endphp
 
-                            <tr class="text-white">
-                                <td>{{ $usuario->id }}</td>
-                                <td style="white-space: nowrap">{{ $usuario->buscarDadosPessoais->nome }}
-                                    {{ $usuario->buscarDadosPessoais->sobrenome }}</td>
-                                <td>{{ ucwords($usuario->buscarAcesso->tipo) }}</td>
-                                <td>{{ $usuario->telefone }}</td>
-                                <td class="text-center"> {{ $conta->num_conta }}</td>
-                                <td class="text-center">
-                                    {{ ucwords($conta->tipo) }}
-                                </td>
-                                <td class="text-center">
-                                    <button class="bg-info" type="button"
-                                        wire:click="selecionarConta({{ $conta->id }})" style="width: 40px">
-                                        <i class="fas fa-check"></i>
-                                    </button>
-                                </td>
-                            </tr>
+                            @if ($clienteOuFuncionario)
+                                <tr class="text-white">
+                                    <td>{{ $usuario->id }}</td>
+                                    <td style="white-space: nowrap">{{ $usuario->buscarDadosPessoais->nome }}
+                                        {{ $usuario->buscarDadosPessoais->sobrenome }}</td>
+                                    <td>{{ ucwords($usuario->buscarAcesso->tipo) }}</td>
+                                    <td>{{ $usuario->telefone }}</td>
+                                    <td class="text-center"> {{ $conta->num_conta }}</td>
+                                    <td class="text-center">
+                                        {{ ucwords($conta->tipo) }}
+                                    </td>
+                                    <td class="text-center">
+                                        <button class="bg-info" type="button"
+                                            wire:click="selecionarConta({{ $conta->id }})" style="width: 40px">
+                                            <i class="fas fa-check"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            @endif
                         @endforeach
                     </tbody>
                 </table>

@@ -3,7 +3,9 @@
 namespace App\Http\Livewire\Cartao;
 
 use App\Models\Cartao;
+use App\Models\Cliente;
 use App\Models\Conta;
+use App\Models\Funcionario;
 use App\Models\User;
 use DateTime;
 use Livewire\Component;

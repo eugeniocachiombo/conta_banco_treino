@@ -52,30 +52,32 @@
                     <tbody class="text-white">
 
                         @foreach ($cartoes as $cartao)
-                        @php
-                            $conta = $this->buscarConta($cartao->id_conta);
-                            $usuario = $this->buscarUsuario($conta->id_usuario);
-                        @endphp
-
-                             <tr class="text-white">
-                                <td>{{ $usuario->id }}</td>
-                                <td style="white-space: nowrap">{{ $usuario->buscarDadosPessoais->nome }} {{ $usuario->buscarDadosPessoais->sobrenome }}</td>
-                                <td>{{ $cartao->numero }}</td>
-                                <td>{{ $cartao->tipo }}</td>
-                                <td class="text-center" style="white-space: nowrap"> {{ $this->formatarData($cartao->emissao) }}</td>
-                                <td class="text-center">
-                                    {{ ucwords($conta->tipo) }}
-                                </td>
-                                <td class="text-center" style="white-space: nowrap"> {{ $this->formatarData($cartao->validade) }}</td>
-                                <td>{{$cartao->estado}}</td>
-                                <td class="text-center">
-                                    <button class="bg-danger" type="button"
-                                        wire:click="eliminarCartao({{ $cartao->id }})"
-                                        style="width: 40px">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
-                                </td>
-                            </tr>
+                            @php
+                                $conta = $this->buscarConta($cartao->id_conta);
+                                $usuario = $this->buscarUsuario($conta->id_usuario);
+                            @endphp
+                            
+                                <tr class="text-white">
+                                    <td>{{ $usuario->id }}</td>
+                                    <td style="white-space: nowrap">{{ $usuario->buscarDadosPessoais->nome }}
+                                        {{ $usuario->buscarDadosPessoais->sobrenome }}</td>
+                                    <td>{{ $cartao->numero }}</td>
+                                    <td>{{ $cartao->tipo }}</td>
+                                    <td class="text-center" style="white-space: nowrap">
+                                        {{ $this->formatarData($cartao->emissao) }}</td>
+                                    <td class="text-center">
+                                        {{ ucwords($conta->tipo) }}
+                                    </td>
+                                    <td class="text-center" style="white-space: nowrap">
+                                        {{ $this->formatarData($cartao->validade) }}</td>
+                                    <td>{{ $cartao->estado }}</td>
+                                    <td class="text-center">
+                                        <button class="bg-danger" type="button"
+                                            wire:click="eliminarCartao({{ $cartao->id }})" style="width: 40px">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
                         @endforeach
                     </tbody>
                 </table>
