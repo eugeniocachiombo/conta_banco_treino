@@ -37,4 +37,33 @@ class CartaoController extends Controller
         $aprovacao = Hash::check($codigo, $cartao->codigo_seguranca);
         return response()->json($aprovacao);
     }
+
+    public function pagarComCartao($num, $codigo, $quantia){
+        $aprovacao = $this->autenticarCartao($num, $codigo);
+        if ($aprovacao) {
+            $cartao = Cartao::where("numero", $num)->first();
+            $conta = $cartao ? Conta::find($cartao->id_conta) : null;
+            $comapatibildade = $conta ? $this->verificarCompactibilidadeSaldo($quantia, $conta->saldo) : null;
+            $pagamento = $comapatibildade == "saldo e maior" ? $this->pagar($conta->id, $quantia) : false;
+            return response()->json([$pagamento, $pagamento ? "Pagamento feito com sucesso" : "Falha no pagamento"]);
+        }else{
+            return response()->json([$aprovacao, "Erro de aprovação"]);
+        }
+    }
+
+    public function verificarCompactibilidadeSaldo($quantia, $saldo){
+        if($saldo >= $quantia){
+            return "saldo e maior";
+        }else{
+            return "saldo e menor";
+        }
+    }
+
+    public function pagar($idConta, $quantia){
+        $conta = Conta::find($idConta);
+        Conta::where("id", $idConta)->update([
+           "saldo" => $conta->saldo - $quantia
+        ]);
+        return true;
+    }
 }
