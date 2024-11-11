@@ -5,16 +5,16 @@
             <h1>Habilitar Cartão</h1>
         </div>
 
+        @if ($this->codSecreto && session('sucesso'))
+            <di class="alert alert-info fw-bold mt-4 mb-5" style="font-size: 30px">O código secreto é
+                {{ $this->codSecreto }}</di>
+        @endif
+
         @if ($formHabilitado)
             <hr>
             <div class="col-12 text-center text-md-start">
                 <h1>Formulário de Habilitação</h1>
             </div>
-            
-            @if ($this->codSecreto && session('sucesso'))
-                <di class="alert alert-info fw-bold mt-4 mb-5" style="font-size: 30px">O código secreto é
-                    {{ $this->codSecreto }}</di>
-            @endif
 
             <div class="container mt-3">
                 <div class="row ">
