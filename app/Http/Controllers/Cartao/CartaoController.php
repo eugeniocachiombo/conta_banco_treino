@@ -38,7 +38,7 @@ class CartaoController extends Controller
             $cartao = Cartao::where("numero", $num)->first();
             $conta = $cartao ? Conta::find($cartao->id_conta) : null;
             $comapatibildade = $conta ? $this->verificarSeSaldoEhCompativel($quantia, $conta->saldo) : null;
-            $pagamento = $comapatibildade == "saldo e maior" ? $this->pagar($conta->id, $quantia) : false;
+            $pagamento = $comapatibildade == "saldo e maior" ? $this->pagar($conta->id, $quantia) : null;
             return response()->json([$pagamento, $pagamento ? "Pagamento feito com sucesso" : "Saldo insuficiente"]);
         }else{
             return response()->json([$aprovacao, "Erro de aprovação, [Dados não encontrados]"]);
@@ -48,7 +48,7 @@ class CartaoController extends Controller
     public function autenticarCartao($num, $codigo){
         $cartao = Cartao::where("numero", $num)->first();
         $aprovacao = Hash::check($codigo, $cartao->codigo_seguranca);
-        return response()->json($aprovacao);
+        return $aprovacao;
     }
 
     public function verificarSeSaldoEhCompativel($quantia, $saldo){
