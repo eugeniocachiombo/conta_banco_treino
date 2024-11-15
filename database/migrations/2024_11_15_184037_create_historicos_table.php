@@ -16,6 +16,7 @@ class CreateHistoricosTable extends Migration
         Schema::create('historicos', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger("id_usuario");
+            $table->string("tema");
             $table->text("descricao");
             $table->foreign("id_usuario")->references("id")->on("users")->onDelete("cascade");
             $table->timestamps();

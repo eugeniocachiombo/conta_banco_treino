@@ -3,7 +3,10 @@
 namespace App\Http\Livewire\Conta;
 
 use App\Models\Conta;
+use App\Models\DadosPessoais;
+use App\Models\Historico;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class AdicionarContas extends Component
@@ -31,6 +34,12 @@ class AdicionarContas extends Component
             "id_usuario" => $id_usuario
         ]);
         $this->emit('alerta', ['mensagem' => 'Conta adicionada com sucesso', 'icon' => 'success']);
+        $dadosPessoais = DadosPessoais::where("id_usuario", $id_usuario)->first();
+        Historico::create([
+        "id_usuario" => Auth::user()->id, 
+        "tema" => "Adição de conta",
+        "descricao" => "Adicionou uma nova conta {$this->tipoConta} para {$dadosPessoais->nome} {$dadosPessoais->sobrenome}"
+    ]);
     }
 
     public function buscarContaEmFaltaUsuario($id_usuario)
