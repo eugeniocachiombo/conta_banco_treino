@@ -139,7 +139,7 @@
 
                             <li class="nav-item">
                                 <a class="nav-link active text-light" aria-current="page"
-                                    href="#">Histórico</a>
+                                    href="{{ route('historico.lista') }}">Histórico</a>
                             </li>
                         </ul>
                     </div>

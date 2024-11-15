@@ -24,22 +24,23 @@ class AdicionarContas extends Component
         return Conta::where('id_usuario', $id_usuario)->get();
     }
 
-    public function adicionarConta($id_usuario){
+    public function adicionarConta($id_usuario)
+    {
         $ultimoRegistro = Conta::orderByDesc("id")->first();
-        $novoNumConta = intval($ultimoRegistro->id . rand(1000,9999) . rand(1100,9999));
+        $novoNumConta = intval($ultimoRegistro->id . rand(1000, 9999) . rand(1100, 9999));
         Conta::create([
             "tipo" => $this->tipoConta,
             'num_conta' => $novoNumConta,
             'saldo' => 0.00,
-            "id_usuario" => $id_usuario
+            "id_usuario" => $id_usuario,
         ]);
         $this->emit('alerta', ['mensagem' => 'Conta adicionada com sucesso', 'icon' => 'success']);
         $dadosPessoais = DadosPessoais::where("id_usuario", $id_usuario)->first();
         Historico::create([
-        "id_usuario" => Auth::user()->id, 
-        "tema" => "Adição de conta",
-        "descricao" => "Adicionou uma nova conta {$this->tipoConta} para {$dadosPessoais->nome} {$dadosPessoais->sobrenome}"
-    ]);
+            "id_usuario" => Auth::user()->id,
+            "tema" => "Adição de conta",
+            "descricao" => "Adicionou uma nova conta {$this->tipoConta} para {$dadosPessoais->nome} {$dadosPessoais->sobrenome}",
+        ]);
     }
 
     public function buscarContaEmFaltaUsuario($id_usuario)

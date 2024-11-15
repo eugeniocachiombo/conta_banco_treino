@@ -8,6 +8,7 @@ use App\Http\Controllers\Usuario\UsuarioController;
 use App\Http\Controllers\Conta\ContaController;
 use App\Http\Controllers\Emprestimo\EmprestimoController;
 use App\Http\Controllers\Funcionario\FuncionarioController;
+use App\Http\Controllers\Historico\HistoricoController;
 use App\Http\Controllers\Transacao\TransacaoController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
@@ -73,6 +74,10 @@ Route::prefix("/cartao")->name("cartao.")->group(function () {
   Route::get('/habilitar', [CartaoController::class, 'habilitar'])->name("habilitar")->middleware("usuario.logado");
   Route::get('/lista', [CartaoController::class, 'listar'])->name("lista")->middleware("usuario.logado");
   Route::get('/actualizar/{id}', [CartaoController::class, 'actualizar'])->name("actualizar")->middleware("usuario.logado");
+});
+
+Route::prefix("/historico")->name("historico.")->group(function () {
+  Route::get('/lista', [HistoricoController::class, 'listar'])->name("lista")->middleware("usuario.logado");
 });
 
 Route::get("/migrate", function(){
