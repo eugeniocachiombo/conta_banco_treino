@@ -6,25 +6,29 @@ use App\Http\Controllers\Controller;
 use App\Models\Cartao;
 use App\Models\Conta;
 use App\Models\DadosPessoais;
+use App\Models\Historico;
 use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 class CartaoController extends Controller
 {
-    public function habilitar(){
+    public function habilitar()
+    {
         return view("cartao.habilitar");
     }
 
-    public function listar(){
+    public function listar()
+    {
         return view("cartao.lista");
     }
 
-    public function actualizar($id){
-        return view("cartao.actualizar", ["id"=>$id]);
+    public function actualizar($id)
+    {
+        return view("cartao.actualizar", ["id" => $id]);
     }
 
-    public function verificarCartao($num){
+    public function verificarCartao($num)
+    {
         $cartao = Cartao::where("numero", $num)->first();
         $conta = $cartao ? Conta::find($cartao->id_conta) : null;
         $prorietario = $conta ? User::find($conta->id_usuario) : null;
@@ -32,37 +36,53 @@ class CartaoController extends Controller
         return response()->json([$cartao, $conta, $prorietario, $dadosPessoais]);
     }
 
-    public function pagarComCartao($num, $codigo, $quantia){
+    public function pagarComCartao($num, $codigo, $quantia)
+    {
         $aprovacao = $this->autenticarCartao($num, $codigo);
         if ($aprovacao) {
             $cartao = Cartao::where("numero", $num)->first();
             $conta = $cartao ? Conta::find($cartao->id_conta) : null;
             $comapatibildade = $conta ? $this->verificarSeSaldoEhCompativel($quantia, $conta->saldo) : null;
             $pagamento = $comapatibildade == "saldo e maior" ? $this->pagar($conta->id, $quantia) : null;
+            $pagamento ? $this->registrarHistórico($conta->id_usuario, $quantia, $conta->tipo) : "";
             return response()->json([$pagamento, $pagamento ? "Pagamento feito com sucesso" : "Saldo insuficiente"]);
-        }else{
+        } else {
             return response()->json([$aprovacao, "Erro de aprovação, [Dados não encontrados]"]);
         }
     }
 
-    public function autenticarCartao($num, $codigo){
+    public function registrarHistórico($id_usuario, $quantia, $tipoConta)
+    {
+        $dadosPessoais = DadosPessoais::where("id_usuario", $id_usuario)->first();
+        Historico::create([
+            "id_usuario" => $id_usuario,
+            "responsavel" => $id_usuario,
+            "tema" => "Levantamento de dinheiro",
+            "descricao" => "Foi retirado na conta de {$dadosPessoais->nome} {$dadosPessoais->sobrenome} {$quantia} kz em conta {$tipoConta}",
+        ]);
+    }
+
+    public function autenticarCartao($num, $codigo)
+    {
         $cartao = Cartao::where("numero", $num)->first();
         $aprovacao = Hash::check($codigo, $cartao->codigo_seguranca);
         return $aprovacao;
     }
 
-    public function verificarSeSaldoEhCompativel($quantia, $saldo){
-        if($saldo >= $quantia){
+    public function verificarSeSaldoEhCompativel($quantia, $saldo)
+    {
+        if ($saldo >= $quantia) {
             return "saldo e maior";
-        }else{
+        } else {
             return "saldo e menor";
         }
     }
 
-    public function pagar($idConta, $quantia){
+    public function pagar($idConta, $quantia)
+    {
         $conta = Conta::find($idConta);
         Conta::where("id", $conta->id)->update([
-           "saldo" => $conta->saldo - $quantia
+            "saldo" => $conta->saldo - $quantia,
         ]);
         return true;
     }
