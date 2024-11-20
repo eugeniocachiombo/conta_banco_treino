@@ -70,6 +70,8 @@ class DepositarUsuario extends Component
             $conta = Conta::find($emprestimo->id_conta);
 
             if ($conta->saldo >= $emprestimo->quantia) {
+                $quantiaFormatada = number_format($emprestimo->quantia, 2, ',', '.');
+                
                 Conta::where("id", $conta->id)
                     ->update([
                         "saldo" => $conta->saldo - $emprestimo->quantia,
@@ -80,7 +82,7 @@ class DepositarUsuario extends Component
                     "id_usuario" => $id_usuario,
                     "responsavel" => $id_usuario,
                     "tema" => "Devolução de dinheiro",
-                    "descricao" => "Foi removido {$emprestimo->quantia} kz emprestado por {$dadosPessoais->nome} {$dadosPessoais->sobrenome} para a conta {$conta->tipo}",
+                    "descricao" => "Foi removido {$quantiaFormatada} kz emprestado por {$dadosPessoais->nome} {$dadosPessoais->sobrenome} para a conta {$conta->tipo}",
                 ]);
 
                 $emprestimo->delete();
