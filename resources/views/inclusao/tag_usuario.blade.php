@@ -22,13 +22,11 @@
     <div class="col-md-4 col-12 d-flex justify-content-center align-items-center border">
         @php
             use App\Models\Conta;
-            $conta = Conta::where('id_usuario', $usuario->id)
-                ->where('tipo', 'corrente')
-                ->first();
+            $saldo = Conta::where('id_usuario', $usuario->id)->sum('saldo');
         @endphp
 
-        @if ($conta)
-            <h3 class="pt-2" style="height: inherit"> {{ number_format($conta->saldo, 2, ',', '.') }} kz</h3>
+        @if ($saldo)
+            <h3 class="pt-2" style="height: inherit"> {{ number_format($saldo, 2, ',', '.') }} kz</h3>
         @else
             <h3 class="pt-2" style="height: inherit"> 0,00 kz</h3>
         @endif

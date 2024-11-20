@@ -33,13 +33,12 @@
                         Saldo da conta:
                         @php
                             use App\Models\Conta;
-                            $conta = Conta::where('id_usuario', $usuario->id)
-                                ->where('tipo', 'corrente')
-                                ->first();
+                            $saldo = Conta::where('id_usuario', $usuario->id)
+                             ->sum("saldo");
                         @endphp
 
-                        @if ($conta)
-                            <div class="ps-md-2">{{ number_format($conta->saldo, 2, ',', '.') }} kz</div>
+                        @if ($saldo)
+                            <div class="ps-md-2">{{ number_format($saldo, 2, ',', '.') }} kz</div>
                         @else
                             <div class="ps-md-2">0,00 kz</div>
                         @endif
