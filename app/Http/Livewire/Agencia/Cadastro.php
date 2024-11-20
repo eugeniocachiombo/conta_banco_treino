@@ -3,7 +3,10 @@
 namespace App\Http\Livewire\Agencia;
 
 use App\Models\Agencia;
+use App\Models\DadosPessoais;
+use App\Models\Historico;
 use App\Models\Morada;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class Cadastro extends Component
@@ -37,6 +40,14 @@ class Cadastro extends Component
                 "num_indent" => $this->num_indent,
             ]);
             $this->emit('alerta', ['mensagem' => 'Agência cadastrada com sucesso', 'icon' => 'success', 'tempo' => 3000]);
+            
+            Historico::create([
+                "id_usuario" => Auth::user()->id,
+                "responsavel" => Auth::user()->id,
+                "tema" => "Cadastro de Agência",
+                "descricao" => "Foi adicionado nova agência no sistema",
+            ]);
+            
             $this->limparCampos();
         }
     }

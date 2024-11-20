@@ -3,7 +3,9 @@
 namespace App\Http\Livewire\Agencia;
 
 use App\Models\Agencia;
+use App\Models\Historico;
 use App\Models\Morada;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class Actualizar extends Component
@@ -40,11 +42,20 @@ class Actualizar extends Component
         $this->validate();
 
         if (empty($this->numIndentExist)) {
+            $numAntigo = Agencia::where("id", $this->id_agencia)->first()->num_indent;
+
             Agencia::where("id", $this->id_agencia)->update([
                 "localizacao" => $this->localizacao,
                 "num_indent" => $this->num_indent,
             ]);
             $this->emit('alerta', ['mensagem' => 'Agência actualizada com sucesso', 'icon' => 'success', 'tempo' => 3000]);
+            
+            Historico::create([
+                "id_usuario" => Auth::user()->id,
+                "responsavel" => Auth::user()->id,
+                "tema" => "Cadastro de Agência",
+                "descricao" => "Foi modificado o número de identificação da agência {$numAntigo} para {$this->num_indent}",
+            ]);
             $this->limparCampos();
         }
     }
