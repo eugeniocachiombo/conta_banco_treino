@@ -57,7 +57,7 @@ class CartaoController extends Controller
         Historico::create([
             "id_usuario" => $id_usuario,
             "responsavel" => $id_usuario,
-            "tema" => "Levantamento de dinheiro",
+            "tema" => "Pagamento com o cartão",
             "descricao" => "Foi retirado na conta de {$dadosPessoais->nome} {$dadosPessoais->sobrenome} {$quantia} kz em conta {$tipoConta}. OBS: {$descricao}",
         ]);
     }
