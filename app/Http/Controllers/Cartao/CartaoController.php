@@ -36,7 +36,7 @@ class CartaoController extends Controller
         return response()->json([$cartao, $conta, $prorietario, $dadosPessoais]);
     }
 
-    public function pagarComCartao($num, $codigo, $quantia)
+    public function pagarComCartao($num, $codigo, $quantia, $descricao)
     {
         $aprovacao = $this->autenticarCartao($num, $codigo);
         if ($aprovacao) {
@@ -44,21 +44,21 @@ class CartaoController extends Controller
             $conta = $cartao ? Conta::find($cartao->id_conta) : null;
             $comapatibildade = $conta ? $this->verificarSeSaldoEhCompativel($quantia, $conta->saldo) : null;
             $pagamento = $comapatibildade == "saldo e maior" ? $this->pagar($conta->id, $quantia) : null;
-            $pagamento ? $this->registrarHistórico($conta->id_usuario, $quantia, $conta->tipo) : "";
+            $pagamento ? $this->registrarHistórico($conta->id_usuario, $quantia, $conta->tipo, $descricao) : "";
             return response()->json([$pagamento, $pagamento ? "Pagamento feito com sucesso" : "Saldo insuficiente"]);
         } else {
             return response()->json([$aprovacao, "Erro de aprovação, [Dados não encontrados]"]);
         }
     }
 
-    public function registrarHistórico($id_usuario, $quantia, $tipoConta)
+    public function registrarHistórico($id_usuario, $quantia, $tipoConta, $descricao)
     {
         $dadosPessoais = DadosPessoais::where("id_usuario", $id_usuario)->first();
         Historico::create([
             "id_usuario" => $id_usuario,
             "responsavel" => $id_usuario,
             "tema" => "Levantamento de dinheiro",
-            "descricao" => "Foi retirado na conta de {$dadosPessoais->nome} {$dadosPessoais->sobrenome} {$quantia} kz em conta {$tipoConta}",
+            "descricao" => "Foi retirado na conta de {$dadosPessoais->nome} {$dadosPessoais->sobrenome} {$quantia} kz em conta {$tipoConta}. OBS: {$descricao}",
         ]);
     }
 

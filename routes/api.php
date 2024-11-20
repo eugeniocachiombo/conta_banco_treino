@@ -26,4 +26,4 @@ Route::get('/verificarConta/{num}', [ContaController::class, "verificarConta"]);
 
 Route::get('/verificarCartao/{num}', [CartaoController::class, "verificarCartao"]);
 Route::get('/autenticarCartao/{num}/{codigo}', [CartaoController::class, "autenticarCartao"]);
-Route::get('/pagarComCartao/{num}/{codigo}/{quantia}', [CartaoController::class, "pagarComCartao"]);
+Route::get('/pagarComCartao/{num}/{codigo}/{quantia}/{descricao}', [CartaoController::class, "pagarComCartao"]);
