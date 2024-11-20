@@ -38,9 +38,8 @@ class Cadastro extends Component
         $this->agencias = Agencia::all();
         $this->moradas = Morada::all();
         $this->usuarios = User::all();
-        $this->listaGeral = User::join('contas', 'users.id', '=', 'contas.id_usuario')
-            ->leftJoin("funcionarios", "funcionarios.id_usuario", "=", "users.id")
-            ->select('users.*', 'contas.*')
+        $this->listaGeral = User::leftJoin("funcionarios", "funcionarios.id_usuario", "=", "users.id")
+            ->select('users.*')
             ->where("users.id_acesso", 2)
             ->whereNull("funcionarios.id_usuario")
             ->get();

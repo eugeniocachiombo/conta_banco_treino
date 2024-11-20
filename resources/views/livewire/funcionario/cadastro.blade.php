@@ -142,19 +142,15 @@
                                 </th>
 
                                 <th class="bg-primary text-white" style="white-space: nowrap">
+                                    Email
+                                </th>
+
+                                <th class="bg-primary text-white" style="white-space: nowrap">
                                     Telefone
                                 </th>
 
                                 <th class="bg-primary text-white" style="white-space: nowrap">
                                     Acesso
-                                </th>
-
-                                <th class="bg-primary text-white text-center" style="white-space: nowrap">
-                                    Número da Conta
-                                </th>
-
-                                <th class="bg-primary text-white" style="white-space: nowrap">
-                                    Saldo da conta
                                 </th>
 
                                 <th class="bg-primary text-white text-center" style="white-space: nowrap">
@@ -168,15 +164,14 @@
                             @foreach ($listaGeral as $item)
                                 <tr class="text-white">
                                     <td>{{ $item->id }}</td>
-                                    <td style="white-space: nowrap">{{ $item->buscarDadosPessoaisJoin->nome }}
-                                        {{ $item->buscarDadosPessoaisJoin->sobrenome }}</td>
+                                    <td style="white-space: nowrap">{{ $item->buscarDadosPessoais->nome }}
+                                        {{ $item->buscarDadosPessoais->sobrenome }}</td>
+                                    <td>{{ $item->email }}</td>
                                     <td>{{ $item->telefone }}</td>
                                     <td>{{ ucwords($item->buscarAcesso->tipo) }}</td>
-                                    <td class="text-center"> {{ $item->num_conta }}</td>
-                                    <td class="saldo">{{ number_format($item->saldo, 2, ',', '.') }} kz</td>
                                     <td class="text-center">
                                         <button class="bg-success" type="button"
-                                            wire:click="tornarfuncionario({{ $item->id_usuario }})" style="width: 40px">
+                                            wire:click="tornarfuncionario({{ $item->id }})" style="width: 40px">
                                             <i class="fas fa-check"></i>
                                         </button>
                                     </td>

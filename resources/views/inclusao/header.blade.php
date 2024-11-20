@@ -96,7 +96,7 @@
                                 <a class="nav-link dropdown-toggle text-light" data-bs-toggle="dropdown" href="#"
                                     role="button" aria-expanded="false">Cliente</a>
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="{{ route('cliente.cadastro') }}">Cadastrar</a>
+                                    <li><a class="dropdown-item" href="{{ route('cliente.cadastro') }}">Associar</a>
                                     </li>
                                     <li><a class="dropdown-item" href="{{ route('cliente.lista') }}">Listar</a>
                                     </li>
@@ -108,7 +108,7 @@
                                     href="#" role="button" aria-expanded="false">Funcionário</a>
                                 <ul class="dropdown-menu">
                                     <li><a class="dropdown-item"
-                                            href="{{ route('funcionario.cadastro') }}">Cadastrar</a>
+                                            href="{{ route('funcionario.cadastro') }}">Associar</a>
                                     </li>
                                     <li><a class="dropdown-item" href="{{ route('funcionario.lista') }}">Listar</a>
                                     </li>
