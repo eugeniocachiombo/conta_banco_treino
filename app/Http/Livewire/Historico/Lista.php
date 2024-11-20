@@ -17,7 +17,9 @@ class Lista extends Component
     
     public function render()
     {
-        $this->historicos = Historico::where("id_usuario", Auth::user()->id)->get();
+        $this->historicos = Historico::where("id_usuario", Auth::user()->id)
+        ->orderBy("id", "desc")
+        ->get();
         return view('livewire.historico.lista');
     }
 

@@ -11,10 +11,6 @@
                     <thead class="">
                         <tr>
                             <th class="bg-primary text-white" style="white-space: nowrap">
-                                Id
-                            </th>
-
-                            <th class="bg-primary text-white" style="white-space: nowrap">
                                 Responsável
                             </th>
 
@@ -41,7 +37,6 @@
                             @endphp
                             
                                 <tr class="text-white">
-                                    <td>{{ $usuario->id }}</td>
                                     <td>{{ $dadosPessoais->nome  }} {{ $dadosPessoais->sobrenome  }}</td>
                                     <td>{{ $historico->descricao  }}</td>
                                     <td>{{ $historico->created_at  }}</td>

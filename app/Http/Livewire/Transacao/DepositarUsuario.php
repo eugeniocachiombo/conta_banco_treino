@@ -4,14 +4,16 @@ namespace App\Http\Livewire\Transacao;
 
 use App\Models\Conta;
 use App\Models\DadosPessoais;
+use App\Models\Historico;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class DepositarUsuario extends Component
 {
     public $id_usuario, $dadosPessoais, $quantia,
-     $contasUsuario, $tipoConta;
+    $contasUsuario, $tipoConta;
 
-     protected $rules = [
+    protected $rules = [
         'tipoConta' => 'required',
         'quantia' => 'required',
     ];
@@ -21,7 +23,8 @@ class DepositarUsuario extends Component
         'quantia.required' => 'Campo obrigatório',
     ];
 
-    public function mount($id){
+    public function mount($id)
+    {
         $this->id_usuario = $id;
     }
 
@@ -32,19 +35,28 @@ class DepositarUsuario extends Component
         return view('livewire.transacao.depositar-usuario');
     }
 
-    public function depositar(){
+    public function depositar()
+    {
         $this->validate();
         $conta = Conta::where("id_usuario", $this->id_usuario)
-        ->where("id", $this->tipoConta)
-        ->first();
-        
+            ->where("id", $this->tipoConta)
+            ->first();
+
         $saldoConta = $conta->saldo;
-        $formatarQuantia1 = str_replace(".","", $this->quantia);
-        $formatarQuantia2 = str_replace(",",".", $formatarQuantia1);
+        $formatarQuantia1 = str_replace(".", "", $this->quantia);
+        $formatarQuantia2 = str_replace(",", ".", $formatarQuantia1);
         $novoSaldo = $saldoConta + $formatarQuantia2;
 
         $conta->update(["saldo" => $novoSaldo]);
         $this->emit('alerta', ['mensagem' => 'Dinheiro depositado com sucesso', 'icon' => 'success', 'tempo' => 3000]);
+        
+        $dadosPessoais = DadosPessoais::where("id_usuario", $this->id_usuario)->first();
+        Historico::create([
+            "id_usuario" => Auth::user()->id,
+            "tema" => "Modificação de Acesso de Conta",
+            "descricao" => "Foi depositado na conta de {$dadosPessoais->nome} {$dadosPessoais->sobrenome} {$this->quantia} kz em conta {$conta->tipo}",
+        ]);
+
         $this->quantia = $this->tipoConta = null;
     }
 }
