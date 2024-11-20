@@ -20,10 +20,12 @@ class Lista extends Component
         return view('livewire.historico.lista');
     }
 
-    public function imprimirComprovativo($idComprovativo){
-        
-        $pdf = Pdf::loadView('pdf.comprovativo');
-        return response()->download(storage_path('app/public/comprovativo.pdf'));
+    public function imprimirComprovativo($idHistorico){
+        $pdfPath = storage_path('app/public/comprovativo.pdf');
+        $historico = Historico::find($idHistorico);
+        $pdf = Pdf::loadView('pdf.comprovativo', ["historico" => $historico]);
+        $pdf->save($pdfPath);
+        return response()->download($pdfPath);
     }
 
     public function buscarDadosPessoais($id_usuario)
