@@ -5,6 +5,8 @@ namespace App\Http\Livewire\Emprestimo;
 use App\Models\Conta;
 use App\Models\DadosPessoais;
 use App\Models\Emprestimo;
+use App\Models\Historico;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class Emprestar extends Component
@@ -50,7 +52,7 @@ class Emprestar extends Component
 
         $emprestimoExiste = Emprestimo::where('id_usuario', $this->id_usuario)->first();
 
-        if(!$emprestimoExiste){
+        if (!$emprestimoExiste) {
             Emprestimo::create([
                 'descricao' => $this->descricao,
                 'quantia' => $formatarQuantia2,
@@ -59,8 +61,17 @@ class Emprestar extends Component
             ]);
             $conta->update(["saldo" => $novoSaldo]);
             $this->emit('alerta', ['mensagem' => 'Dinheiro emprestado com sucesso', 'icon' => 'success', 'tempo' => 3000]);
+
+            $dadosPessoais = DadosPessoais::where("id_usuario", $this->id_usuario)->first();
+            Historico::create([
+                "id_usuario" => $this->id_usuario,
+                "responsavel" => Auth::user()->id,
+                "tema" => "Empréstimo de dinheiro",
+                "descricao" => "Foi emprestado {$this->quantia} kz na conta {$conta->tipo} de {$dadosPessoais->nome} {$dadosPessoais->sobrenome} ",
+            ]);
+
             $this->quantia = $this->descricao = $this->tipoConta = null;
-        }else{
+        } else {
             $this->emit('alerta', ['mensagem' => 'Já fizeste um empréstimo', 'icon' => 'error', 'tempo' => 3000]);
         }
     }

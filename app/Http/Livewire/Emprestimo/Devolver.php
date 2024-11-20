@@ -3,7 +3,10 @@
 namespace App\Http\Livewire\Emprestimo;
 
 use App\Models\Conta;
+use App\Models\DadosPessoais;
 use App\Models\Emprestimo;
+use App\Models\Historico;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class Devolver extends Component
@@ -51,6 +54,15 @@ class Devolver extends Component
             $conta->save();
             $emprestimo->save();
             $this->emit('alerta', ['mensagem' => 'Dinheiro devolvido com sucesso', 'icon' => 'success', 'tempo' => 3000]);
+            
+            $dadosPessoais = DadosPessoais::where("id_usuario", $this->id_usuario)->first();
+            Historico::create([
+                "id_usuario" => $this->id_usuario,
+                "responsavel" => Auth::user()->id,
+                "tema" => "Devolução de dinheiro",
+                "descricao" => "Foi devolvido {$this->quantia} kz na conta {$conta->tipo} de {$dadosPessoais->nome} {$dadosPessoais->sobrenome} ",
+            ]);
+            
             $this->quantia = $this->tipoConta = null;
         }
     }

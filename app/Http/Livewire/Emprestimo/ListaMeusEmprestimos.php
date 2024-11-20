@@ -3,8 +3,11 @@
 namespace App\Http\Livewire\Emprestimo;
 
 use App\Models\Conta;
+use App\Models\DadosPessoais;
 use App\Models\Emprestimo;
+use App\Models\Historico;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class ListaMeusEmprestimos extends Component
@@ -30,6 +33,15 @@ class ListaMeusEmprestimos extends Component
             $conta->update(["saldo" => $novoSaldo]);
             $emprestimo->delete();
             $this->emit('alerta', ['mensagem' => 'Empréstimo cancelado com sucesso', 'icon' => 'success', 'tempo' => 3000]);
+        
+            $dadosPessoais = DadosPessoais::where("id_usuario", $this->id_usuario)->first();
+            Historico::create([
+                "id_usuario" => $id_usuario,
+                "responsavel" => Auth::user()->id,
+                "tema" => "Cancelamento de Empréstimo de dinheiro",
+                "descricao" => "Foi cancelado o empréstimo de {$dadosPessoais->nome} {$dadosPessoais->sobrenome} ",
+            ]);
+        
         }else{
             $this->emit('alerta', ['mensagem' => 'Não tem nenhum valor emprestado', 'icon' => 'warning', 'tempo' => 3000]);
         }

@@ -3,12 +3,15 @@
 namespace App\Http\Livewire\Emprestimo;
 
 use App\Models\Conta;
+use App\Models\DadosPessoais;
 use App\Models\Emprestimo;
+use App\Models\Historico;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class Lista extends Component
-{ 
+{
     public $listaGeral;
 
     public function render()
@@ -17,14 +20,24 @@ class Lista extends Component
         return view('livewire.emprestimo.lista');
     }
 
-    public function cancelarEmprestimo($id_usuario, $id_conta){
+    public function cancelarEmprestimo($id_usuario, $id_conta)
+    {
         $emprestimo = Emprestimo::where("id_usuario", $id_usuario)->first();
         $conta = Conta::find($id_conta);
         $saldoConta = $conta->saldo;
-        
+
         $novoSaldo = $saldoConta - $emprestimo->quantia;
         $conta->update(["saldo" => $novoSaldo]);
         $emprestimo->delete();
         $this->emit('alerta', ['mensagem' => 'Empréstimo cancelado com sucesso', 'icon' => 'success', 'tempo' => 3000]);
+
+        $dadosPessoais = DadosPessoais::where("id_usuario", $this->id_usuario)->first();
+        Historico::create([
+            "id_usuario" => $id_usuario,
+            "responsavel" => Auth::user()->id,
+            "tema" => "Cancelamento de Empréstimo de dinheiro",
+            "descricao" => "Foi cancelado o empréstimo de {$dadosPessoais->nome} {$dadosPessoais->sobrenome} ",
+        ]);
+
     }
 }
