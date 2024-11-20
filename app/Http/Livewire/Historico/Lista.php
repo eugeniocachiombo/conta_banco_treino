@@ -7,6 +7,7 @@ use App\Models\DadosPessoais;
 use App\Models\Historico;
 use App\Models\User;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
@@ -21,7 +22,10 @@ class Lista extends Component
     }
 
     public function imprimirComprovativo($idHistorico){
-        $pdfPath = storage_path('app/public/comprovativo.pdf');
+        $data = strval(Carbon::now());
+        $data = str_replace(" ", "_", $data);
+        $data = str_replace(":", "_", $data);
+        $pdfPath = storage_path('app/public/comprovativo_'.$data.'.pdf');
         $historico = Historico::find($idHistorico);
         $pdf = Pdf::loadView('pdf.comprovativo', ["historico" => $historico]);
         $pdf->save($pdfPath);
