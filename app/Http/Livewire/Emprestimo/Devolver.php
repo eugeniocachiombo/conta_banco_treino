@@ -60,7 +60,7 @@ class Devolver extends Component
                 "id_usuario" => $this->id_usuario,
                 "responsavel" => Auth::user()->id,
                 "tema" => "Devolução de dinheiro",
-                "descricao" => "Foi devolvido {$this->quantia} kz na conta {$conta->tipo} de {$dadosPessoais->nome} {$dadosPessoais->sobrenome} ",
+                "descricao" => "Foi devolvido {$this->quantia} kz emprestado por {$dadosPessoais->nome} {$dadosPessoais->sobrenome} para a conta {$conta->tipo}",
             ]);
             
             $this->quantia = $this->tipoConta = null;
