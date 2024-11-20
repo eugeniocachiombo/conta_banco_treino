@@ -46,7 +46,7 @@
                                     Tipo de Conta
                                 </th>
 
-                                <th class="bg-primary text-white text-center" style="white-space: nowrap">
+                                <th class="d-none bg-primary text-white text-center" style="white-space: nowrap">
                                     Eliminar Conta
                                 </th>
                             </tr>
@@ -66,7 +66,7 @@
                                     <td class="text-center">
                                         {{ ucwords($item->tipo) }}
                                     </td>
-                                    <td class="text-center">
+                                    <td class="d-none text-center">
                                         <button class="bg-danger" type="button"
                                             wire:click="eliminarConta({{ $item->id_usuario }}, '{{ $item->tipo }}')"
                                             style="width: 40px">

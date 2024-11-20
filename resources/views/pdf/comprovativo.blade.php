@@ -120,6 +120,9 @@
 
     <hr>
 
+    <p><b>Comprovativo digital...</b></p>
+    <p>Em caso de dúvidas, dirija-se ao nosso centro de atendimento.</p>
+    <p><b>OBS:</b> Juntos! faremos um trabalho de alta qualidade.</p>
 </body>
 
 </html>
