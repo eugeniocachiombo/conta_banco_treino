@@ -3,7 +3,10 @@
 namespace App\Http\Livewire\Conta;
 
 use App\Models\Conta;
+use App\Models\DadosPessoais;
+use App\Models\Historico;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class ListarContas extends Component
@@ -30,6 +33,12 @@ class ListarContas extends Component
                 ->where('tipo', $tipo)
                 ->delete();
             $this->emit('alerta', ['mensagem' => 'Eliminado com sucesso', 'icon' => 'success']);
+            $dadosPessoais = DadosPessoais::where("id_usuario", $id_usuario)->first();
+            Historico::create([
+                "id_usuario" => Auth::user()->id,
+                "tema" => "Eliminação de conta",
+                "descricao" => "Eliminou a conta {$tipo} de {$dadosPessoais->nome} {$dadosPessoais->sobrenome}",
+            ]);
         }
     }
 }

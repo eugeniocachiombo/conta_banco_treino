@@ -1,7 +1,7 @@
 <div class="container g-3 border " style="min-height: inherit">
     <div class="p-4 ">
         <div class="col-12 text-center text-md-start">
-            <h1>Lista de Cartões Habilitados</h1>
+            <h1>Históricos</h1>
         </div>
         <hr>
 
@@ -25,6 +25,10 @@
                             <th class="bg-primary text-white" style="white-space: nowrap">
                                 Data
                             </th>
+
+                            <th class="bg-primary text-white" style="white-space: nowrap">
+                                Imprimir
+                            </th>
                         </tr>
                     </thead>
 
@@ -41,6 +45,12 @@
                                     <td>{{ $dadosPessoais->nome  }} {{ $dadosPessoais->sobrenome  }}</td>
                                     <td>{{ $historico->descricao  }}</td>
                                     <td>{{ $historico->created_at  }}</td>
+                                    <td class="text-center">
+                                        <button class="bg-primary" type="button"
+                                            wire:click="imprimirComprovativo({{$historico->id}})" style="width: 40px">
+                                            <i class="fas fa-print"></i>
+                                        </button>
+                                    </td>
                                 </tr>
                         @endforeach
                     </tbody>
