@@ -60,7 +60,7 @@
 
                 <div class="col-12 text-center text-md-start">
                     <span>
-                        <button type="submit" wire:click.prevent='depositar'>
+                        <button type="submit" wire:click.prevent='retirar'>
                             Retirar
                         </button> <br> <br>
                     </span>

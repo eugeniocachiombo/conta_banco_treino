@@ -4,6 +4,8 @@ namespace App\Http\Livewire\Transacao;
 
 use App\Models\Conta;
 use App\Models\DadosPessoais;
+use App\Models\Historico;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class RetirarUsuario extends Component
@@ -33,7 +35,7 @@ class RetirarUsuario extends Component
         return view('livewire.transacao.retirar-usuario');
     }
 
-    public function depositar()
+    public function retirar()
     {
         $this->validate();
         $conta = Conta::where("id_usuario", $this->id_usuario)
@@ -48,6 +50,14 @@ class RetirarUsuario extends Component
             $novoSaldo = $saldoConta - $formatarQuantia2;
             $conta->update(["saldo" => $novoSaldo]);
             $this->emit('alerta', ['mensagem' => 'Dinheiro retirado com sucesso', 'icon' => 'success', 'tempo' => 3000]);
+
+            $dadosPessoais = DadosPessoais::where("id_usuario", $this->id_usuario)->first();
+            Historico::create([
+                "id_usuario" => Auth::user()->id,
+                "tema" => "Levantamento de dinheiro",
+                "descricao" => "Foi retirado na conta de {$dadosPessoais->nome} {$dadosPessoais->sobrenome} {$this->quantia} kz em conta {$conta->tipo}",
+            ]);
+
             $this->quantia = $this->tipoConta = null;
         }
     }

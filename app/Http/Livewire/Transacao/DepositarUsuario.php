@@ -53,7 +53,7 @@ class DepositarUsuario extends Component
         $dadosPessoais = DadosPessoais::where("id_usuario", $this->id_usuario)->first();
         Historico::create([
             "id_usuario" => Auth::user()->id,
-            "tema" => "Modificação de Acesso de Conta",
+            "tema" => "Depósito de dinheiro",
             "descricao" => "Foi depositado na conta de {$dadosPessoais->nome} {$dadosPessoais->sobrenome} {$this->quantia} kz em conta {$conta->tipo}",
         ]);
 
