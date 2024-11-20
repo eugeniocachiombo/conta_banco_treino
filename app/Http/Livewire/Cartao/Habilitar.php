@@ -5,9 +5,12 @@ namespace App\Http\Livewire\Cartao;
 use App\Models\Cartao;
 use App\Models\Cliente;
 use App\Models\Conta;
+use App\Models\DadosPessoais;
 use App\Models\Funcionario;
+use App\Models\Historico;
 use App\Models\User;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Livewire\Component;
 
@@ -58,6 +61,16 @@ class Habilitar extends Component
 
             session()->flash("sucesso", "sucesso");
             $this->emit('alerta', ['mensagem' => 'Cartão habilitado com sucesso', 'icon' => 'success', 'tempo' => 3000]);
+            
+            $conta = Conta::find($this->id_conta);
+            $dadosPessoais = DadosPessoais::where("id_usuario", $this->id_usuario)->first();
+            Historico::create([
+                "id_usuario" => $this->id_usuario,
+                "responsavel" => Auth::user()->id,
+                "tema" => "Habilitação de cartão",
+                "descricao" => "Foi habilitado cartão para <<{$dadosPessoais->nome} {$dadosPessoais->sobrenome}>> na conta {$conta->tipo}",
+            ]);
+            
             $this->limparCampos();
         }
 
