@@ -53,12 +53,13 @@ class CartaoController extends Controller
 
     public function registrarHistórico($id_usuario, $quantia, $tipoConta, $descricao)
     {
+        $quantiaFormatada = number_format($quantia, 2, ',', '.');
         $dadosPessoais = DadosPessoais::where("id_usuario", $id_usuario)->first();
         Historico::create([
             "id_usuario" => $id_usuario,
             "responsavel" => $id_usuario,
             "tema" => "Pagamento com o cartão",
-            "descricao" => "Foi retirado na conta de {$dadosPessoais->nome} {$dadosPessoais->sobrenome} {$quantia} kz em conta {$tipoConta}. OBS: {$descricao}",
+            "descricao" => "Foi retirado na conta de {$dadosPessoais->nome} {$dadosPessoais->sobrenome} {$quantiaFormatada} kz em conta {$tipoConta}. OBS: {$descricao}",
         ]);
     }
 
