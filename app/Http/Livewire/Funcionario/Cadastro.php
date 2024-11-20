@@ -4,9 +4,12 @@ namespace App\Http\Livewire\Funcionario;
 
 use App\Models\Agencia;
 use App\Models\Cliente;
+use App\Models\DadosPessoais;
 use App\Models\Funcionario;
+use App\Models\Historico;
 use App\Models\Morada;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class Cadastro extends Component
@@ -58,6 +61,15 @@ class Cadastro extends Component
                 "id_morada" => $this->morada,
             ]);
             $this->emit('alerta', ['mensagem' => 'Funcionário associado com sucesso', 'icon' => 'success', 'tempo' => 3000]);
+            
+            $dadosPessoais = DadosPessoais::where("id_usuario", $this->id_usuario)->first();
+            Historico::create([
+                "id_usuario" => $this->id_usuario,
+                "responsavel" => Auth::user()->id,
+                "tema" => "Associação de funcionários",
+                "descricao" => "Foi colocado como funcionário efectivo <<{$dadosPessoais->nome} {$dadosPessoais->sobrenome}>> no sytem-bank",
+            ]);
+            
             $this->limparCampos();
         }
     }

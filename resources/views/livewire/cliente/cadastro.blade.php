@@ -15,7 +15,7 @@
             <div class="container">
                 <div class="row ">
                     <div class="col-12 text-center text-md-start">
-                        <h1>Tornar Cliente</h1>
+                        <h1>Tornar Cliente Efectivo</h1>
                     </div>
 
                     <div class="col-12 text-center text-md-start mb-5">
@@ -144,7 +144,7 @@
                                 </th>
 
                                 <th class="bg-primary text-white text-center" style="white-space: nowrap">
-                                    Tornar Cliente
+                                    Tornar Efectivo
                                 </th>
                             </tr>
                         </thead>

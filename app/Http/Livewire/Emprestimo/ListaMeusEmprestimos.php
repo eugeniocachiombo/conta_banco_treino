@@ -34,7 +34,7 @@ class ListaMeusEmprestimos extends Component
             $emprestimo->delete();
             $this->emit('alerta', ['mensagem' => 'Empréstimo cancelado com sucesso', 'icon' => 'success', 'tempo' => 3000]);
         
-            $dadosPessoais = DadosPessoais::where("id_usuario", $this->id_usuario)->first();
+            $dadosPessoais = DadosPessoais::where("id_usuario", $id_usuario)->first();
             Historico::create([
                 "id_usuario" => $id_usuario,
                 "responsavel" => Auth::user()->id,

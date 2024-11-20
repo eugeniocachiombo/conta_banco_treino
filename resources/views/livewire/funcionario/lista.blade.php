@@ -76,7 +76,7 @@
                                         </a>
 
                                         <button class="bg-danger" type="button"
-                                            wire:click="eliminarFuncionario({{ $funcionario->id }})" style="width: 40px">
+                                            wire:click="eliminarFuncionario({{ $funcionario->id_usuario }})" style="width: 40px">
                                             <i class="fas fa-trash"></i>
                                         </button>
                                     </td>
