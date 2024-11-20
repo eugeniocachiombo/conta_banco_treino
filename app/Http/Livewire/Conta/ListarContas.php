@@ -35,9 +35,10 @@ class ListarContas extends Component
             $this->emit('alerta', ['mensagem' => 'Eliminado com sucesso', 'icon' => 'success']);
             $dadosPessoais = DadosPessoais::where("id_usuario", $id_usuario)->first();
             Historico::create([
-                "id_usuario" => Auth::user()->id,
+                "id_usuario" => $id_usuario,
+                "responsavel" => Auth::user()->id,
                 "tema" => "Eliminação de conta",
-                "descricao" => "Eliminou a conta {$tipo} de {$dadosPessoais->nome} {$dadosPessoais->sobrenome}",
+                "descricao" => "Foi eliminado a conta {$tipo} de {$dadosPessoais->nome} {$dadosPessoais->sobrenome}",
             ]);
         }
     }

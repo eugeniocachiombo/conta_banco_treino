@@ -37,9 +37,10 @@ class AdicionarContas extends Component
         $this->emit('alerta', ['mensagem' => 'Conta adicionada com sucesso', 'icon' => 'success']);
         $dadosPessoais = DadosPessoais::where("id_usuario", $id_usuario)->first();
         Historico::create([
-            "id_usuario" => Auth::user()->id,
+            "id_usuario" => $id_usuario,
+            "responsavel" => Auth::user()->id,
             "tema" => "Adição de conta",
-            "descricao" => "Adicionou uma nova conta {$this->tipoConta} para {$dadosPessoais->nome} {$dadosPessoais->sobrenome}",
+            "descricao" => "Foi adicionado uma nova conta {$this->tipoConta} para {$dadosPessoais->nome} {$dadosPessoais->sobrenome}",
         ]);
     }
 

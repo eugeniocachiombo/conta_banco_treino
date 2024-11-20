@@ -14,20 +14,40 @@ use Livewire\Component;
 class Lista extends Component
 {
     public $historicos;
-    
+
     public function render()
     {
-        $this->historicos = Historico::where("id_usuario", Auth::user()->id)
-        ->orderBy("id", "desc")
-        ->get();
+        switch (Auth::user()->id_acesso) {
+            case 1:
+                $this->historicos = Historico::orderBy("id", "desc")
+                    ->get();
+                break;
+
+            case 2:
+                $this->historicos = Historico::where("responsavel", Auth::user()->id)
+                ->orWhere(function($query) {
+                    $query->where("id_usuario", Auth::user()->id);
+                })
+                ->orderBy("id", "desc")
+                ->get();
+                break;
+
+            default:
+                $this->historicos = Historico::where("id_usuario", Auth::user()->id)
+                    ->orderBy("id", "desc")
+                    ->get();
+                break;
+        }
+
         return view('livewire.historico.lista');
     }
 
-    public function imprimirComprovativo($idHistorico){
+    public function imprimirComprovativo($idHistorico)
+    {
         $data = strval(Carbon::now());
         $data = str_replace(" ", "_", $data);
         $data = str_replace(":", "_", $data);
-        $pdfPath = storage_path('app/public/comprovativo_'.$data.'.pdf');
+        $pdfPath = storage_path('app/public/comprovativo_' . $data . '.pdf');
         $historico = Historico::find($idHistorico);
         $pdf = Pdf::loadView('pdf.comprovativo', ["historico" => $historico]);
         $pdf->save($pdfPath);

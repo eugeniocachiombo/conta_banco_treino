@@ -31,9 +31,10 @@ class Modificar extends Component
             $this->emit('alerta', ['mensagem' => $nomeCompleto . ' adicionado como ' . $acesso->tipo, 'icon' => 'success', 'tempo'=>3000]);
             $dadosPessoais = DadosPessoais::where("id_usuario", $id_usuario)->first();
             Historico::create([
-                "id_usuario" => Auth::user()->id,
+                "id_usuario" => $id_usuario,
+                "responsavel" => Auth::user()->id,
                 "tema" => "Modificação de Acesso de Conta",
-                "descricao" => "Modificou o acesso de conta do/a {$dadosPessoais->nome} {$dadosPessoais->sobrenome} para {$acesso->tipo}",
+                "descricao" => "Foi modificado o acesso de conta do/a {$dadosPessoais->nome} {$dadosPessoais->sobrenome} para {$acesso->tipo}",
             ]);
             return redirect()->route('acesso.modificar');
         }else{

@@ -23,10 +23,6 @@
                                 </th>
 
                                 <th class="bg-primary text-white" style="white-space: nowrap">
-                                    Proprietário
-                                </th>
-
-                                <th class="bg-primary text-white" style="white-space: nowrap">
                                     Número da conta
                                 </th>
 
@@ -48,7 +44,6 @@
                             @foreach ($listaGeral as $item)
                                 <tr class="text-white">
                                     <td>{{ $item->id }}</td>
-                                    <td>{{ $item->id_usuario }}</td>
                                     <td>{{ $item->num_conta }}</td>
                                     <td>{{ ucwords($item->tipo) }}</td>
                                     <td>{{ ucwords($item->estado) }}</td>

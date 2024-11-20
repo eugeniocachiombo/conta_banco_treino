@@ -108,7 +108,7 @@
                 use App\Models\DadosPessoais;
                 use App\Models\User;
 
-                $dadosPessoais = DadosPessoais::find($historico->id_usuario);
+                $dadosPessoais = DadosPessoais::find($historico->responsavel);
             @endphp
 
             <h1>{{ $historico->tema }}</h1>

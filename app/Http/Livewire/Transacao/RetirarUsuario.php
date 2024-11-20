@@ -53,12 +53,15 @@ class RetirarUsuario extends Component
 
             $dadosPessoais = DadosPessoais::where("id_usuario", $this->id_usuario)->first();
             Historico::create([
-                "id_usuario" => Auth::user()->id,
+                "id_usuario" => $this->id_usuario,
+                "responsavel" => Auth::user()->id,
                 "tema" => "Levantamento de dinheiro",
                 "descricao" => "Foi retirado na conta de {$dadosPessoais->nome} {$dadosPessoais->sobrenome} {$this->quantia} kz em conta {$conta->tipo}",
             ]);
 
             $this->quantia = $this->tipoConta = null;
+        }else{
+            $this->emit('alerta', ['mensagem' => 'Saldo insuficiente', 'icon' => 'warning', 'tempo' => 3000]);
         }
     }
 

@@ -33,7 +33,7 @@
                         @foreach ($historicos as $historico)
                             @php
                                 $usuario = $this->buscarUsuario($historico->id_usuario);
-                                $dadosPessoais = $this->buscarDadosPessoais($historico->id_usuario);
+                                $dadosPessoais = $this->buscarDadosPessoais($historico->responsavel);
                             @endphp
                             
                                 <tr class="text-white">
