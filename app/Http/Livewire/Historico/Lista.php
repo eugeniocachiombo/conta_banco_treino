@@ -19,23 +19,18 @@ class Lista extends Component
     {
         switch (Auth::user()->id_acesso) {
             case 1:
-                $this->historicos = Historico::orderBy("id", "desc")
-                    ->get();
+                $this->historicos = Historico::all();
                 break;
 
             case 2:
                 $this->historicos = Historico::where("responsavel", Auth::user()->id)
                 ->orWhere(function($query) {
                     $query->where("id_usuario", Auth::user()->id);
-                })
-                ->orderBy("id", "desc")
-                ->get();
+                })->get();
                 break;
 
             default:
-                $this->historicos = Historico::where("id_usuario", Auth::user()->id)
-                    ->orderBy("id", "desc")
-                    ->get();
+                $this->historicos = Historico::where("id_usuario", Auth::user()->id)->get();
                 break;
         }
 

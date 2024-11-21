@@ -42,6 +42,7 @@ Route::prefix("/transacao")->name("transacao.")->group(function () {
    Route::get('/depositar/usuario/{id}', [TransacaoController::class, 'depositarNoUsuarioSelecionado'])->name("depositar.usuario")->middleware("usuario.logado");
    Route::get('/retirar', [TransacaoController::class, 'retirar'])->name("retirar")->middleware("usuario.logado");
    Route::get('/retirar/usuario/{id}', [TransacaoController::class, 'retirarNoUsuarioSelecionado'])->name("retirar.usuario")->middleware("usuario.logado");
+   Route::get('/transferir', [TransacaoController::class, 'transferir'])->name("transferir")->middleware("usuario.logado");
 });
 
 Route::prefix("/emprestimo")->name("emprestimo.")->group(function () {

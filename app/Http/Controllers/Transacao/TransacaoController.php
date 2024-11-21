@@ -22,4 +22,8 @@ class TransacaoController extends Controller
     public function retirarNoUsuarioSelecionado($id){
         return view("transacao.retirar_usuario", ["id"=>$id]);
     }
+
+    public function transferir(){
+        return view("transacao.transferir");
+    }
 }

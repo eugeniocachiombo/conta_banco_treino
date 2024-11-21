@@ -72,6 +72,8 @@
                                     </li>
                                     <li><a class="dropdown-item" href="{{ route('transacao.retirar') }}">Retirar</a>
                                     </li>
+                                    <li><a class="dropdown-item" href="{{ route('transacao.transferir') }}">Transferir</a>
+                                    </li>
                                 </ul>
                             </li>
 
