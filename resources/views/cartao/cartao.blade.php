@@ -1,7 +1,7 @@
 <div class="d-md-flex d-table text-start">
     <style>
         .cartao {
-            min-width: inherit;
+            min-width: max-content;
             height: 200px;
             background: linear-gradient(135deg, #0f2b47, #165ca1);
             color: white;
