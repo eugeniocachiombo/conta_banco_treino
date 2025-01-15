@@ -94,6 +94,7 @@
     @foreach ($contas as $conta)
         @php
             $cartao = Cartao::where('id_conta', $conta->id)->first();
+            $contaActual = Conta::where('id', $cartao->id_conta)->first();
         @endphp
 
         <div class="container d-flex justify-content-center">
@@ -113,6 +114,10 @@
 
                     <div class="numero-cartao mb-4">
                         <h3>Ref {{ $numeroFormatado }}</h3>
+                    </div>
+
+                    <div>
+                        Conta: {{ucWords($contaActual->tipo)}}
                     </div>
 
                     <div class="validade mt-5 pb-2">
