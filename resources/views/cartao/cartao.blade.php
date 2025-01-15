@@ -40,7 +40,7 @@
             position: absolute;
             bottom: 20px;
             right: 20px;
-           /* background: rgba(255, 255, 255, 0.1);*/
+            /* background: rgba(255, 255, 255, 0.1);*/
             padding: 5px 10px;
             border-radius: 5px;
         }
@@ -94,7 +94,6 @@
     @foreach ($contas as $conta)
         @php
             $cartao = Cartao::where('id_conta', $conta->id)->first();
-            $contaActual = Conta::where('id', $cartao->id_conta)->first();
         @endphp
 
         <div class="container d-flex justify-content-center">
@@ -102,8 +101,8 @@
                 @php
                     $numero = $cartao->numero;
                     $numeroFormatado = substr($numero, 0, 3) . ' ' . substr($numero, 3, 3) . ' ' . substr($numero, 6);
-                    $data = $cartao->validade; 
-                    list($ano, $mes) = explode('-', $data);
+                    $data = $cartao->validade;
+                    [$ano, $mes] = explode('-', $data);
                 @endphp
 
                 <div class="cartao m-2">
@@ -117,11 +116,14 @@
                     </div>
 
                     <div>
-                        Conta: {{ucWords($contaActual->tipo)}}
+                        @php
+                            $contaActual = Conta::where('id', $cartao->id_conta)->first();
+                        @endphp
+                        Conta: {{ ucWords($contaActual->tipo) }}
                     </div>
 
                     <div class="validade mt-5 pb-2">
-                        <span>Validade: {{$mes}}/{{$ano}}</span>
+                        <span>Validade: {{ $mes }}/{{ $ano }}</span>
                     </div>
 
                     <div class="mt-4" style="font-size: 10px">
