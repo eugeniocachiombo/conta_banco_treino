@@ -48,31 +48,40 @@
                                 <ul class="dropdown-menu">
                                     <li><a class="dropdown-item" href="{{ route('conta.listar.logado') }}">Minhas
                                             Contas</a></li>
-                                    <li><a class="dropdown-item" href="{{ route('conta.adicionar.contas') }}">Adicionar
-                                            Contas</a></li>
-                                    <li><a class="dropdown-item" href="{{ route('conta.listar.contas') }}">Listar
-                                            Contas</a></li>
+                                    @if (Auth::user()->id_acesso == 2 || Auth::user()->id_acesso == 1)
+                                        <li><a class="dropdown-item"
+                                                href="{{ route('conta.adicionar.contas') }}">Adicionar
+                                                Contas</a></li>
+                                        <li><a class="dropdown-item" href="{{ route('conta.listar.contas') }}">Listar
+                                                Contas</a></li>
+                                    @endif
                                 </ul>
                             </li>
 
-                            <li class="nav-item dropdown ">
-                                <a class="nav-link dropdown-toggle text-light" data-bs-toggle="dropdown" href="#"
-                                    role="button" aria-expanded="false">Acessos</a>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="{{ route('acesso.modificar') }}">Modificar
-                                            Acesso</a></li>
-                                </ul>
-                            </li>
+                            @if (Auth::user()->id_acesso == 2 || Auth::user()->id_acesso == 1)
+                                <li class="nav-item dropdown ">
+                                    <a class="nav-link dropdown-toggle text-light" data-bs-toggle="dropdown"
+                                        href="#" role="button" aria-expanded="false">Acessos</a>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="{{ route('acesso.modificar') }}">Modificar
+                                                Acesso</a></li>
+                                    </ul>
+                                </li>
+                            @endif
 
                             <li class="nav-item dropdown ">
                                 <a class="nav-link dropdown-toggle text-light" data-bs-toggle="dropdown" href="#"
                                     role="button" aria-expanded="false">Transação</a>
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="{{ route('transacao.depositar') }}">Depositar</a>
-                                    </li>
-                                    <li><a class="dropdown-item" href="{{ route('transacao.retirar') }}">Retirar</a>
-                                    </li>
-                                    <li><a class="dropdown-item" href="{{ route('transacao.transferir') }}">Transferir</a>
+                                    @if (Auth::user()->id_acesso == 2 || Auth::user()->id_acesso == 1)
+                                        <li><a class="dropdown-item"
+                                                href="{{ route('transacao.depositar') }}">Depositar</a>
+                                        </li>
+                                        <li><a class="dropdown-item" href="{{ route('transacao.retirar') }}">Retirar</a>
+                                        </li>
+                                    @endif
+                                    <li><a class="dropdown-item"
+                                            href="{{ route('transacao.transferir') }}">Transferir</a>
                                     </li>
                                 </ul>
                             </li>
@@ -81,63 +90,82 @@
                                 <a class="nav-link dropdown-toggle text-light" data-bs-toggle="dropdown" href="#"
                                     role="button" aria-expanded="false">Empréstimo</a>
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item"
-                                            href="{{ route('emprestimo.emprestar', Auth::user()->id) }}">Emprestar</a>
-                                    </li>
-                                    <li><a class="dropdown-item"
-                                            href="{{ route('emprestimo.devolver', Auth::user()->id) }}">Devolver</a>
-                                    </li>
-                                    <li><a class="dropdown-item" href="{{ route('emprestimo.lista') }}">Lista</a></li>
-                                    <li><a class="dropdown-item"
-                                            href="{{ route('emprestimo.lista.meus.emprestimos', Auth::user()->id) }}">Meus
-                                            Empréstimos</a></li>
+                                    @if (Auth::user()->id_acesso == 3)
+                                        <li><a class="dropdown-item"
+                                                href="{{ route('emprestimo.emprestar', Auth::user()->id) }}">Emprestar</a>
+                                        </li>
+                                        <li><a class="dropdown-item"
+                                                href="{{ route('emprestimo.devolver', Auth::user()->id) }}">Devolver</a>
+                                        </li>
+                                        <li><a class="dropdown-item"
+                                                href="{{ route('emprestimo.lista.meus.emprestimos', Auth::user()->id) }}">Meus
+                                                Empréstimos</a></li>
+                                    @endif
+
+
+                                    @if (Auth::user()->id_acesso == 2 || Auth::user()->id_acesso == 1)
+                                        <li><a class="dropdown-item" href="{{ route('emprestimo.lista') }}">Lista</a>
+                                        </li>
+                                    @endif
                                 </ul>
                             </li>
 
-                            <li class="nav-item dropdown ">
-                                <a class="nav-link dropdown-toggle text-light" data-bs-toggle="dropdown" href="#"
-                                    role="button" aria-expanded="false">Cliente</a>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="{{ route('cliente.cadastro') }}">Associar</a>
-                                    </li>
-                                    <li><a class="dropdown-item" href="{{ route('cliente.lista') }}">Listar</a>
-                                    </li>
-                                </ul>
-                            </li>
+                            @if (Auth::user()->id_acesso == 2 || Auth::user()->id_acesso == 1)
+                                <li class="nav-item dropdown ">
+                                    <a class="nav-link dropdown-toggle text-light" data-bs-toggle="dropdown"
+                                        href="#" role="button" aria-expanded="false">Cliente</a>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item"
+                                                href="{{ route('cliente.cadastro') }}">Associar</a>
+                                        </li>
+                                        <li><a class="dropdown-item" href="{{ route('cliente.lista') }}">Listar</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            @endif
 
-                            <li class="nav-item dropdown ">
-                                <a class="nav-link dropdown-toggle text-light" data-bs-toggle="dropdown"
-                                    href="#" role="button" aria-expanded="false">Funcionário</a>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item"
-                                            href="{{ route('funcionario.cadastro') }}">Associar</a>
-                                    </li>
-                                    <li><a class="dropdown-item" href="{{ route('funcionario.lista') }}">Listar</a>
-                                    </li>
-                                </ul>
-                            </li>
+                            @if (Auth::user()->id_acesso == 1)
+                                <li class="nav-item dropdown ">
+                                    <a class="nav-link dropdown-toggle text-light" data-bs-toggle="dropdown"
+                                        href="#" role="button" aria-expanded="false">Funcionário</a>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item"
+                                                href="{{ route('funcionario.cadastro') }}">Associar</a>
+                                        </li>
+                                        <li><a class="dropdown-item"
+                                                href="{{ route('funcionario.lista') }}">Listar</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            @endif
 
-                            <li class="nav-item dropdown ">
-                                <a class="nav-link dropdown-toggle text-light" data-bs-toggle="dropdown"
-                                    href="#" role="button" aria-expanded="false">Agência</a>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="{{ route('agencia.cadastro') }}">Cadastrar</a>
-                                    </li>
-                                    <li><a class="dropdown-item" href="{{ route('agencia.lista') }}">Listar</a>
-                                    </li>
-                                </ul>
-                            </li>
+                            @if (Auth::user()->id_acesso == 1)
+                                <li class="nav-item dropdown ">
+                                    <a class="nav-link dropdown-toggle text-light" data-bs-toggle="dropdown"
+                                        href="#" role="button" aria-expanded="false">Agência</a>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item"
+                                                href="{{ route('agencia.cadastro') }}">Cadastrar</a>
+                                        </li>
+                                        <li><a class="dropdown-item" href="{{ route('agencia.lista') }}">Listar</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            @endif
 
-                            <li class="nav-item dropdown ">
-                                <a class="nav-link dropdown-toggle text-light" data-bs-toggle="dropdown"
-                                    href="#" role="button" aria-expanded="false">Cartão</a>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="{{ route('cartao.habilitar') }}">Habilitar</a>
-                                    </li>
-                                    <li><a class="dropdown-item" href="{{ route('cartao.lista') }}">Listar</a>
-                                    </li>
-                                </ul>
-                            </li>
+                            @if (Auth::user()->id_acesso == 2 || Auth::user()->id_acesso == 1)
+                                <li class="nav-item dropdown ">
+                                    <a class="nav-link dropdown-toggle text-light" data-bs-toggle="dropdown"
+                                        href="#" role="button" aria-expanded="false">Cartão</a>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item"
+                                                href="{{ route('cartao.habilitar') }}">Habilitar</a>
+                                        </li>
+                                        <li><a class="dropdown-item" href="{{ route('cartao.lista') }}">Listar</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            @endif
 
                             <li class="nav-item">
                                 <a class="nav-link active text-light" aria-current="page"
