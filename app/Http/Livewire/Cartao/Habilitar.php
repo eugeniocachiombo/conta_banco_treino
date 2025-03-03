@@ -36,7 +36,7 @@ class Habilitar extends Component
     {
         $this->usuarios = User::all();
         $this->contas = Conta::all();
-        return view('livewire.cartao.habilitar');
+        return view('livewire.cartao.habilitar')->layout("layouts.usuario.app");
     }
 
     public function habilitar()

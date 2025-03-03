@@ -1,7 +1,7 @@
-<div class="container g-3 border " style="min-height: inherit">
-    <div class="p-4 ">
-
-        <div class="col-12 text-center text-md-start">
+@section('titulo', 'Habilitar Cartão')
+<div class="container border mt-4 mb-4" >
+    <div class="p-4 text-white">
+        <div class="container col-12 border mb-2 text-white">
             <h1>Habilitar Cartão</h1>
         </div>
 

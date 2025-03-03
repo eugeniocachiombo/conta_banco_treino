@@ -1,12 +1,12 @@
-<div class="container g-3 border " style="min-height: inherit">
+@section('titulo', 'Lista de Cartões')
+<div class="container border mt-4 mb-4" >
     <div class="p-4 ">
-
-        <div class="col-12 text-center text-md-start">
+        <div class="container col-12 border mb-2 text-white">
             <h1>Lista de Cartões Habilitados</h1>
         </div>
 
         <hr>
-        <div class="col-12 ">
+        <div class="col-12 text-white">
             <div class="table-responsive">
                 <table id="minhaTabela" class="table datatablePT table-hover pt-3">
                     <thead class="">

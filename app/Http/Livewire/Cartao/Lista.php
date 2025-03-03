@@ -18,7 +18,7 @@ class Lista extends Component
     public function render()
     {
         $this->cartoes = Cartao::all();
-        return view('livewire.cartao.lista');
+        return view('livewire.cartao.lista')->layout("layouts.usuario.app");
     }
 
     public function buscarUsuario($id_usuario)
