@@ -1,64 +1,102 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+## REGRAS DE NEGÓCIO E ACESSOS (System Bank)
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+**Menu Início ***
 
-## About Laravel
+<table border="1">
+    <tr>
+        <th>Usuário</th>
+        <th>Admin</th>
+        <th>Gestor</th>
+        <th>Cliente</th>
+        <th>Descrição</th>
+    </tr>
+    <tr>
+        <td>Inicio</td>
+        <td>Acesso</td>
+        <td>Acesso</td>
+        <td>Acesso</td>
+        <td>
+        O usuário poderá ver o saldo da conta, quantidade de cartões que possui e as suas informações pessoais.
+        </td>
+    </tr>
+</table>
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+<table border="1">
+    <tr>
+        <th>Usuário</th>
+        <th>Admin</th>
+        <th>Gestor</th>
+        <th>Cliente</th>
+        <th>Descrição</th>
+    </tr>
+    <tr>
+        <td>Inicio</td>
+        <td>Acesso</td>
+        <td>Acesso</td>
+        <td>Acesso</td>
+        <td>
+        O usuário poderá ver o saldo da conta, quantidade de cartões que possui e as suas informações pessoais.
+        </td>
+    </tr>
+</table>
+				
+				
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Menu Perfil ******
+Usuário	Admin	Gestor	Cliente	Descrição
+Editar dados	Acesso	Acesso	Acesso	O usuário poderá alterar as suas informações pessoais.
+Alterar Senha	Acesso	Acesso	Acesso	O usuário poderá alterar a sua senha.
+Sair	Acesso	Acesso	Acesso	O usuário poderá terminar a sessão.
 
-## Learning Laravel
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
 
-## Laravel Sponsors
+Menu Contas ******
+Usuário	Admin	Gestor	Cliente	Descrição
+Minhas contas	Acesso	Acesso	Acesso	O usuário poderá verificar quantidade de contas que possui.
+Adicionar contas	Acesso	Acesso	Negado	O usuário poderá adicionar uma conta nova a um outro usuário.
+Listar contas	Acesso	Acesso	Negado	O usuário poderá listar todas as contas existentes no sistema.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+Menu Acessos ******
+Usuário	Admin	Gestor	Cliente	Descrição
+Modificar Acesso	Acesso	Negado	Negado	O usuário poderá modificar o acesso de um usuário no sistema.
 
-### Premium Partners
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+Menu Transações ******
+Usuário	Admin	Gestor	Cliente	Descrição
+Depositar	Acesso	Acesso	Negado	O usuário poderá depositar algum dinheiro.
+Retirar	Acesso	Acesso	Negado	O usuário poderá retirar algum dinheiro.
+Transferir	Acesso	Acesso	Acesso	O usuário poderá transferir algum dinheiro.
 
-## Contributing
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Menu Empréstimo ******
+Usuário	Admin	Gestor	Cliente	Descrição
+Emprestar	Negado	Negado	Acesso	O usuário poderá emprestar algum dinheiro.
+Devolver	Negado	Negado	Acesso	O usuário poderá devolver algum dinheiro.
+Meus Empréstimos	Negado	Negado	Acesso	O usuário poderá ver os empréstimos feitos.
+Listar	Acesso	Acesso	Negado	O usuário poderá ver a lista de empréstimos.
 
-## Code of Conduct
+## Menu Cliente 
+Usuário	Admin	Gestor	Cliente	Descrição
+Associar	Acesso	Acesso	Negado	O usuário poderá associar um cliente ao banco para poder ter acesso ao cartão multicaixa.
+Listar	Acesso	Acesso	Negado	O usuário poderá listar todos clientes associados ao banco.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
 
-## Security Vulnerabilities
+Menu Funcionário ******
+Usuário	Admin	Gestor	Cliente	Descrição
+Associar	Acesso	Negado	Negado	O usuário poderá associar um funcionário ao banco para poder ter acesso ao cartão multicaixa.
+Listar	Acesso	Negado	Negado	O usuário poderá listar todos funcionários associados ao banco.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
 
-## License
+Menu Agência ******
+Usuário	Admin	Gestor	Cliente	Descrição
+Cadastrar	Acesso	Negado	Negado	O usuário poderá cadastrar uma agência ao sistema.
+Listar	Acesso	Negado	Negado	O usuário poderá listar todas as agências cadastradas no sistema.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+Menu Cartão ******
+Usuário	Admin	Gestor	Cliente	Descrição
+Habilitar	Acesso	Negado	Negado	O usuário poderá habilitar cartão multicaixa para um usário no sistema.
+Listar	Acesso	Negado	Negado	O usuário poderá listar todos os usuários que possuem cartão multicaixa e as informações do cartão.
+
