@@ -12,11 +12,19 @@ use Livewire\Component;
 class Lista extends Component
 {
     public $clientes;
+    public $usuario, $dados, $acesso;
+
+    public function mount()
+    {
+        $this->usuario = Auth::user();
+        $this->dados = $this->usuario->buscarDadosPessoais;
+        $this->acesso = $this->usuario->buscarAcesso;
+    }
 
     public function render()
     {
         $this->clientes = Cliente::all();
-        return view('livewire.cliente.lista');
+        return view('livewire.cliente.lista')->layout("layouts.usuario.app");
     }
 
     public function buscarMorada($id)
