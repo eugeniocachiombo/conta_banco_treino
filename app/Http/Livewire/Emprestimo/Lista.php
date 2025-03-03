@@ -13,11 +13,20 @@ use Livewire\Component;
 class Lista extends Component
 {
     public $listaGeral;
+    public $usuario, $dados, $acesso;
+
+    public function mount()
+    {
+        $this->usuario = Auth::user();
+        $this->dados = $this->usuario->buscarDadosPessoais;
+        $this->acesso = $this->usuario->buscarAcesso;
+    }
 
     public function render()
     {
         $this->listaGeral = User::all();
-        return view('livewire.emprestimo.lista');
+        return view('livewire.emprestimo.lista')
+        ->layout("layouts.usuario.app");
     }
 
     public function cancelarEmprestimo($id_usuario, $id_conta)

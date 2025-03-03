@@ -13,6 +13,7 @@ class Emprestar extends Component
 {
     public $id_usuario, $dadosPessoais, $quantia,
     $contasUsuario, $tipoConta, $descricao;
+    public $usuario, $dados, $acesso;
 
     protected $rules = [
         'tipoConta' => 'required',
@@ -29,13 +30,17 @@ class Emprestar extends Component
     public function mount($id)
     {
         $this->id_usuario = $id;
+        $this->usuario = Auth::user();
+        $this->dados = $this->usuario->buscarDadosPessoais;
+        $this->acesso = $this->usuario->buscarAcesso;
     }
 
     public function render()
     {
         $this->dadosPessoais = DadosPessoais::where("id_usuario", $this->id_usuario)->first();
         $this->contasUsuario = Conta::where("id_usuario", $this->id_usuario)->get();
-        return view('livewire.emprestimo.emprestar');
+        return view('livewire.emprestimo.emprestar')
+        ->layout("layouts.usuario.app");
     }
 
     public function emprestar()

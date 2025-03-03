@@ -13,6 +13,7 @@ class Devolver extends Component
 {
     public $id_usuario, $dadosPessoais, $quantia,
     $contasUsuario, $tipoConta, $msgErroQuantia;
+    public $usuario, $dados, $acesso;
 
     protected $rules = [
         'quantia' => 'required',
@@ -24,6 +25,9 @@ class Devolver extends Component
 
     public function mount($id)
     {
+        $this->usuario = Auth::user();
+        $this->dados = $this->usuario->buscarDadosPessoais;
+        $this->acesso = $this->usuario->buscarAcesso;
         $this->id_usuario = $id;
         $emprestimo = Emprestimo::where('id_usuario', $this->id_usuario)->first();
         if ($emprestimo) {
@@ -33,7 +37,8 @@ class Devolver extends Component
 
     public function render()
     {
-        return view('livewire.emprestimo.devolver');
+        return view('livewire.emprestimo.devolver')
+        ->layout("layouts.usuario.app");
     }
 
     public function devolver()
@@ -45,6 +50,7 @@ class Devolver extends Component
         $emprestimo = Emprestimo::where('id_usuario', $this->id_usuario)->first();
 
         if ($emprestimo && $this->msgErroQuantia == null) {
+
             $formatarQuantia1 = str_replace(".", "", $this->quantia);
             $formatarQuantia2 = str_replace(",", ".", $formatarQuantia1);
 
@@ -53,8 +59,11 @@ class Devolver extends Component
 
             $conta->save();
             $emprestimo->save();
+            if ($emprestimo->quantia == 0) {
+                $emprestimo->delete();
+            }
+
             $this->emit('alerta', ['mensagem' => 'Dinheiro devolvido com sucesso', 'icon' => 'success', 'tempo' => 3000]);
-            
             $dadosPessoais = DadosPessoais::where("id_usuario", $this->id_usuario)->first();
             Historico::create([
                 "id_usuario" => $this->id_usuario,
@@ -62,7 +71,6 @@ class Devolver extends Component
                 "tema" => "Devolução de dinheiro",
                 "descricao" => "Foi devolvido {$this->quantia} kz emprestado por {$dadosPessoais->nome} {$dadosPessoais->sobrenome} para a conta {$conta->tipo}",
             ]);
-            
             $this->quantia = $this->tipoConta = null;
         }
     }
@@ -71,7 +79,14 @@ class Devolver extends Component
     {
         $this->msgErroQuantia = null;
         $emprestimo = Emprestimo::where('id_usuario', $this->id_usuario)->first();
-        $quantiaEmprestada = $emprestimo->quantia;
+
+        if ($emprestimo) {
+            $quantiaEmprestada = $emprestimo->quantia;
+        }else{
+            $this->msgErroQuantia = "Não tens nenhum empréstimo";
+            return;
+        }
+
         $formatarQuantia1 = str_replace(".", "", $this->quantia);
         $formatarQuantia2 = str_replace(",", ".", $formatarQuantia1);
 
