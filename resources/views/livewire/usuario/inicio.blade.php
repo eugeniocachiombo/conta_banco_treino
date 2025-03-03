@@ -1,6 +1,4 @@
-@include('inclusao.head')
-@include('inclusao.header')
-<title>Início</title>
+@section('titulo', 'Início')
 
 @php
     use App\Models\DadosPessoais;
@@ -48,6 +46,3 @@
         </div>
     </div>
 </main>
-
-@include('inclusao.footer')
-@include('inclusao.foot')
