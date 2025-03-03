@@ -1,17 +1,9 @@
-@php
-    use App\Models\DadosPessoais;
-    use App\Models\Acesso;
-    $usuario = Auth::user();
-    $dados = DadosPessoais::where('id_usuario', $usuario->id)->first();
-    $acesso = Acesso::find($usuario->id_acesso);
-@endphp
-
-<div class="container g-3 border " style="min-height: inherit">
+@section('titulo', 'Cadastro de Agência')
+<div class="container border mt-4 mb-4" >
     <div class="p-4 ">
         @include('inclusao.tag_usuario')
 
-            <hr>
-            <div class="container">
+        <div class="container col-12 border mb-2 text-white">
                 <div class="row ">
                     <div class="col-12 text-center text-md-start">
                         <h1>Cadastrar Agência</h1>
@@ -50,7 +42,7 @@
                         </form>
                     </div>
 
-                    <div class="col-12 text-center text-md-start ">
+                    <div class="col-12 text-center text-md-start mb-3">
                         <span>
                             <button type="submit" wire:click.prevent='cadastrar'>
                                 Cadastrar

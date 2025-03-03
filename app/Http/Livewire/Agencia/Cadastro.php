@@ -13,6 +13,7 @@ class Cadastro extends Component
 {
     public $num_indent, $localizacao;
     public $localizacoes, $numIndentExist;
+    public $usuario, $dados, $acesso;
 
     protected $rules = [
         'localizacao' => 'required',
@@ -24,10 +25,16 @@ class Cadastro extends Component
         'num_indent.required' => 'Campo obrigatório',
     ];
 
+    public function mount(){
+        $this->usuario = Auth::user();
+        $this->dados = $this->usuario->buscarDadosPessoais;
+        $this->acesso = $this->usuario->buscarAcesso;
+    }
+
     public function render()
     {
         $this->localizacoes = Morada::all();
-        return view('livewire.agencia.cadastro');
+        return view('livewire.agencia.cadastro')->layout("layouts.usuario.app");
     }
 
     public function cadastrar()

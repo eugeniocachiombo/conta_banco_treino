@@ -12,6 +12,7 @@ class Actualizar extends Component
 {
     public $id_agencia, $num_indent, $localizacao;
     public $localizacoes, $numIndentExist;
+    public $usuario, $dados, $acesso;
 
     protected $rules = [
         'localizacao' => 'required',
@@ -25,6 +26,11 @@ class Actualizar extends Component
 
     public function mount($id)
     {
+        
+        $this->usuario = Auth::user();
+        $this->dados = $this->usuario->buscarDadosPessoais;
+        $this->acesso = $this->usuario->buscarAcesso;
+
         $this->id_agencia = $id;
         $agencia = Agencia::find($this->id_agencia);
         $this->num_indent = $agencia->num_indent;
@@ -34,7 +40,7 @@ class Actualizar extends Component
     public function render()
     {
         $this->localizacoes = Morada::all();
-        return view('livewire.agencia.actualizar');
+        return view('livewire.agencia.actualizar')->layout("layouts.usuario.app");
     }
 
     public function actualizar()

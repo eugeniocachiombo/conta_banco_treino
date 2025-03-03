@@ -4,16 +4,24 @@ namespace App\Http\Livewire\Agencia;
 
 use App\Models\Agencia;
 use App\Models\Morada;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class Lista extends Component
 {
     public $agencias;
+    public $usuario, $dados, $acesso;
+    
+    public function mount(){
+        $this->usuario = Auth::user();
+        $this->dados = $this->usuario->buscarDadosPessoais;
+        $this->acesso = $this->usuario->buscarAcesso;
+    }
 
     public function render()
     {
         $this->agencias = Agencia::all();
-        return view('livewire.agencia.lista');
+        return view('livewire.agencia.lista')->layout("layouts.usuario.app");
     }
 
     public function buscarLocalizacao($id){

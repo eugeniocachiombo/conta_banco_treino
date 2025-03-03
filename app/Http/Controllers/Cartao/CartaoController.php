@@ -12,21 +12,6 @@ use Illuminate\Support\Facades\Hash;
 
 class CartaoController extends Controller
 {
-    public function habilitar()
-    {
-        return view("cartao.habilitar");
-    }
-
-    public function listar()
-    {
-        return view("cartao.lista");
-    }
-
-    public function actualizar($id)
-    {
-        return view("cartao.actualizar", ["id" => $id]);
-    }
-
     public function verificarCartao($num)
     {
         $cartao = Cartao::where("numero", $num)->first();

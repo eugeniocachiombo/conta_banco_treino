@@ -1,10 +1,12 @@
 <?php
 
-use App\Http\Controllers\Agencia\AgenciaController;
+use App\Http\Livewire\Agencia\Actualizar;
+use App\Http\Livewire\Agencia\Cadastro;
+use App\Http\Livewire\Agencia\Lista;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix("/agencia")->name("agencia.")->group(function () {
-    Route::get('/cadastro', [AgenciaController::class, 'cadastrar'])->name("cadastro")->middleware("usuario.logado");
-    Route::get('/lista', [AgenciaController::class, 'listar'])->name("lista")->middleware("usuario.logado");
-    Route::get('/actualizar/{id}', [AgenciaController::class, 'actualizar'])->name("actualizar")->middleware("usuario.logado");
+    Route::get('/cadastro', Cadastro::class)->name("cadastro")->middleware("usuario.logado");
+    Route::get('/lista', Lista::class)->name("lista")->middleware("usuario.logado");
+    Route::get('/actualizar/{id}', Actualizar::class)->name("actualizar")->middleware("usuario.logado");
   });
