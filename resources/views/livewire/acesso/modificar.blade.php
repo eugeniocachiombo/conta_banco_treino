@@ -1,16 +1,9 @@
-@php
-    use App\Models\DadosPessoais;
-    use App\Models\Acesso;
-    $usuario = Auth::user();
-    $dados = DadosPessoais::where('id_usuario', $usuario->id)->first();
-    $acesso = Acesso::find($usuario->id_acesso);
-@endphp
-
-<div class="container g-3 border " style="min-height: inherit">
+@section('titulo', 'Modificar Acesso do Usuário')
+<div class="container border mt-4 mb-4" >
     <div class="p-4 ">
         @include('inclusao.tag_usuario')
 
-        <div class="container col-12 border mb-2">
+        <div class="container col-12 border mb-2 text-white">
             <h1 class="text-center text-md-start pt-3">Modificar acesso de usuários</h1>
 
             <div class="col-12 ">

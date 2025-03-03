@@ -13,12 +13,20 @@ use Livewire\Component;
 class Modificar extends Component
 {
     public $listaGeral, $acessos, $usarioIdAcesso;
+    public $usuario, $dados, $acesso;
+
+    public function mount(){
+        $this->usuario = Auth::user();
+        $this->dados = $this->usuario->buscarDadosPessoais;
+        $this->acesso = $this->usuario->buscarAcesso;
+    }
 
     public function render()
     {
         $this->acessos = Acesso::all();
         $this->listaGeral = User::where("id_acesso", "!=", 1)->get();
-        return view('livewire.acesso.modificar');
+        return view('livewire.acesso.modificar')
+        ->layout("layouts.acesso.app");
     }
 
     public function modificarAcesso($id_usuario){
