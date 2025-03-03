@@ -12,11 +12,6 @@ use Illuminate\Support\Facades\Auth;
 
 class ContaController extends Controller
 {
-    
-    public function listarContas(){
-        return view("conta.listar_contas");
-    }
-
     public function verificarConta($num){
         $conta = Conta::where("num_conta", $num)->first();
         $prorietario = $conta ? User::find($conta->id_usuario) : null;

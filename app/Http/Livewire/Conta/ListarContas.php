@@ -12,13 +12,21 @@ use Livewire\Component;
 class ListarContas extends Component
 {
     public $listaGeral, $tipoConta;
+    public $usuario, $dados, $acesso;
+
+    public function mount(){
+        $this->usuario = Auth::user();
+        $this->dados = $this->usuario->buscarDadosPessoais;
+        $this->acesso = $this->usuario->buscarAcesso;
+    }
 
     public function render()
     {
         $this->listaGeral = User::join('contas', 'users.id', '=', 'contas.id_usuario')
             ->select('users.*', 'contas.*')
             ->get();
-        return view('livewire.conta.listar-contas');
+        return view('livewire.conta.listar-contas')
+        ->layout("layouts.conta.app");
     }
 
     public function buscarTiposContaUsuario($id_usuario)
