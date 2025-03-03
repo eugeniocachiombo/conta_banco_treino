@@ -34,7 +34,7 @@ class Lista extends Component
                 break;
         }
 
-        return view('livewire.historico.lista');
+        return view('livewire.historico.lista')->layout("layouts.usuario.app");
     }
 
     public function imprimirComprovativo($idHistorico)

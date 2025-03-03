@@ -1,9 +1,8 @@
 <?php
 
-use App\Http\Controllers\Historico\HistoricoController;
+use App\Http\Livewire\Historico\Lista;
 use Illuminate\Support\Facades\Route;
 
-
 Route::prefix("/historico")->name("historico.")->group(function () {
-    Route::get('/lista', [HistoricoController::class, 'listar'])->name("lista")->middleware("usuario.logado");
-  });
+    Route::get('/lista', Lista::class)->name("lista")->middleware("usuario.logado");
+});
