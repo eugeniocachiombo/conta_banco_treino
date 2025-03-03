@@ -12,11 +12,19 @@ use Livewire\Component;
 class AdicionarContas extends Component
 {
     public $listaGeral, $tipoConta;
+    public $usuario, $dados, $acesso;
+
+    public function mount(){
+        $this->usuario = Auth::user();
+        $this->dados = $this->usuario->buscarDadosPessoais;
+        $this->acesso = $this->usuario->buscarAcesso;
+    }
 
     public function render()
     {
         $this->listaGeral = User::all();
-        return view('livewire.conta.adicionar-contas');
+        return view('livewire.conta.adicionar-contas')
+        ->layout("layouts.conta.app");
     }
 
     public function buscarTiposContaUsuario($id_usuario)
