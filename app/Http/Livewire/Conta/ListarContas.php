@@ -26,7 +26,7 @@ class ListarContas extends Component
             ->select('users.*', 'contas.*')
             ->get();
         return view('livewire.conta.listar-contas')
-        ->layout("layouts.conta.app");
+        ->layout("layouts.usuario.app");
     }
 
     public function buscarTiposContaUsuario($id_usuario)

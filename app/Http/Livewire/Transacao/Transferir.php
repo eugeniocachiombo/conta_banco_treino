@@ -25,7 +25,8 @@ class Transferir extends Component
 
     public function render()
     {
-        return view('livewire.transacao.transferir');
+        return view('livewire.transacao.transferir')
+        ->layout("layouts.usuario.app");
     }
 
     public function transferir()
@@ -95,7 +96,7 @@ class Transferir extends Component
         $this->msgErroNumConta = null;
         if ($this->num_conta != null) {
             $conta = Conta::where("num_conta", $this->num_conta)->first();
-            $conta ? $this->msgErroNumConta = null : $this->msgErroNumConta = "Conta não existe";
+            isset($conta) ? $this->msgErroNumConta = null : $this->msgErroNumConta = "Conta não existe";
         }
     }
 }

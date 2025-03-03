@@ -32,7 +32,8 @@ class RetirarUsuario extends Component
     {
         $this->dadosPessoais = DadosPessoais::where("id_usuario", $this->id_usuario)->first();
         $this->contasUsuario = Conta::where("id_usuario", $this->id_usuario)->get();
-        return view('livewire.transacao.retirar-usuario');
+        return view('livewire.transacao.retirar-usuario')
+        ->layout("layouts.usuario.app");
     }
 
     public function retirar()

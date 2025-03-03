@@ -24,7 +24,7 @@ class AdicionarContas extends Component
     {
         $this->listaGeral = User::all();
         return view('livewire.conta.adicionar-contas')
-        ->layout("layouts.conta.app");
+        ->layout("layouts.usuario.app");
     }
 
     public function buscarTiposContaUsuario($id_usuario)

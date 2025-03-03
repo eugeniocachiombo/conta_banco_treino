@@ -1,6 +1,7 @@
-<div class="container g-3 border " style="min-height: inherit">
+@section('titulo', 'Depositar Dinheiro')
+<div class="container border mt-4 mb-4" >
     <div class="p-4 ">
-        <div class="container col-12 border mb-2">
+        <div class="container col-12 border mb-2 text-white">
             <h1 class="text-center text-md-start pt-3 pb-4">Formulário de Depósito</h1>
             <div class="pb-5">
                 <div class="col-12 ">

@@ -12,6 +12,7 @@ class Retirar extends Component
     public function render()
     {
         $this->listaGeral = User::all();
-        return view('livewire.transacao.retirar');
+        return view('livewire.transacao.retirar')
+        ->layout("layouts.usuario.app");
     }
 }

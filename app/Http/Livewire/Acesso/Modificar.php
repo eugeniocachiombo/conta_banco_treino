@@ -26,7 +26,7 @@ class Modificar extends Component
         $this->acessos = Acesso::all();
         $this->listaGeral = User::where("id_acesso", "!=", 1)->get();
         return view('livewire.acesso.modificar')
-        ->layout("layouts.acesso.app");
+        ->layout("layouts.usuario.app");
     }
 
     public function modificarAcesso($id_usuario){

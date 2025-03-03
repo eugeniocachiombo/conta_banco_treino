@@ -33,7 +33,8 @@ class DepositarUsuario extends Component
     {
         $this->dadosPessoais = DadosPessoais::where("id_usuario", $this->id_usuario)->first();
         $this->contasUsuario = Conta::where("id_usuario", $this->id_usuario)->get();
-        return view('livewire.transacao.depositar-usuario');
+        return view('livewire.transacao.depositar-usuario')
+        ->layout("layouts.usuario.app");
     }
 
     public function depositar()

@@ -21,6 +21,6 @@ class ListarLogado extends Component
     {
         $this->listaGeral = Conta::where("id_usuario", Auth::user()->id)->get();
         return view('livewire.conta.listar-logado')
-        ->layout("layouts.conta.app");
+        ->layout("layouts.usuario.app");
     }
 }

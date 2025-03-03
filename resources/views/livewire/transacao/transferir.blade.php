@@ -1,6 +1,7 @@
-<div class="container g-3 border " style="min-height: inherit">
+@section('titulo', 'Transferir Dinheiro')
+<div class="container border mt-4 mb-4" >
     <div class="p-4 ">
-        <div class="container col-12 border mb-2">
+        <div class="container col-12 border mb-2 text-white">
             <h1 class="text-center text-md-start pt-3 pb-4">Formulário de Transferência</h1>
             <div class="pb-5">
                 <div class="col-12 ">
@@ -8,7 +9,7 @@
                         <div class="col-12 col-md-6 mb-3">
                             <label for="">Número da conta</label>
                             <input style="min-height: 38px" class="form-control"
-                            wire:keydown="verificarContaExiste"
+                            wire:keyup="verificarContaExiste" placeholder="Nº da conta"
                              type="number" id="num_conta" required wire:model="num_conta">
 
                             @if ($this->msgErroNumConta != null)

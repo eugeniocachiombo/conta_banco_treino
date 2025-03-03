@@ -13,6 +13,7 @@ class Depositar extends Component
     public function render()
     {
         $this->listaGeral = User::all();
-        return view('livewire.transacao.depositar');
+        return view('livewire.transacao.depositar')
+        ->layout("layouts.usuario.app");
     }
 }
