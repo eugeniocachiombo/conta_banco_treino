@@ -1,6 +1,6 @@
+@section('titulo', 'Cadastro')
 <div class="container formulario pt-3 d-flex justify-content-center align-items-center text-light"
     style="min-height: inherit">
-    <title>Cadastro</title>
     <div class="row ">
         <div class="col-12 text-center text-md-start">
             <i class="fas fa-user text-center" style="font-size: 100px"></i>

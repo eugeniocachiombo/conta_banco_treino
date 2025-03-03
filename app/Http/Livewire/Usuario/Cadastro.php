@@ -49,7 +49,6 @@ class Cadastro extends Component
 
     public function render()
     {
-       // dd("ok");
         return view('livewire.usuario.cadastro')
         ->layout("layouts.cadastro.app");
     }

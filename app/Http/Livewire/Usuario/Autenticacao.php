@@ -15,7 +15,7 @@ class Autenticacao extends Component
     public function render()
     {
         return view('livewire.usuario.autenticacao')
-        ->layout("layouts.usuario.app");
+        ->layout("layouts.autenticacao.app");
     }
 
     public function logar()
