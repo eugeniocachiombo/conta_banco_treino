@@ -5,15 +5,22 @@ namespace App\Http\Livewire\Conta;
 use App\Models\Conta;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
-use Whoops\Exception\Formatter;
 
 class ListarLogado extends Component
 {
     public $listaGeral;
+    public $usuario, $dados, $acesso;
+
+    public function mount(){
+        $this->usuario = Auth::user();
+        $this->dados = $this->usuario->buscarDadosPessoais;
+        $this->acesso = $this->usuario->buscarAcesso;
+    }
 
     public function render()
     {
         $this->listaGeral = Conta::where("id_usuario", Auth::user()->id)->get();
-        return view('livewire.conta.listar-logado');
+        return view('livewire.conta.listar-logado')
+        ->layout("layouts.conta.app");
     }
 }

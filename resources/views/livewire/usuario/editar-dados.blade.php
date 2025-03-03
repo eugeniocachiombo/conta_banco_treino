@@ -1,3 +1,4 @@
+@section('titulo', 'Editar Dados')
 <div class="container g-3 border mt-4 mb-4" style="min-height: inherit">
     <div class="p-4 ">
         @include('inclusao.tag_usuario')

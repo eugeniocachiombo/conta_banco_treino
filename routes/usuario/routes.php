@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Usuario\UsuarioController;
+use App\Http\Livewire\Usuario\AlterarSenha;
 use App\Http\Livewire\Usuario\Autenticacao;
 use App\Http\Livewire\Usuario\Cadastro;
 use App\Http\Livewire\Usuario\EditarDados;
@@ -13,5 +14,5 @@ Route::prefix("/usuario")->name("usuario.")->group(function () {
     Route::get('/inicio', Inicio::class)->name("index")->middleware("usuario.logado");
     Route::get('/sair', [UsuarioController::class, 'sair'])->name("sair")->middleware("usuario.logado");
     Route::get('/editar/dados', EditarDados::class)->name("editar.dados")->middleware("usuario.logado");
-    Route::get('/alterar/senha', [UsuarioController::class, 'alterarSenha'])->name("alterar.senha")->middleware("usuario.logado");
+    Route::get('/alterar/senha', AlterarSenha::class)->name("alterar.senha")->middleware("usuario.logado");
 });

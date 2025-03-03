@@ -11,6 +11,7 @@ class AlterarSenha extends Component
 {
     public $senhaAntiga, $senhaNova,
     $confirmarSenha, $senhaConfErrada;
+    public $usuario, $dados, $acesso;
 
     protected $rules = [
         'senhaAntiga' => 'required|min:6',
@@ -27,9 +28,16 @@ class AlterarSenha extends Component
         'confirmarSenha.min' => 'A senha deve conter pelo menos 6 digitos',
     ];
 
+    public function mount(){
+        $this->usuario = Auth::user();
+        $this->dados = $this->usuario->buscarDadosPessoais;
+        $this->acesso = $this->usuario->buscarAcesso;
+    }
+
     public function render()
     {
-        return view('livewire.usuario.alterar-senha');
+        return view('livewire.usuario.alterar-senha')
+        ->layout("layouts.usuario.app");
     }
 
     public function alterarSenha()
