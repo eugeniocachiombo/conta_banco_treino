@@ -16,6 +16,7 @@ class Cadastro extends Component
 {
     public $listaGeral, $tipo, $salario, $agencia, $nif, $morada, $id_usuario;
     public $verForm = false, $nifExist, $usuarios, $moradas, $agencias;
+    public $usuario, $dados, $acesso;
 
     protected $rules = [
         'tipo' => 'required',
@@ -33,6 +34,13 @@ class Cadastro extends Component
         'morada.required' => 'Campo obrigatório',
     ];
 
+    public function mount()
+    {
+        $this->usuario = Auth::user();
+        $this->dados = $this->usuario->buscarDadosPessoais;
+        $this->acesso = $this->usuario->buscarAcesso;
+    }
+
     public function render()
     {
         $this->agencias = Agencia::all();
@@ -43,7 +51,7 @@ class Cadastro extends Component
             ->where("users.id_acesso", 2)
             ->whereNull("funcionarios.id_usuario")
             ->get();
-        return view('livewire.funcionario.cadastro');
+        return view('livewire.funcionario.cadastro')->layout("layouts.usuario.app");
     }
 
     public function cadastrar()

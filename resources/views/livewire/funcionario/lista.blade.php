@@ -1,19 +1,12 @@
-@php
-    use App\Models\DadosPessoais;
-    use App\Models\Acesso;
-    $usuario = Auth::user();
-    $dados = DadosPessoais::where('id_usuario', $usuario->id)->first();
-    $acesso = Acesso::find($usuario->id_acesso);
-@endphp
-
-<div class="container g-3 border " style="min-height: inherit">
+@section('titulo', 'Lista de Funcionários')
+<div class="container g-3 border mb-4 mt-4">
     <div class="p-4 ">
         @include('inclusao.tag_usuario')
 
-        <div class="container col-12 border mb-2">
+        <div class="container col-12 border mb-2 text-white">
             <h1 class="text-center text-md-start pt-3 pb-4">Lista de Funcionários</h1>
 
-            <div class="col-12 ">
+            <div class="col-12 text-white">
                 <div class="table-responsive">
                     <table id="minhaTabela" class="table datatablePT table-hover pt-3">
                         <thead class="">
@@ -54,20 +47,15 @@
 
                         <tbody class="text-white">
                             @foreach ($funcionarios as $funcionario)
-                                @php
-                                    $agencia = $this->buscarAgencia($funcionario->id_agencia);
-                                    $morada = $this->buscarMorada($funcionario->id_morada);
-                                    $dadosPessoais = DadosPessoais::where('id_usuario', $funcionario->id_usuario)->first();
-                                @endphp
 
                                 <tr class="text-white">
                                     <td>{{ $funcionario->id }}</td>
-                                    <td>{{ $dadosPessoais->nome }} {{ $dadosPessoais->sobrenome }}</td>
-                                    <td>{{ $agencia->num_indent }}</td>
+                                    <td>{{ $funcionario->buscarUsuario->buscarDadosPessoais->nome }} {{ $funcionario->buscarUsuario->buscarDadosPessoais->sobrenome }}</td>
+                                    <td>{{ $funcionario->buscarAgencia->num_indent }}</td>
                                     <td>{{ ucwords($funcionario->tipo) }}</td>
                                     <td>{{ number_format($funcionario->salario, 2, ",", ".") }}</td>
                                     <td>{{ $funcionario->nif }}</td>
-                                    <td>{{ $morada->provincia }} : {{ $morada->endereco }} </td>
+                                    <td>{{ $funcionario->buscarMorada->provincia }} : {{ $funcionario->buscarMorada->endereco }} </td>
                                     <td class="text-center">
                                         <a href="{{route("funcionario.actualizar", $funcionario->id_usuario)}}">
                                             <button class="bg-info" type="button" style="width: 40px">

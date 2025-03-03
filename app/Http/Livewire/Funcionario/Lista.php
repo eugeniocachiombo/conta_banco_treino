@@ -13,11 +13,19 @@ use Livewire\Component;
 class Lista extends Component
 {
     public $funcionarios;
+    public $usuario, $dados, $acesso;
+
+    public function mount()
+    {
+        $this->usuario = Auth::user();
+        $this->dados = $this->usuario->buscarDadosPessoais;
+        $this->acesso = $this->usuario->buscarAcesso;
+    }
 
     public function render()
     {
         $this->funcionarios = Funcionario::all();
-        return view('livewire.funcionario.lista');
+        return view('livewire.funcionario.lista')->layout("layouts.usuario.app");
     }
 
     public function buscarMorada($id){

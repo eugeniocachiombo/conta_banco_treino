@@ -1,15 +1,9 @@
-@php
-    use App\Models\DadosPessoais;
-    use App\Models\Acesso;
-    $usuario = Auth::user();
-    $dados = DadosPessoais::where('id_usuario', $usuario->id)->first();
-    $acesso = Acesso::find($usuario->id_acesso);
-@endphp
-
-<div class="container g-3 border " style="min-height: inherit">
+@section('titulo', 'Actualizar Funcionário')
+<div class="container g-3 border mb-4 mt-4 text-white" >
     <div class="p-4 ">
         @include('inclusao.tag_usuario')
         <hr>
+
         <div class="container">
             <div class="row ">
                 <div class="col-12 text-center text-md-start">

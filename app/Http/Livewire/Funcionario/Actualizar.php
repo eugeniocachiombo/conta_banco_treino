@@ -7,12 +7,14 @@ use App\Models\Cliente;
 use App\Models\Funcionario;
 use App\Models\Morada;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class Actualizar extends Component
 {
     public $listaGeral, $tipo, $salario, $agencia, $nif, $morada, $id_usuario;
     public $verForm = false, $nifExist, $usuarios, $moradas, $agencias;
+    public $usuario, $dados, $acesso;
 
     protected $rules = [
         'tipo' => 'required',
@@ -31,10 +33,15 @@ class Actualizar extends Component
     ];
 
     public function mount($id){
+        $this->usuario = Auth::user();
+        $this->dados = $this->usuario->buscarDadosPessoais;
+        $this->acesso = $this->usuario->buscarAcesso;
+
         $this->agencias = Agencia::all();
         $this->moradas = Morada::all();
         $this->usuarios = User::all();
         $this->id_usuario = $id;
+        
         $funcionario = Funcionario::where("id_usuario", $id)->first();
         $this->tipo = $funcionario->tipo; 
         $this->salario = $funcionario->salario; 
@@ -45,7 +52,7 @@ class Actualizar extends Component
 
     public function render()
     {
-        return view('livewire.funcionario.actualizar');
+        return view('livewire.funcionario.actualizar')->layout("layouts.usuario.app");
     }
 
     public function cadastrar()
