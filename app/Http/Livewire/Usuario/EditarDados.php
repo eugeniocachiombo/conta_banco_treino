@@ -14,6 +14,7 @@ class EditarDados extends Component
     public $nome, $sobrenome, $email, $telefone, $senha;
     public $nascimento, $genero, $nacionalidade;
     public $tlfExiste, $emailExist;
+    public $usuario, $dados, $acesso;
 
     protected $rules = [
         'nome' => 'required|min:3|regex:/^[A-Za-zÀ-ÿ\s]+$/',
@@ -45,10 +46,16 @@ class EditarDados extends Component
 
     public function render()
     {
-        return view('livewire.usuario.editar-dados');
+        return view('livewire.usuario.editar-dados')
+        ->layout("layouts.usuario.app");
     }
 
     public function mount(){
+        
+        $this->usuario = Auth::user();
+        $this->dados = $this->usuario->buscarDadosPessoais;
+        $this->acesso = $this->usuario->buscarAcesso;
+
         $this->usuarioLogado = Auth::user();
         $this->email =  $this->usuarioLogado->email;
         $this->telefone = $this->usuarioLogado->telefone;

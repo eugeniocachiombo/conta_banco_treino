@@ -1,13 +1,4 @@
 @section('titulo', 'Início')
-
-@php
-    use App\Models\DadosPessoais;
-    use App\Models\Acesso;
-    $usuario = Auth::user();
-    $dados = DadosPessoais::where('id_usuario', $usuario->id)->first();
-    $acesso = Acesso::find($usuario->id_acesso);
-@endphp
-
 <main class="p-4">
     <div class="container g-3 border " style="min-height: inherit">
         <div class="p-4 ">

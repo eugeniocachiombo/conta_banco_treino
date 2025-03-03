@@ -1,12 +1,4 @@
-@php
-    use App\Models\DadosPessoais;
-    use App\Models\Acesso;
-    $usuario = Auth::user();
-    $dados = DadosPessoais::where('id_usuario', $usuario->id)->first();
-    $acesso = Acesso::find($usuario->id_acesso);
-@endphp
-
-<div class="container g-3 border " style="min-height: inherit">
+<div class="container g-3 border mt-4 mb-4" style="min-height: inherit">
     <div class="p-4 ">
         @include('inclusao.tag_usuario')
         <div class="container border formulario pt-3 d-flex justify-content-center align-items-center text-light"
