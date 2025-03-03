@@ -4,7 +4,6 @@ namespace App\Http\Livewire\Usuario;
 
 use App\Models\User;
 use Illuminate\Database\QueryException;
-use Illuminate\Filesystem\Cache;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Livewire\Component;
@@ -15,7 +14,8 @@ class Autenticacao extends Component
 
     public function render()
     {
-        return view('livewire.usuario.autenticacao');
+        return view('livewire.usuario.autenticacao')
+        ->layout("layouts.usuario.app");
     }
 
     public function logar()

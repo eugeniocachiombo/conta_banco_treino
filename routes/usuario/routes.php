@@ -1,11 +1,13 @@
 <?php
 
 use App\Http\Controllers\Usuario\UsuarioController;
+use App\Http\Livewire\Usuario\Autenticacao;
+use App\Http\Livewire\Usuario\Cadastro;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix("/usuario")->name("usuario.")->group(function () {
-    Route::get('/cadastro', [UsuarioController::class, 'cadastrar'])->name("cadastro")->middleware("usuario.terminado");
-    Route::get('/autenticacao', [UsuarioController::class, 'autenticar'])->name("autenticacao")->middleware("usuario.terminado");
+    Route::get('/cadastro', Cadastro::class)->name("cadastro")->middleware("usuario.terminado");
+    Route::get('/autenticacao', Autenticacao::class)->name("autenticacao")->middleware("usuario.terminado");
     Route::get('/inicio', [UsuarioController::class, 'iniciar'])->name("index")->middleware("usuario.logado");
     Route::get('/sair', [UsuarioController::class, 'sair'])->name("sair")->middleware("usuario.logado");
     Route::get('/editar/dados', [UsuarioController::class, 'editarDados'])->name("editar.dados")->middleware("usuario.logado");

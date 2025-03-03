@@ -1,3 +1,4 @@
+<title>Autenticação</title>
 <div class="container pt-3 formulario d-flex justify-content-center align-items-center text-light" style="min-height: inherit">
     <form class="row g-4 d-block justify-content-center" style="min-width: 50px">
         <i class="fas fa-bank text-center" style="font-size: 100px"></i>
