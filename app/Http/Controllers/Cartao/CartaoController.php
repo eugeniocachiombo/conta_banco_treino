@@ -27,9 +27,11 @@ class CartaoController extends Controller
         if ($aprovacao) {
             $cartao = Cartao::where("numero", $num)->first();
             $conta = $cartao ? Conta::find($cartao->id_conta) : null;
-            $comapatibildade = $conta ? $this->verificarSeSaldoEhCompativel($quantia, $conta->saldo) : null;
-            $pagamento = $comapatibildade == "saldo e maior" ? $this->pagar($conta->id, $quantia) : null;
+            $compatibildade = $conta ? $this->verificarSeSaldoEhCompativel($quantia, $conta->saldo) : null;
+            
+            $pagamento = $compatibildade == "saldo e maior" ? $this->pagar($conta->id, $quantia) : null;
             $pagamento ? $this->registrarHistórico($conta->id_usuario, $quantia, $conta->tipo, $descricao) : "";
+            
             return response()->json([$pagamento, $pagamento ? "Pagamento feito com sucesso" : "Saldo insuficiente"]);
         } else {
             return response()->json([$aprovacao, "Erro de aprovação, [Dados não encontrados]"]);
@@ -67,9 +69,8 @@ class CartaoController extends Controller
     public function pagar($idConta, $quantia)
     {
         $conta = Conta::find($idConta);
-        Conta::where("id", $conta->id)->update([
-            "saldo" => $conta->saldo - $quantia,
-        ]);
+        $conta->saldo = $conta->saldo - $quantia;
+        $conta->save();
         return true;
     }
 }
