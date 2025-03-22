@@ -22,8 +22,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/verificarConta/{num}', [ContaController::class, "verificarConta"]);
-
-Route::get('/verificarCartao/{num}', [CartaoController::class, "verificarCartao"]);
-Route::get('/autenticarCartao/{num}/{codigo}', [CartaoController::class, "autenticarCartao"]);
-Route::get('/pagarComCartao/{num}/{codigo}/{quantia}/{descricao}', [CartaoController::class, "pagarComCartao"]);
+Route::apiResource("pagar/com/cartao", CartaoController::class);

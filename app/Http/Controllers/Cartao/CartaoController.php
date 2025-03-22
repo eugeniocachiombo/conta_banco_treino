@@ -3,26 +3,32 @@
 namespace App\Http\Controllers\Cartao;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\CartaoResource;
 use App\Models\Cartao;
 use App\Models\Conta;
 use App\Models\DadosPessoais;
 use App\Models\Historico;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Http\Request;
 
 class CartaoController extends Controller
 {
-    public function verificarCartao($num)
+    public function show($num)
     {
         $cartao = Cartao::where("numero", $num)->first();
         $conta = $cartao ? Conta::find($cartao->id_conta) : null;
         $prorietario = $conta ? User::find($conta->id_usuario) : null;
         $dadosPessoais = $conta ? DadosPessoais::find($conta->id_usuario) : null;
-        return response()->json([$cartao, $conta, $prorietario, $dadosPessoais]);
+        return new CartaoResource([$cartao, $conta, $prorietario, $dadosPessoais]);
     }
 
-    public function pagarComCartao($num, $codigo, $quantia, $descricao)
-    {
+    public function store(Request $request){
+        $num = $request->input("num"); 
+        $codigo = $request->input("codigo"); 
+        $quantia = $request->input("quantia"); 
+        $descricao = $request->input("descricao");
+
         $aprovacao = $this->autenticarCartao($num, $codigo);
         if ($aprovacao) {
             $cartao = Cartao::where("numero", $num)->first();
@@ -31,10 +37,9 @@ class CartaoController extends Controller
             
             $pagamento = $compatibildade == "saldo e maior" ? $this->pagar($conta->id, $quantia) : null;
             $pagamento ? $this->registrarHistórico($conta->id_usuario, $quantia, $conta->tipo, $descricao) : "";
-            
-            return response()->json([$pagamento, $pagamento ? "Pagamento feito com sucesso" : "Saldo insuficiente"]);
+            return new CartaoResource([$pagamento, $pagamento ? "Pagamento feito com sucesso" : "Saldo insuficiente"]);
         } else {
-            return response()->json([$aprovacao, "Erro de aprovação, [Dados não encontrados]"]);
+            return new CartaoResource([$aprovacao, "Erro de aprovação, [Dados não encontrados]"]);
         }
     }
 
@@ -53,7 +58,7 @@ class CartaoController extends Controller
     public function autenticarCartao($num, $codigo)
     {
         $cartao = Cartao::where("numero", $num)->first();
-        $aprovacao = Hash::check($codigo, $cartao->codigo_seguranca);
+        $aprovacao = Hash::check($codigo, $cartao->codigo_seguranca ?? '');
         return $aprovacao;
     }
 
